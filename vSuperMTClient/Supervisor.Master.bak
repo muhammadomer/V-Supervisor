@@ -1,0 +1,2624 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Supervisor.Master.cs" Inherits="vSuperMTClient.Supervisor.Supervisor" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css">
+    <link href="styles/font-awesome.min.css" rel="stylesheet" />
+    <link href="styles/simple-line-icons.min.css" rel="stylesheet" />
+    <link href="styles/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/uniform.default.css" rel="stylesheet" />
+    <link href="styles/jquery-ui.min.css" rel="stylesheet" />
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="styles/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="styles/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="styles/jquery.toastmessage.css" rel="stylesheet" />
+    <link href="styles/style.min.css" rel="stylesheet" />
+    <link href="styles/bootstrap-switch.min.css" rel="stylesheet" />
+    <link href="styles/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="styles/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="styles/select2.css" rel="stylesheet" />
+    <link href="styles/multi-select.css" rel="stylesheet" />
+    <link href="styles/square/red.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="styles/components.css" rel="stylesheet" />
+    <link href="styles/plugins.css" rel="stylesheet" />
+    <link href="styles/layout.css" rel="stylesheet" />
+    <link href="styles/grey.css" rel="stylesheet" />
+    <link href="styles/custom.css" rel="stylesheet" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>vSupervisor</title>
+
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="scripts/jquery-1.11.1-jquery.min.js"></script>
+    <script src="scripts/jquery-migrate.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/jquery.blockui.min.js"></script>
+    <script src="scripts/jquery.cokie.min.js"></script>
+    <script src="scripts/jquery.uniform.min.js"></script>
+    <script src="scripts/bootstrap-switch.min.js"></script>
+    <script src="scripts/components-pickers.js"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="scripts/jquery.dataTables.min.js"></script>
+    <script src="scripts/bootstrap-select.min.js"></script>
+    <script src="scripts/select2.min.js"></script>
+    <script src="scripts/jquery.multi-select.js"></script>
+    <script src="scripts/jquery.slimscroll.min.js"></script>
+    <script src="scripts/jstree.min.js"></script>
+    <script src="scripts/bootstrap-hover-dropdown.min.js"></script>
+    <script src="scripts/dataTables.bootstrap.js"></script>
+    <script src="scripts/moment.min.js"></script>
+    <script src="scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="scripts/bootstrap-multiselect.js"></script>
+    <script src="scripts/amcharts.js"></script>
+    <script src="scripts/serial.js"></script>
+    <script src="scripts/pie.js"></script>
+    <script src="scripts/light.js"></script>
+
+    <script src="scripts/jquery.toastmessage.js"></script>
+    <script src="scripts/icheck.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="scripts/metronic.js"></script>
+    <script src="scripts/layout.js"></script>
+    <script src="scripts/components-dropdowns.js"></script>
+    <script src="scripts/components-jqueryui-sliders.js"></script>
+    <script src="scripts/ui-tree.js"></script>
+    <%--  <script src="scripts/form-icheck.js"></script>--%>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    <script>
+        jQuery(document).ready(function () {
+            Metronic.init();
+            Layout.init();
+            ComponentsPickers.init();
+            ComponentsjQueryUISliders.init();
+            ComponentsDropdowns.init();
+            UITree.init();
+        });
+    </script>
+</head>
+<%--<body class="page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo" oncontextmenu="return false">--%>
+<body class="page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo">
+    <form id="form1" runat="server">
+        <div class="page-header navbar navbar-fixed-top">
+            <div class="page-header-inner container-fluid">
+                <div class="page-top">
+                    <div class="row" style="padding-top: 10px;">
+                        <div class="col-md-3" style="padding-left: 0px;">
+
+                            <div id="MenuDashboard" class="col-md-3" style="width:85px;padding-left:10px;padding-right:5px;" onclick="RedirectToDashboard();">
+                                <div id="HeaderLinkDashboard" class="DeactiveHeaderLink">
+                                    <i class="fa fa-bars headeri"></i>
+                                    <span class="headerspan">Dashboard</span>
+                                </div>
+                            </div>
+                            <div id="MenuAgents" class="col-md-3" style="width:80px;padding-left:5px;padding-right:5px;" onclick="RedirectToAgents();" runat="server">
+                                <div id="HeaderLinkAgents" class="DeactiveHeaderLink">
+                                    <i class="fa fa-user headeri"></i>
+                                    <span class="headerspan">Agents</span>
+                                </div>
+                            </div>
+                            <div id="MenuSettings" class="col-md-3" style="width:80px;padding-left:5px;padding-right:5px;" onclick="ShowSettingsModal();" runat="server">
+                                <div id="HeaderLinkSettings" class="DeactiveHeaderLink">
+                                    <i class="fa fa-wrench headeri"></i>
+                                    <span class="headerspan">Settings</span>
+                                </div>
+                            </div>
+                            <div id="MenuLicensing" class="col-md-3" style="width:80px;padding-left:5px;padding-right:5px;" onclick="RedirectToLicensing();" runat="server">
+                                <div id="HeaderLinkLicensing" class="DeactiveHeaderLink">
+                                    <i class="fa fa-id-card headeri"></i>
+                                    <span class="headerspan">Licensing</span>
+                                </div>
+                            </div>
+
+                        </div>
+           
+                        <div class="col-md-9" style="text-align:right">
+                             <i id="imgSocketServerConnectState" class="fa fa-plug" style=" font-size:30px;padding-top: 8px;color:#f91627;display:none;"></i>
+                            <ul class="nav navbar-nav pull-right">
+                                <li class="dropdown dropdown-user">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" style="padding-right: 0px; background-color: #c0c0c0;">
+                                        <img src="Content/images/user_icon_top.png" class="img-circle" style="width:30px;" />
+                                        <%--<i class="fa fa-user" style="font-size: 20px"></i>--%>
+                                        <input type="hidden" id="currentUserName" runat="server" />
+                                        <span class="username username-hide-on-mobile" id="UserName" runat="server" style="color: white"></span>
+                                        <i class=" fa fa-angle-down" style="color: white"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-default">
+                                        <li>
+                                            <a class="" data-toggle='modal' href='#ModalChangePassword'><i class="fa fa-lock"></i>Change Password</a>
+                                        </li>
+                                        <li>
+                                            <a onclick="LogOut()"><i class='icon-key'></i>Log Out </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="container-fluid">
+            <div class="page-container">
+                <div class="page-content-wrapper">
+                    <div class="page-content">
+                        <div id="ModalChangePassword" data-backdrop="static" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog" id="" style="width: 500px;height:100%">
+                                <div class="modal-content">
+                                    <div class="row" style="line-height: 35px; background-color: #ffffff; width: 100%; margin-left: 0%; vertical-align: middle; border-bottom: 1px solid #e5e5e5;">
+                                        <div class="col-md-11" style="margin-top: 5px;">
+                                            <span style="font-size: 16px; color: #404040;">Change Password</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div id="ErrorDivChangePassword" class="row" style="display: none;">
+                                        <div class="col-md-12" style="text-align: center;">
+                                            <label class="Label" style="color: red;" id="lblErrorChangePassword"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="col-md-4">
+                                            <label class="control-label">Enter Old Password</label>
+
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <asp:TextBox ID="txbOldPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="col-md-4">
+                                            <label class="control-label">Enter New Password</label>
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <asp:TextBox ID="txbNewPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="col-md-4">
+                                            <label class="control-label">Confirm Password</label>
+
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <asp:TextBox ID="txbConfirmNewPassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
+                                        <div class="col-md-12" style="text-align: right;">
+                                            <button type="button" data-dismiss="modal" class="btnFlat">Close</button>
+                                            <button type="button" class="btnFlat" onclick="ChangePassword()">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="AgentsModal" tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="">
+                            <div class="modal-dialog" style="width: 800px;height:100%">
+                                <div class="modal-content">
+                                    <div class="row" style="line-height: 35px; background-color: #ffffff; width: 100%; margin-left: 0%; vertical-align: middle; border-bottom: 1px solid #e5e5e5;">
+                                        <div class="col-md-11" style="margin-top: 5px;">
+                                            <span style="font-size: 18px; color: #404040;">Agents</span>
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 0%; text-align: right" onclick="CloseAgentModal();">
+                                            <span style="font-size: 20px; color: black;">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div id="ErrorDivAgents" class="row" style="padding-top: 5px; padding-bottom: 5px; display: none;">
+                                        <div class="col-md-12" style="">
+                                            <label class="Label" style="color: red" id="lblErrorAgents"></label>
+                                        </div>
+                                        <input id="txbAgentId" type="text" class="col-md-12 form-control" style="display: none;" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="SettingsModal" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="">
+                            <div class="modal-dialog" style="width: 810px;height:100%">
+                                <div class="modal-content" style="">
+                                    <div class="row" style="line-height: 35px; background-color: #ffffff; width: 100%; margin-left: 0%; vertical-align: middle; border-bottom: 1px solid #e5e5e5;">
+                                        <div class="col-md-11" style="margin-top: 5px;">
+                                            <span style="font-size: 18px; color: #404040;">Settings</span>
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 0%; text-align: right" onclick="CloseSettingsModal();">
+                                            <span style="font-size: 20px; color: black;">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="col-md-2" style="">
+                                            <div class="row" style="padding-bottom: 10px;">
+                                                <div class="input-group">
+                                                    <span id="SettingLeftMenuCosting" class="input-group-addon SettingsSpanDeactive" onclick="ShowCosting();">
+                                                        <i class="fa fa-database" style="padding-right: 2px; display: block; font-size: 24px; padding-top: 5px;"></i>Billing
+                                                           
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom: 10px;">
+                                                <div class="input-group">
+                                                    <span id="SettingLeftMenuPrefrences" class="input-group-addon SettingsSpanDeactive" onclick="ShowPrefrences();">
+                                                        <i class="fa fa-compass" style="padding-right: 2px; display: block; font-size: 24px; padding-top: 5px;"></i>System
+                                                           
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom: 10px;">
+                                                <div class="input-group">
+                                                    <span id="SettingLeftMenuUsers" class="input-group-addon SettingsSpanDeactive" onclick="ShowUsers();">
+                                                        <i class="fa fa-user" style="padding-right: 2px; display: block; font-size: 24px; padding-top: 5px;"></i>Users 
+                                                    </span>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-10" style="padding: 0px; border-left: 1px solid  #4f4e4f;">
+                                            <div id="ErrorDivSettings" class="row" style="padding-top: 5px; padding-bottom: 5px; display: none;">
+                                                <div class="col-md-12" style="">
+                                                    <label class="Label" style="color: red" id="lblErrorSettings"></label>
+                                                </div>
+
+                                            </div>
+                                            <div id="SettingRightMenuCosting" class="row rightmenu" style="display: none">
+                                                <div class="row" style="width: 100%;">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 SettingsTabsHeader" style="">
+                                                        <div id="btnSettingCallRates" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingsCallRates();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Call Rates</span>
+                                                        </div>
+                                                        <div id="btnSettingRecordingRates" class="col-md-3 SettingsTabDeActive" style="width: 22%;" onclick="ShowSettingsRecordingRates();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Recording Rates</span>
+                                                        </div>
+                                                        <div id="btnSettingExtensions" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingsExtensions();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Extensions</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingCallRates" style="display: none;">
+                                                    <div class="row">
+                                                        <input id="txbCostingId" type="text" class="col-md-12 form-control" style="display: none;" />
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label">Call Type</label>
+                                                                </div>
+                                                                <div class="col-md-12" style="">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-map-marker "></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbCostType" class="form-control" placeholder="Specify Call Type" maxlength="50" list="CallTypes" />
+                                                                        <datalist id="CallTypes">
+
+                                                                            <option>Local</option>
+                                                                            <option>National</option>
+                                                                            <option>Mobile</option>
+                                                                            <option>Premium</option>
+                                                                            <option>Free</option>
+                                                                            <option>International Landline</option>
+                                                                            <option>International Mobile</option>
+                                                                            <option>Service Numbers</option>
+                                                                        </datalist>
+
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblCostPerSecond" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbCostPerSec" class="form-control" placeholder="Specify Cost Per Second" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblConnectionCost" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input id="txbConnectCost" type="text" class="form-control" placeholder="Specify Connection Cost" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblCallSetupCost" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input id="txbCallSetupCost" type="text" class="form-control" placeholder="Specify Call Setup Cost" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Dial Prefix</label>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input id="txbCostingDialNumber" type="text" class="form-control" style="border-bottom: 0px !important;" placeholder="Specify Dial Prefix" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                        <span class="input-group-btn" style="vertical-align: bottom">
+                                                                            <button type="button" id="btnCostingAddDialNumber" class="btn green" onclick="btnCostingAddDialNumber_Click();" style="padding: 7px 14px;"><i class="fa fa-plus"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <select id="lstCostingDialNumbers" class="form-control" multiple="multiple" style="width: 100%; height: 70px;">
+                                                                        </select>
+                                                                        <span class="input-group-btn" style="vertical-align: bottom">
+                                                                            <button type="button" id="btnCostingRemoveDialNumber" class="btn green" onclick="btnCostingRemoveDialNumber_Click();" style="padding: 7px 14px;"><i class="fa fa-trash"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid black">
+                                                        <div class="col-md-8" style="">
+                                                        </div>
+                                                        <div id="divAddCosting" class="col-md-4" style="text-align: right;">
+                                                            <button type="button" onclick="AddCosting();" id="btnAddCosting" class="btnFlat">Create</button>
+                                                        </div>
+                                                        <div id="divUpdateCosting" class="col-md-4" style="display: none; text-align: right;">
+
+                                                            <button type="button" onclick="UpdateCosting();" id="btnCosting" class="btnFlat">Update</button>
+                                                            <button type="button" onclick="CancelEditCosting();" class="btnFlat">Cancel</button>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row" style="margin-top: 0%; width: 100%;">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px 10px 5px 10px;">
+                                                            <table class="table table-striped table-bordered table-hover" id="tblCosting" style="margin-bottom: 0px !important">
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingRecordingRates" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblRecordingPerMinute" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input id="txbDurationCostPerMinute" type="text" class="form-control" placeholder="Specify Connection Cost" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblStoragePerMinute" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbDiskCostPerMB" class="form-control" placeholder="Specify Cost Per Second" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row" style="padding-top: 50px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                                        </div>
+                                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="">
+                                                            <button type="button" class="btnFlat" onclick="UpdateRecordingRates()" style="float: right;">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingExtensions" style="display: none;">
+
+                                                    <div class="row">
+                                                        <input id="txbExtensionId" type="text" class="col-md-12 form-control" style="display: none;" />
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">First Name</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-male"></i>
+                                                                        </span>
+                                                                        <input id="txbExtensionFirstName" type="text" class="form-control" placeholder="Please enter First Name" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Last Name</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-male"></i>
+                                                                        </span>
+                                                                        <input id="txbExtensionLastName" type="text" class="form-control" placeholder="Please enter Last Name" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label">Extension</label>
+                                                                </div>
+                                                                <div class="col-md-12" style="">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-phone-square "></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbExtension" class="form-control" placeholder="Please enter Extension" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Enable</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+
+                                                                        <input type="checkbox" id="chkExtensionEnabled" class="make-switch" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="danger" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid #6b696a">
+                                                        <div class="col-md-8" style="">
+                                                        </div>
+                                                        <div id="divAddExtension" class="col-md-4" style="text-align: right;">
+                                                            <button type="button" onclick="AddExtension();" id="btnAddExtension" class="btnFlat">Create</button>
+                                                        </div>
+                                                        <div id="divUpdateExtension" class="col-md-4" style="display: none; text-align: right;">
+
+                                                            <button type="button" onclick="UpdateExtension();" id="btnExtension" class="btnFlat">Update</button>
+                                                            <button type="button" onclick="CancelEditExtension();" class="btnFlat">Cancel</button>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row" style="margin-top: 0%; width: 100%;">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px 10px 5px 10px;">
+                                                            <table class="table table-striped table-bordered table-hover" id="tblExtensions" style="margin-bottom: 0px !important">
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="SettingRightMenuPrefrences" class="row rightmenu" style="display: none">
+
+                                                <div class="row" style="width: 100%;">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 SettingsTabsHeader" style="">
+
+                                                        <div id="btnSettingPrefrences" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingPrefrences();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Prefrences</span>
+                                                        </div>
+                                                        <div id="btnSettingSMTP" class="col-md-3 SettingsTabDeActive" style="width: 22%;" onclick="ShowSettingSMTP();">
+                                                            <span style="font-size: 16px; color: #fffeff;">SMTP</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingPrefrences" style="display: none;">
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">PBX IP</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPBXIP" class="form-control" maxlength="16" oninput="this.value = this.value.replace([0-9]*\.?[0-9]*, '');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Working Hours</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesWorkingHours" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Hangup Threshold (Sec)</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesHangupThreshold" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Internal Digit Length</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesInternalLength" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Ring Time Threshold (Sec)</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesRingTimeThreshold" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Currency</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <select id="lstPrefrencesCurrency" class="form-control">
+                                                                <option value="Euro">Euros (€)</option>
+                                                                <option value="Dollar">Dollars ($)</option>
+                                                                <option value="Pound">Pounds (£)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                                        </div>
+                                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="text-align: right;">
+                                                            <button type="button" class="btnFlat" onclick="UpdatePrefrences()">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingSMTP" style="display: none;">
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Host</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="text" id="txbSMTPHost" class="form-control" maxlength="50" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Port</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="text" id="txbSMTPort" class="form-control" maxlength="6" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">User Name</label>
+
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="text" id="txbSMTUserName" class="form-control" maxlength="50" />
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Password</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="password" id="txbSMTPassword" class="form-control" maxlength="50" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Enable SSL</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="checkbox" id="chkEnableSSL" class="make-switch" data-on-text="Yes" data-off-text="No"
+                                                                data-on-color="success" data-off-color="danger" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                                        </div>
+                                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="">
+                                                            <button type="button" class="btnFlat" onclick="SaveSMTPSettings()" style="float: right;">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="SettingRightMenuUsers" class="row rightmenu" style="display: none">
+                                                <div class="row" style="width: 100%;">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 SettingsTabsHeader" style="">
+                                                        <div id="btnSettingUsers" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingUsers();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Users</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingUsers" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label">Display Name</label>
+                                                                </div>
+                                                                <div class="col-md-12" style="">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-user"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbDisplayName" class="form-control" placeholder="Please enter the display name" maxlength="50" />
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">User Name</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-user"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbUserName" class="form-control" placeholder="Please enter the user name" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Password</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-lock"></i>
+                                                                        </span>
+                                                                        <input id="txbPassword" type="password" class="form-control" placeholder="8-50 Characters" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Email</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-envelope"></i>
+                                                                        </span>
+                                                                        <input id="txbEmail" type="text" class="form-control" placeholder="Please enter Email address" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Permissions</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <select id="ddlModule" class="form-control" multiple="multiple" style="border: 1px solid #e5e5e5">
+                                                                        <%foreach (vSuperMTClient.Entities.Modules Obj in ListModuleObj)
+                                                                            {%>
+                                                                        <option value="<%=(Obj.moduleID.ToString())%>"><%=(Obj.Name.ToString())%></option>
+                                                                        <%}%>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Enable</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <input type="checkbox" id="cbEnableUser" class="make-switch" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="danger" />
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 5px; padding-bottom: 10px; border-bottom: 2px solid #6b696a">
+                                                        <div class="col-md-8" style="">
+                                                        </div>
+                                                        <div id="divAddUser" class="col-md-4" style="text-align: right;">
+
+                                                            <button type="button" onclick="AddUsers();" id="btnAddUser" class="btnFlat">Create User</button>
+                                                        </div>
+                                                        <div id="divUpdateUser" class="col-md-4" style="display: none; text-align: right;">
+
+                                                            <button type="button" onclick="UpdateUsers();" id="btnUpdateUser" class="btnFlat">Update User</button>
+                                                            <button type="button" onclick="CancelEditUser();" class="btnFlat">Cancel</button>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row" style="margin-top: 0%; width: 100%;">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px 10px 5px 10px;">
+                                                            <table class="table table-striped table-bordered table-hover" id="tblUsers" style="margin-bottom: 0px !important">
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="LicensingModal" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="">
+                            <div class="modal-dialog" style="width: 810px;height:100%">
+                                <div class="modal-content" style="">
+                                    <div class="row" style="line-height: 35px; background-color: #ffffff; width: 100%; margin-left: 0%; vertical-align: middle; border-bottom: 1px solid #e5e5e5;">
+                                        <div class="col-md-11" style="margin-top: 5px;">
+                                            <span style="font-size: 18px; color: #404040;">Licensing</span>
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 0%; text-align: right" onclick="CloseLicensingModal();">
+                                            <span style="font-size: 20px; color: black;">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                    <%-- <div class="row" style="padding-top: 10px;">
+                                        <div class="col-md-2" style="">
+                                            <div class="row" style="padding-bottom: 10px;">
+                                                <div class="input-group">
+                                                    <span id="SettingLeftMenuCosting" class="input-group-addon SettingsSpanDeactive" onclick="ShowCosting();">
+                                                        <i class="fa fa-database" style="padding-right: 2px; display: block; font-size: 24px; padding-top: 5px;"></i>Billing
+                                                           
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom: 10px;">
+                                                <div class="input-group">
+                                                    <span id="SettingLeftMenuPrefrences" class="input-group-addon SettingsSpanDeactive" onclick="ShowPrefrences();">
+                                                        <i class="fa fa-compass" style="padding-right: 2px; display: block; font-size: 24px; padding-top: 5px;"></i>System
+                                                           
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-bottom: 10px;">
+                                                <div class="input-group">
+                                                    <span id="SettingLeftMenuUsers" class="input-group-addon SettingsSpanDeactive" onclick="ShowUsers();">
+                                                        <i class="fa fa-user" style="padding-right: 2px; display: block; font-size: 24px; padding-top: 5px;"></i>Users 
+                                                    </span>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-10" style="padding: 0px; border-left: 1px solid  #4f4e4f;">
+                                            <div id="ErrorDivSettings" class="row" style="padding-top: 5px; padding-bottom: 5px; display: none;">
+                                                <div class="col-md-12" style="">
+                                                    <label class="Label" style="color: red" id="lblErrorSettings"></label>
+                                                </div>
+
+                                            </div>
+                                            <div id="SettingRightMenuCosting" class="row rightmenu" style="display: none">
+                                                <div class="row" style="width: 100%;">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 SettingsTabsHeader" style="">
+                                                        <div id="btnSettingCallRates" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingsCallRates();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Call Rates</span>
+                                                        </div>
+                                                        <div id="btnSettingRecordingRates" class="col-md-3 SettingsTabDeActive" style="width: 22%;" onclick="ShowSettingsRecordingRates();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Recording Rates</span>
+                                                        </div>
+                                                        <div id="btnSettingExtensions" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingsExtensions();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Extensions</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingCallRates" style="display: none;">
+                                                    <div class="row">
+                                                        <input id="txbCostingId" type="text" class="col-md-12 form-control" style="display: none;" />
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label">Call Type</label>
+                                                                </div>
+                                                                <div class="col-md-12" style="">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-map-marker "></i>
+                                                                        </span>
+                                                                        <input type="text"  id="txbCostType" class="form-control" placeholder="Specify Call Type" maxlength="50" list="CallTypes" />
+                                                                        <datalist id="CallTypes">
+ 
+                                                                            <option>Local</option>
+                                                                            <option>National</option>
+                                                                            <option>Mobile</option>
+                                                                            <option>Premium</option>
+                                                                            <option>Free</option>
+                                                                            <option>International Landline</option>
+                                                                            <option>International Mobile</option>
+                                                                            <option>Service Numbers</option>
+                                                                        </datalist>
+                                                                    
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblCostPerSecond" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbCostPerSec" class="form-control" placeholder="Specify Cost Per Second" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"  />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblConnectionCost" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input id="txbConnectCost" type="text" class="form-control" placeholder="Specify Connection Cost" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblCallSetupCost" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input id="txbCallSetupCost" type="text" class="form-control" placeholder="Specify Call Setup Cost" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Dial Prefix</label>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input id="txbCostingDialNumber" type="text" class="form-control" style="border-bottom: 0px !important;" placeholder="Specify Dial Prefix" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/>
+                                                                        <span class="input-group-btn" style="vertical-align: bottom">
+                                                                            <button type="button" id="btnCostingAddDialNumber" class="btn green" onclick="btnCostingAddDialNumber_Click();" style="padding: 7px 14px;"><i class="fa fa-plus"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <select id="lstCostingDialNumbers" class="form-control" multiple="multiple" style="width: 100%; height: 70px;">
+                                                                        </select>
+                                                                        <span class="input-group-btn" style="vertical-align: bottom">
+                                                                            <button type="button" id="btnCostingRemoveDialNumber" class="btn green" onclick="btnCostingRemoveDialNumber_Click();" style="padding: 7px 14px;"><i class="fa fa-trash"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid black">
+                                                        <div class="col-md-8" style="">
+                                                        </div>
+                                                        <div id="divAddCosting" class="col-md-4" style="text-align: right;">
+                                                            <button type="button" onclick="AddCosting();" id="btnAddCosting" class="btnFlat">Create</button>
+                                                        </div>
+                                                        <div id="divUpdateCosting" class="col-md-4" style="display: none; text-align: right;">
+
+                                                            <button type="button" onclick="UpdateCosting();" id="btnCosting" class="btnFlat">Update</button>
+                                                            <button type="button" onclick="CancelEditCosting();" class="btnFlat">Cancel</button>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row" style="margin-top: 0%; width: 100%;">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px 10px 5px 10px;">
+                                                            <table class="table table-striped table-bordered table-hover" id="tblCosting" style="margin-bottom: 0px !important">
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingRecordingRates" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblRecordingPerMinute" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input id="txbDurationCostPerMinute" type="text" class="form-control" placeholder="Specify Connection Cost" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label id="lblStoragePerMinute" class="Label" style=""></label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-money"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbDiskCostPerMB" class="form-control" placeholder="Specify Cost Per Second" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row" style="padding-top: 50px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                                        </div>
+                                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="">
+                                                            <button type="button" class="btnFlat" onclick="UpdateRecordingRates()" style="float: right;">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingExtensions" style="display: none;">
+
+                                                    <div class="row">
+                                                        <input id="txbExtensionId" type="text" class="col-md-12 form-control" style="display: none;" />
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">First Name</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-male"></i>
+                                                                        </span>
+                                                                        <input id="txbExtensionFirstName" type="text" class="form-control" placeholder="Please enter First Name" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Last Name</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-male"></i>
+                                                                        </span>
+                                                                        <input id="txbExtensionLastName" type="text" class="form-control" placeholder="Please enter Last Name" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label">Extension</label>
+                                                                </div>
+                                                                <div class="col-md-12" style="">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-phone-square "></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbExtension" class="form-control" placeholder="Please enter Extension" maxlength="5" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Enable</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+
+                                                                        <input type="checkbox" id="chkExtensionEnabled" class="make-switch" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="danger" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 5px; padding-bottom: 10px; border-bottom: 1px solid #6b696a">
+                                                        <div class="col-md-8" style="">
+                                                        </div>
+                                                        <div id="divAddExtension" class="col-md-4" style="text-align: right;">
+                                                            <button type="button" onclick="AddExtension();" id="btnAddExtension" class="btnFlat">Create</button>
+                                                        </div>
+                                                        <div id="divUpdateExtension" class="col-md-4" style="display: none; text-align: right;">
+
+                                                            <button type="button" onclick="UpdateExtension();" id="btnExtension" class="btnFlat">Update</button>
+                                                            <button type="button" onclick="CancelEditExtension();" class="btnFlat">Cancel</button>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row" style="margin-top: 0%; width: 100%;">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px 10px 5px 10px;">
+                                                            <table class="table table-striped table-bordered table-hover" id="tblExtensions" style="margin-bottom: 0px !important">
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="SettingRightMenuPrefrences" class="row rightmenu" style="display: none">
+
+                                                <div class="row" style="width: 100%;">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 SettingsTabsHeader" style="">
+
+                                                        <div id="btnSettingPrefrences" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingPrefrences();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Prefrences</span>
+                                                        </div>
+                                                        <div id="btnSettingSMTP" class="col-md-3 SettingsTabDeActive" style="width: 22%;" onclick="ShowSettingSMTP();">
+                                                            <span style="font-size: 16px; color: #fffeff;">SMTP</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingPrefrences" style="display: none;">
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Working Hours</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesWorkingHours" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Hangup Threshold (Sec)</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesHangupThreshold" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Internal Digit Length</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesInternalLength" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Ring Time Threshold (Sec)</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <input type="text" id="txbPrefrencesRingTimeThreshold" class="form-control" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="">
+                                                            <label class="control-label" style="padding-top: 5px;">Currency</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="">
+                                                            <select id="lstPrefrencesCurrency" class="form-control">
+                                                                <option value="Euro">Euros (€)</option>
+                                                                <option value="Dollar">Dollars ($)</option>
+                                                                <option value="Pound">Pounds (£)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                                        </div>
+                                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="text-align: right;">
+                                                            <button type="button" class="btnFlat" onclick="UpdatePrefrences()">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingSMTP" style="display: none;">
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Host</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="text" id="txbSMTPHost" class="form-control" maxlength="50" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Port</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="text" id="txbSMTPort" class="form-control" maxlength="6" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">User Name</label>
+
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="text" id="txbSMTUserName" class="form-control" maxlength="50" />
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Password</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="password" id="txbSMTPassword" class="form-control" maxlength="50" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 15px; padding-bottom: 10px">
+                                                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="">
+                                                            <label class="control-label" style="">Enable SSL</label>
+                                                        </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="">
+                                                            <input type="checkbox" id="chkEnableSSL" class="make-switch" data-on-text="Yes" data-off-text="No"
+                                                                data-on-color="success" data-off-color="danger" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+
+                                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                                        </div>
+                                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="">
+                                                            <button type="button" class="btnFlat" onclick="SaveSMTPSettings()" style="float: right;">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div id="SettingRightMenuUsers" class="row rightmenu" style="display: none">
+                                                <div class="row" style="width: 100%;">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 SettingsTabsHeader" style="">
+                                                        <div id="btnSettingUsers" class="col-md-3 SettingsTabDeActive" style="width: 18%;" onclick="ShowSettingUsers();">
+                                                            <span style="font-size: 16px; color: #fffeff;">Users</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="SettingUsers" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="padding: 0px;">
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label">Display Name</label>
+                                                                </div>
+                                                                <div class="col-md-12" style="">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-user"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbDisplayName" class="form-control" placeholder="Please enter the display name" maxlength="50" />
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">User Name</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-user"></i>
+                                                                        </span>
+                                                                        <input type="text" id="txbUserName" class="form-control" placeholder="Please enter the user name" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Password</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-lock"></i>
+                                                                        </span>
+                                                                        <input id="txbPassword" type="password" class="form-control" placeholder="8-50 Characters" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6" style="padding: 0px;">
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Email</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">
+                                                                            <i class="fa fa-envelope"></i>
+                                                                        </span>
+                                                                        <input id="txbEmail" type="text" class="form-control" placeholder="Please enter Email address" maxlength="50" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Permissions</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <select id="ddlModule" class="form-control" multiple="multiple" style="border: 1px solid #e5e5e5">
+                                                                        <%foreach (vSuperMTClient.Entities.Modules Obj in ListModuleObj)
+                                                                            {%>
+                                                                        <option value="<%=(Obj.moduleID.ToString())%>"><%=(Obj.Name.ToString())%></option>
+                                                                        <%}%>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top: 5px; padding-bottom: 5px;">
+                                                                <div class="col-md-12" style="">
+                                                                    <label class="Label" style="">Enable</label>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <input type="checkbox" id="cbEnableUser" class="make-switch" data-on-text="Yes" data-off-text="No" data-on-color="success" data-off-color="danger" />
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="padding-top: 5px; padding-bottom: 10px; border-bottom: 2px solid #6b696a">
+                                                        <div class="col-md-8" style="">
+                                                        </div>
+                                                        <div id="divAddUser" class="col-md-4" style="text-align: right;">
+
+                                                            <button type="button" onclick="AddUsers();" id="btnAddUser" class="btnFlat">Create User</button>
+                                                        </div>
+                                                        <div id="divUpdateUser" class="col-md-4" style="display: none; text-align: right;">
+
+                                                            <button type="button" onclick="UpdateUsers();" id="btnUpdateUser" class="btnFlat">Update User</button>
+                                                            <button type="button" onclick="CancelEditUser();" class="btnFlat">Cancel</button>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row" style="margin-top: 0%; width: 100%;">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 0px 10px 5px 10px;">
+                                                            <table class="table table-striped table-bordered table-hover" id="tblUsers" style="margin-bottom: 0px !important">
+                                                                <tbody>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>--%>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="Index-div-wrapper">
+                                <asp:ScriptManager runat="server"></asp:ScriptManager>
+                                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        var left = 1;
+        var center = 1;
+        var right = 1;
+
+
+        $(document).ready(function () {
+            KeepSessionAlive();
+            $('#ModalChangePassword').on('hidden.bs.modal', function () {
+                $("#ErrorDivChangePassword").hide();
+                $("#txbOldPassword").val('');
+                $("#txbNewPassword").val('');
+                $("#txbConfirmNewPassword").val('');
+            });
+            Permissionlist();
+            $('#cbEnableUser').bootstrapSwitch('state', false);
+        });
+
+        function KeepSessionAlive() {
+            url = "SessionHeartbeat.ashx?";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", url, true);
+            xmlHttp.send();
+            setTimeout(KeepSessionAlive, 120000);
+        }
+     
+
+        //
+        function ShowSettingsCallRates() {
+            $("#SettingCallRates").show();
+            $("#SettingRecordingRates").hide();
+            $("#SettingExtensions").hide();
+            $("#btnSettingCallRates").removeClass("SettingsTabDeActive").addClass("SettingsTabActive");
+            $("#btnSettingRecordingRates").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            $("#btnSettingExtensions").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            GetCosting();
+            GetCurrency();
+            CancelEditCosting();
+        }
+        function ShowSettingsRecordingRates() {
+            $("#SettingCallRates").hide();
+            $("#SettingRecordingRates").show();
+            $("#SettingExtensions").hide();
+            $("#btnSettingCallRates").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            $("#btnSettingRecordingRates").removeClass("SettingsTabDeActive").addClass("SettingsTabActive");
+            $("#btnSettingExtensions").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            GetRecordingRates();
+        }
+        function ShowSettingsExtensions() {
+            $("#SettingCallRates").hide();
+            $("#SettingRecordingRates").hide();
+            $("#SettingExtensions").show();
+            $("#btnSettingRecordingRates").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            $("#btnSettingCallRates").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            $("#btnSettingExtensions").removeClass("SettingsTabDeActive").addClass("SettingsTabActive");
+            GetExtensions();
+            CancelEditExtension();
+
+        }
+        function ShowSettingPrefrences() {
+            $("#SettingPrefrences").show();
+            $("#SettingSMTP").hide();
+            $("#btnSettingPrefrences").removeClass("SettingsTabDeActive").addClass("SettingsTabActive");
+            $("#btnSettingSMTP").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            GetPrefrences();
+
+        }
+        function ShowSettingSMTP() {
+            $("#SettingPrefrences").hide();
+            $("#SettingSMTP").show();
+            $("#btnSettingPrefrences").removeClass("SettingsTabActive").addClass("SettingsTabDeActive");
+            $("#btnSettingSMTP").removeClass("SettingsTabDeActive").addClass("SettingsTabActive");
+            GetSMTPSettings();
+
+        }
+        function ShowSettingUsers() {
+
+            $("#btnSettingUsers").removeClass("SettingsTabDeActive").addClass("SettingsTabActive");
+            $("#SettingUsers").show();
+
+            GetUsers();
+            CancelEditUser();
+        }
+        function ErrorText(ErrorMsg, ErrorDiv, ErrorLable) {
+            ErrorDiv.show();
+            ErrorLable.text(ErrorMsg);
+        }
+
+        //Change Password
+        function Validate() {
+            ErrorDiv = $("#ErrorDivChangePassword");
+            ErrorLable = $("#lblErrorChangePassword");
+            var OldPassword = $("#txbOldPassword").val();
+            var NewPassword = $("#txbNewPassword").val();
+            var ConfirmPassword = $("#txbConfirmNewPassword").val();
+            var CUserName = $("#currentUserName").val().trim();
+            //var passwordValidation = validateUserPassword(NewPassword, CUserName);
+            var passwordValidation = "true";
+            if (OldPassword == "") {
+                ErrorText("Please provide old password", ErrorDiv, ErrorLable);
+                return false;
+            }
+            else if (NewPassword == "") {
+
+                ErrorText("Please Provide New Password", ErrorDiv, ErrorLable);
+                return false;
+            }
+            else if (ConfirmPassword == "") {
+
+                ErrorText("Please Confirm Password", ErrorDiv, ErrorLable);
+                return false;
+            }
+            else if (NewPassword != ConfirmPassword) {
+
+                ErrorText("Password Mismatch.Please Confirm The Correct Password", ErrorDiv, ErrorLable);
+                return false;
+            }
+            else if (passwordValidation != "true") {
+                ErrorText(passwordValidation, ErrorDiv, ErrorLable);
+                return false;
+            }
+            return true;
+
+        }
+        function ChangePassword() {
+            if (Validate()) {
+                ErrorDiv = $("#ErrorDivChangePassword");
+                ErrorLable = $("#lblErrorChangePassword");
+                var OldPassword = $("#txbOldPassword").val();
+                var NewPassword = $("#txbNewPassword").val();
+                var ConfirmPassword = $("#txbConfirmNewPassword").val();
+                var Param = { "password": NewPassword, "oldPassword": OldPassword };
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url: "Users.aspx/ChangePassword",
+                    data: JSON.stringify(Param),
+                    type: "POST",
+                    success: function (data) {
+                        if (data.d == "Password Changed Sucessfully") {
+                            $("#txbOldPassword").val("");
+                            $("#txbNewPassword").val("");
+                            $("#txbNewPassword").trigger("change");
+                            $("#txbConfirmNewPassword").val("");
+                            $('#ModalChangePassword').modal('hide');
+                            $().toastmessage('showSuccessToast', data.d);
+                        }
+                        else {
+                            $().toastmessage("showErrorToast", data.d);
+                        }
+                    }
+                });
+            }
+        }
+        function LogOut() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "Users.aspx/LogOut",
+                type: "POST",
+                success: function (data) {
+                    window.location = data.d;
+                }
+            });
+        }
+        //Modals
+        function ShowSettingsModal() {
+            $("#SettingsModal").modal('show');
+            //$(".ActiveHeaderLink").removeClass("ActiveHeaderLink").addClass("DeactiveHeaderLink");
+            $("#HeaderLinkSettings").removeClass("DeactiveHeaderLink").addClass("ActiveHeaderLink");
+            ShowCosting();
+        }
+        function CloseSettingsModal() {
+            ClearSettingsModal();
+            $('#SettingsModal').modal('hide');
+            //$(".ActiveHeaderLink").removeClass("ActiveHeaderLink").addClass("DeactiveHeaderLink");
+            //$("#HeaderLinkDashboard").removeClass("DeactiveHeaderLink").addClass("ActiveHeaderLink");
+            $("#HeaderLinkSettings").removeClass("ActiveHeaderLink").addClass("DeactiveHeaderLink");
+            $(".rightmenu").hide();
+        }
+        function ClearSettingsModal() {
+            CancelEditCosting();
+            CancelEditExtension();
+            CancelEditUser();
+        }
+        //Call Rates
+        function ShowCosting() {
+
+            $(".rightmenu").hide();
+            ClearSettingsModal();
+
+            $("#SettingRightMenuCosting").show();
+            $(".SettingsSpanActive").removeClass("SettingsSpanActive").addClass("SettingsSpanDeactive");
+            $("#SettingLeftMenuCosting").removeClass("SettingsSpanDeactive").addClass("SettingsSpanActive");
+            ShowSettingsCallRates();
+
+        }
+        function isValidDialNumber(DialNumber) {
+            return true;
+        }
+        function GetCosting() {
+            $('#tblCosting').empty();
+            $.ajax({
+                type: "POST",
+                url: "Costing.aspx/GetAllCostings",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var trHTML = '<thead><tr><th>Call Type</th><th>Cost Per Sec</th><th>Connect Cost</th><th>Call Setup Cost</th><th>Edit</th><th>Delete</th></tr></thead><tbody></tbody>';
+                    $('#tblCosting').append(trHTML);
+                    for (var i = 0; i < data.d.length; i++) {
+                        var trHTML = '';
+                        trHTML += '<tr><td>' + data.d[i].CostType + '</td>';
+                        trHTML += '<td>' + data.d[i].CostPerSec + '</td>';
+                        trHTML += '<td>' + data.d[i].ConnectCost + '</td>';
+                        trHTML += '<td>' + data.d[i].CallSetupCost + '</td>';
+
+                        trHTML += '<td><a class="edit"  onclick="CostingEdit(\'' + data.d[i].Id + '\',\'' + data.d[i].CostType + '\',\'' + data.d[i].CostPerSec + '\',\'' + data.d[i].ConnectCost + '\',\'' + data.d[i].CallSetupCost + '\',\'' + data.d[i].DialNumber + '\')";>Edit</a></td>';
+                        trHTML += '<td><a class="edit" style="padding: 0px;" onclick="DeleteFromCosting(\'' + data.d[i].Id + '\')";>Delete</a></td></tr>';
+                        $('#tblCosting').append(trHTML);
+                    }
+                    $('#tblCosting').dataTable({
+                        "pagingType": "full_numbers",
+                        destroy: true,
+                        "bLengthChange": false,
+                        "bPaginate": true,
+                        "bFilter": false,
+                        "aaSorting": [],
+                        "pageLength": 4,
+                        "info": false
+                    });
+                    //$.fn.DataTable.ext.pager.numbers_length = 5;
+                }
+            });
+        }
+        function AddCosting() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var CostingExists = 0;
+            var Id = 0;
+            var CostType = $('#txbCostType').val();
+            var CostPerSec = $('#txbCostPerSec').val();
+            var ConnectCost = $('#txbConnectCost').val();
+            var CallSetupCost = $('#txbCallSetupCost').val();
+            if (CostType == "") {
+
+                ErrorText('Please provide Costing Type', ErrorDiv, ErrorLable);
+                return;
+
+            }
+            if (CostPerSec == "") {
+                CostPerSec = 0;
+            }
+            if (ConnectCost == "") {
+                ConnectCost = 0;
+            }
+            if (CallSetupCost == "") {
+                CallSetupCost = 0;
+            }
+            if (!$.isNumeric(CostPerSec)) {
+
+                ErrorText('Please provide numeric value for Cost Per Sec', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(ConnectCost)) {
+                ErrorText('Please provide numeric value for Connect Cost', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(CallSetupCost)) {
+                ErrorText('Please provide numeric value for Call Setup Cost', ErrorDiv, ErrorLable);
+                return;
+            }
+
+            var Param = { "CostingId": Id, "CostType": CostType };
+
+            $.ajax({
+                type: "POST",
+                url: "Costing.aspx/CheckIfCostingNameAlreadyExists",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        CostingExists = 1;
+
+                    }
+                    else {
+                        CostingExists = 0;
+
+                    }
+                }
+            });
+            if (CostingExists == 1) {
+
+                ErrorText('Costing with this name already exists.', ErrorDiv, ErrorLable);
+                return;
+            }
+            var DialNumber = ""
+
+            $('#lstCostingDialNumbers option').each(function () {
+                DialNumber += "" + $(this).val() + ";"
+            });
+
+            Param = { "Id": Id, "CostType": CostType, "CostPerSec": CostPerSec, "ConnectCost": ConnectCost, "CallSetupCost": CallSetupCost, "DialNumber": DialNumber };
+
+            $.ajax({
+                type: "POST",
+                url: "Costing.aspx/InsertIntoCosting",
+                data: "{CostingEntityObj:" + JSON.stringify(Param) + "}",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.d === "1") {
+                        $().toastmessage('showSuccessToast', 'Costing added successfully.');
+                        CancelEditCosting();
+                        GetCosting();
+                    }
+                    else {
+                        $().toastmessage('showErrorToast', 'Error adding  Costing.');
+                    }
+                }
+            });
+        }
+        function CostingEdit(CostingId, CostType, CostPerSec, ConnectCost, CallSetupCost, DialNumbers) {
+
+            $('#lstCostingDialNumbers').empty();
+            $('#txbCostingId').val(CostingId);
+            $('#txbCostType').val(CostType);
+            $('#txbCostPerSec').val(CostPerSec);
+            $('#txbConnectCost').val(ConnectCost);
+            $('#txbCallSetupCost').val(CallSetupCost);
+            var CostingDialNumbers = DialNumbers.split(";");
+            for (var i = 0; i < CostingDialNumbers.length; i++) {
+                if (CostingDialNumbers[i] != "")
+                    $('#lstCostingDialNumbers').append($('<option>', { value: CostingDialNumbers[i], text: CostingDialNumbers[i] }));
+            }
+            $('#divAddCosting').hide();
+            $('#divUpdateCosting').show();
+        }
+        function UpdateCosting() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var CostingExists = 0;
+            var Id = $('#txbCostingId').val();
+            var CostType = $('#txbCostType').val();
+            var CostPerSec = $('#txbCostPerSec').val();
+            var ConnectCost = $('#txbConnectCost').val();
+            var CallSetupCost = $('#txbCallSetupCost').val();
+            if (CostType == "") {
+                ErrorText('Please provide Costing Type', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (CostPerSec == "") {
+                CostPerSec = 0;
+            }
+            if (ConnectCost == "") {
+                ConnectCost = 0;
+            }
+            if (CallSetupCost == "") {
+                CallSetupCost = 0;
+            }
+            if (!$.isNumeric(CostPerSec)) {
+                ErrorText('Please provide numeric value for Cost Per Sec', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(ConnectCost)) {
+                ErrorText('Please provide numeric value for Connect Cost', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(CallSetupCost)) {
+                ErrorText('Please provide numeric value for Call Setup Cost', ErrorDiv, ErrorLable);
+                return;
+            }
+
+            var Param = { "CostingId": Id, "CostType": CostType };
+
+            $.ajax({
+                type: "POST",
+                url: "Costing.aspx/CheckIfCostingNameAlreadyExists",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        CostingExists = 1;
+
+                    }
+                    else {
+                        CostingExists = 0;
+
+                    }
+                }
+            });
+            if (CostingExists == 1) {
+                ErrorText('Costing with this name already exists.', ErrorDiv, ErrorLable);
+                return;
+            }
+
+            var DialNumber = ""
+
+            $('#lstCostingDialNumbers option').each(function () {
+                DialNumber += "" + $(this).val() + ";"
+            });
+
+            Param = { "Id": Id, "CostType": CostType, "CostPerSec": CostPerSec, "ConnectCost": ConnectCost, "CallSetupCost": CallSetupCost, "DialNumber": DialNumber };
+
+            $.ajax({
+                type: "POST",
+                url: "Costing.aspx/UpdateIntoCosting",
+                data: "{CostingEntityObj:" + JSON.stringify(Param) + "}",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        $().toastmessage('showSuccessToast', 'Costing updated successfully.');
+                        GetCosting();
+                    }
+                    else {
+                        $().toastmessage('showErrorToast', 'Error updating  Costing.');
+                    }
+                }
+            });
+        }
+        function CancelEditCosting() {
+
+            $('#lstCostingDialNumbers').empty();
+            $('#txbCostingId').val("");
+            $('#txbCostType').val("");
+            $('#txbCostPerSec').val("");
+            $('#txbConnectCost').val("");
+            $('#txbCallSetupCost').val("");
+
+            $('#ErrorDivSettings').hide();
+            $('#divAddCosting').show();
+            $('#divUpdateCosting').hide();
+        }
+        function DeleteFromCosting(CostingId) {
+
+            var Param = { "CostingId": CostingId }
+            var ConfirmDelete = confirm("Are you sure you want to delete?");
+            if (ConfirmDelete == false) {
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "Costing.aspx/DeleteFromCostings",
+                data: JSON.stringify(Param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === "1") {
+                        CancelEditCosting();
+                        GetCosting();
+                        $().toastmessage("showSuccessToast", "Costing deleted successfully.");
+                    }
+                    else {
+                        $().toastmessage("showErrorToast", "Failed to delete Costing.");
+                    }
+                }
+            });
+        }
+        function btnCostingAddDialNumber_Click() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var DialNumber = $('#txbCostingDialNumber').val();
+            if (isValidDialNumber(DialNumber)) {
+                $('#lstCostingDialNumbers').append($('<option>', { value: DialNumber, text: DialNumber }));
+                $('#txbCostingDialNumber').val("");
+            }
+            else {
+                ErrorText('Please provide valid Dial Number', ErrorDiv, ErrorLable);
+                return;
+            }
+        }
+        function btnCostingRemoveDialNumber_Click() {
+            $('#lstCostingDialNumbers option:selected').remove();
+        }
+        //Recording Rates
+        function GetRecordingRates() {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "Settings.aspx/GetSettings",
+                type: "POST",
+                asynch: true,
+                success: function (data) {
+                    $("#txbDiskCostPerMB").val(data.d.DiskCostPerMin);
+                    $("#txbDurationCostPerMinute").val(data.d.DurationCostPerMin);
+                }
+            });
+        }
+        function UpdateRecordingRates() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var DiskCostPerMin = $("#txbDiskCostPerMB").val();
+            var DurationCostPerMin = $("#txbDurationCostPerMinute").val();
+            if (!$.isNumeric(DiskCostPerMin)) {
+                ErrorText('Please provide numeric value for Disk Cost', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(DurationCostPerMin)) {
+                ErrorText('Please provide numeric value for Duration Cost', ErrorDiv, ErrorLable);
+                return;
+            }
+            var Param = { "DiskCostPerMin": DiskCostPerMin, "DurationCostPerMin": DurationCostPerMin };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "settings.aspx/UpdateRecordingRates",
+                data: "{SettingsUpdatedInfo:" + JSON.stringify(Param) + "}",
+                type: "POST",
+                success: function (data) {
+                    ErrorDiv.hide();
+                    $().toastmessage("showSuccessToast", "Recording Rates updated successfully.</span>");
+                }
+            });
+
+        }
+        //Extensions
+        function GetExtensions() {
+            $('#tblExtensions').empty();
+            $.ajax({
+                type: "POST",
+                url: "Extensions.aspx/GetExtensions",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#tblExtensions').empty();
+                    var trHTML = '<thead><tr><th>Extension</th><th>First Name</th><th>Last Name</th><th>Enabled</th><th>Edit</th><th>Delete</th></tr></thead><tbody></tbody>';
+                    $('#tblExtensions').append(trHTML);
+                    for (i = 0; i < data.d.length; i++) {
+
+                        var trHTML = '';
+                        trHTML += '<tr><td>' + data.d[i].Extension + '</td>';
+                        trHTML += '<td>' + data.d[i].FirstName + '</td>';
+                        trHTML += '<td>' + data.d[i].LastName + '</td>';
+                        var Enabled = "";
+                        if (data.d[i].Enabled) {
+                            Enabled = "Yes";
+                        }
+                        else {
+                            Enabled = "No";
+                        }
+                        trHTML += '<td>' + Enabled + '</td>';
+                        trHTML += '<td><a class="edit"  onclick="ExtensionEdit(\'' + data.d[i].Id + '\',\'' + data.d[i].Extension + '\',\'' + data.d[i].FirstName + '\',\'' + data.d[i].LastName + '\',\'' + data.d[i].Enabled + '\')";>Edit</a></td>';
+                        trHTML += '<td><a class="edit" style="padding: 0px;" onclick="DeleteFromExtension(\'' + data.d[i].Id + '\')";>Delete</a></td></tr>';
+
+
+                        $('#tblExtensions').append(trHTML);
+                    }
+                    $('#tblExtensions').dataTable({
+                        "pagingType": "full_numbers",
+                        destroy: true,
+                        "bLengthChange": false,
+                        "bPaginate": true,
+                        "bFilter": false,
+                        "aaSorting": [],
+                        "pageLength": 4,
+                        "info": false
+                    });
+                }
+            });
+        }
+        function AddExtension() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var ExtensionExists = 0;
+            var Id = 0;
+            var Extension = $('#txbExtension').val();
+            var FirstName = $('#txbExtensionFirstName').val();
+            var LastName = $('#txbExtensionLastName').val();
+            var Enabled = $('#chkExtensionEnabled').is(":checked");
+            if (Extension == "") {
+                ErrorText('Please provide Extension', ErrorDiv, ErrorLable);
+                return;
+            }
+            var Param = { "Id": Id, "Extension": Extension, "FirstName": FirstName, "LastName": LastName, "Enabled": Enabled };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "Extensions.aspx/AddExtension",
+                data: "{ExtensionsEntityObj:" + JSON.stringify(Param) + "}",
+                type: "POST",
+                success: function (data) {
+
+                    if (data.d.indexOf("1:") > -1) {
+                        $().toastmessage("showSuccessToast", "Extension added sucessfully.");
+                        GetExtensions();
+                        CancelEditExtension();
+                    }
+                    else if (data.d.indexOf("2:") > -1) {
+                        $().toastmessage("showErrorToast", "An error occured while adding the extension.");
+                    }
+                    else if (data.d.indexOf("3:") > -1) {
+                        $().toastmessage("showErrorToast", "Extension with same name already exists.");
+                    }
+                }
+            });
+        }
+        function ExtensionEdit(ExtensionId, Extension, FirstName, LastName, Enabled) {
+
+
+            $('#txbExtensionId').val(ExtensionId);
+            $('#txbExtension').val(Extension);
+            $('#txbExtensionFirstName').val(FirstName);
+            $('#txbExtensionLastName').val(LastName);
+            $('#chkExtensionEnabled').bootstrapSwitch('state', Enabled);
+            $('#divAddExtension').hide();
+            $('#divUpdateExtension').show();
+        }
+        function UpdateExtension() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var ExtensionExists = 0;
+            var Id = $('#txbExtensionId').val();
+            var Extension = $('#txbExtension').val();
+            var FirstName = $('#txbExtensionFirstName').val();
+            var LastName = $('#txbExtensionLastName').val();
+            var Enabled = $('#chkExtensionEnabled').is(":checked");
+            if (Extension == "") {
+                ErrorText('Please provide Extension', ErrorDiv, ErrorLable);
+                return;
+            }
+            var Param = { "Id": Id, "Extension": Extension, "FirstName": FirstName, "LastName": LastName, "Enabled": Enabled };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "Extensions.aspx/UpdateExtension",
+                data: "{ExtensionsEntityObj:" + JSON.stringify(Param) + "}",
+                type: "POST",
+                success: function (data) {
+
+                    if (data.d.indexOf("1:") > -1) {
+                        GetExtensions();
+                        $().toastmessage("showSuccessToast", "Extension updated sucessfully.");
+                    }
+                    else if (data.d.indexOf("2:") > -1) {
+                        $().toastmessage("showErrorToast", "An error occured while updating the extension.");
+                    }
+                    else if (data.d.indexOf("3:") > -1) {
+                        $().toastmessage("showErrorToast", "Extension with same name already exists.");
+                    }
+                }
+            });
+        }
+        function CancelEditExtension() {
+
+            $('#txbExtensionId').val("");
+            $('#txbExtension').val("");
+            $('#txbExtensionFirstName').val("");
+            $('#txbExtensionLastName').val("");
+            $('#chkExtensionEnabled').bootstrapSwitch('state', true);
+            $('#ErrorDivSettings').hide();
+            $('#divAddExtension').show();
+            $('#divUpdateExtension').hide();
+        }
+        function DeleteFromExtension(ExtensionId) {
+
+            var Param = { "ExtensionId": ExtensionId }
+            var ConfirmDelete = confirm("Are you sure you want to delete?");
+            if (ConfirmDelete == false) {
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "Extensions.aspx/DeleteExtensionOnId",
+                data: JSON.stringify(Param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d.indexOf("1:") > -1) {
+                        CancelEditExtension();
+                        GetExtensions();
+                        $().toastmessage("showSuccessToast", "Extension deleted successfully.");
+                    }
+                    else {
+                        $().toastmessage("showErrorToast", "Failed to delete Extension.");
+                    }
+                }
+            });
+        }
+        //Prefrences
+        function ShowPrefrences() {
+            $(".rightmenu").hide();
+            ClearSettingsModal();
+
+            $("#SettingRightMenuPrefrences").show();
+            $(".SettingsSpanActive").removeClass("SettingsSpanActive").addClass("SettingsSpanDeactive");
+            $("#SettingLeftMenuPrefrences").removeClass("SettingsSpanDeactive").addClass("SettingsSpanActive");
+            ShowSettingPrefrences();
+        }
+        function GetPrefrences() {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "Settings.aspx/GetSettings",
+                type: "POST",
+                asynch: true,
+                success: function (data) {
+                    $("#txbPBXIP").val(data.d.PBXIP);
+                    $("#txbPrefrencesWorkingHours").val(data.d.AgentWorkingHours);
+                    $("#txbPrefrencesHangupThreshold").val(data.d.AgentHangUpThreshold);
+                    $("#txbPrefrencesInternalLength").val(data.d.InternalLength);
+                    $("#txbPrefrencesRingTimeThreshold").val(data.d.RingTimeThreshold);
+                    $("#lstPrefrencesCurrency").val(data.d.Currency);
+
+
+                    if (data.d.Currency == "Euro") {
+                        $("#lblCostPerSecond").append("Cost Per Second (€)");
+                        $("#lblConnectionCost").append("Connection Cost (€)");
+                        $("#lblCallSetupCost").append("Call Setup Cost (€)");
+                        $("#lblRecordingPerMinute").append("Recording Per Minute (€)");
+                        $("#lblStoragePerMinute").append("Storage Per Minute (€)");
+                    }
+                    else if (data.d.Currency == "Pound") {
+                        $("#lblCostPerSecond").append("Cost Per Second (£)");
+                        $("#lblConnectionCost").append("Connection Cost (£)");
+                        $("#lblCallSetupCost").append("Call Setup Cost (£)");
+                        $("#lblRecordingPerMinute").append("Recording Per Minute (£)");
+                        $("#lblStoragePerMinute").append("Storage Per Minute (£)");
+                    }
+                    else if (data.d.Currency == "Dollar") {
+                        $("#lblCostPerSecond").append("Cost Per Second ($)");
+                        $("#lblConnectionCost").append("Connection Cost ($)");
+                        $("#lblCallSetupCost").append("Call Setup Cost ($)");
+                        $("#lblRecordingPerMinute").append("Recording Per Minute ($)");
+                        $("#lblStoragePerMinute").append("Storage Per Minute ($)");
+                    }
+
+
+
+
+                }
+            });
+        }
+        function GetCurrency() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "Settings.aspx/GetSettings",
+                type: "POST",
+                asynch: true,
+                success: function (data) {
+
+                    $("#lblCostPerSecond").text('');
+                    $("#lblConnectionCost").text('');
+                    $("#lblCallSetupCost").text('');
+                    $("#lblRecordingPerMinute").text('');
+                    $("#lblStoragePerMinute").text('');
+
+                    if (data.d.Currency == "Euro") {
+                        $("#lblCostPerSecond").append("Cost Per Second (€)");
+                        $("#lblConnectionCost").append("Connection Cost (€)");
+                        $("#lblCallSetupCost").append("Call Setup Cost (€)");
+                        $("#lblRecordingPerMinute").append("Recording Per Minute (€)");
+                        $("#lblStoragePerMinute").append("Storage Per Minute (€)");
+                    }
+                    else if (data.d.Currency == "Pound") {
+                        $("#lblCostPerSecond").append("Cost Per Second (£)");
+                        $("#lblConnectionCost").append("Connection Cost (£)");
+                        $("#lblCallSetupCost").append("Call Setup Cost (£)");
+                        $("#lblRecordingPerMinute").append("Recording Per Minute (£)");
+                        $("#lblStoragePerMinute").append("Storage Per Minute (£)");
+                    }
+                    else if (data.d.Currency == "Dollar") {
+                        $("#lblCostPerSecond").append("Cost Per Second ($)");
+                        $("#lblConnectionCost").append("Connection Cost ($)");
+                        $("#lblCallSetupCost").append("Call Setup Cost ($)");
+                        $("#lblRecordingPerMinute").append("Recording Per Minute ($)");
+                        $("#lblStoragePerMinute").append("Storage Per Minute ($)");
+                    }
+                }
+            });
+        }
+        function UpdatePrefrences() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var PBXIP = $("#txbPBXIP").val();
+            var AgentWorkingHours = $("#txbPrefrencesWorkingHours").val();
+            var AgentHangUpThreshold = $("#txbPrefrencesHangupThreshold").val();
+            var InternalLength = $("#txbPrefrencesInternalLength").val();
+            var RingTimeThreshold = $("#txbPrefrencesRingTimeThreshold").val();
+            var Currency = $("#lstPrefrencesCurrency").val();
+            var DiskCostPerMin = $("#txbDiskCostPerMB").val();
+            var DurationCostPerMin = $("#txbDurationCostPerMinute").val();
+            if (!isValidIpv4Addr(PBXIP)) {
+                ErrorText('Please provide a valid PBXIP.', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(AgentWorkingHours) || !(Math.floor(AgentWorkingHours) == AgentWorkingHours)) {
+                ErrorText('Please provide numeric value for Working Hours', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(AgentHangUpThreshold) || !(Math.floor(AgentHangUpThreshold) == AgentHangUpThreshold)) {
+                ErrorText('Please provide numeric value for Hangup Threshold', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(InternalLength) || !(Math.floor(InternalLength) == InternalLength)) {
+                ErrorText('Please provide numeric value for Internal Length', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (!$.isNumeric(RingTimeThreshold) || !(Math.floor(RingTimeThreshold) == RingTimeThreshold)) {
+                ErrorText('Please provide numeric value for Ring Time Threshold', ErrorDiv, ErrorLable);
+                return;
+            }
+
+            var Param = { "PBXIP": PBXIP, "AgentWorkingHours": AgentWorkingHours, "AgentHangUpThreshold": AgentHangUpThreshold, "InternalLength": InternalLength, "RingTimeThreshold": RingTimeThreshold, "Currency": Currency };
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "settings.aspx/UpdatePrefrences",
+                data: "{SettingsUpdatedInfo:" + JSON.stringify(Param) + "}",
+                type: "POST",
+                success: function (data) {
+                    ErrorDiv.hide();
+                    $().toastmessage("showSuccessToast", "Settings updated successfully.</span>");
+                }
+            });
+
+        }
+        function isValidIpv4Addr(ip) {
+            return /^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/.test(ip);
+        }
+        //User
+        function ShowUsers() {
+            $(".rightmenu").hide();
+            ClearSettingsModal();
+
+            $("#SettingRightMenuUsers").show();
+            $(".SettingsSpanActive").removeClass("SettingsSpanActive").addClass("SettingsSpanDeactive");
+            $("#SettingLeftMenuUsers").removeClass("SettingsSpanDeactive").addClass("SettingsSpanActive");
+            ShowSettingUsers();
+        }
+        function Permissionlist() {
+
+            $('#ddlModule').multiselect({
+                includeSelectAllOption: true,
+                selectAllValue: 'multiselect-all',
+                enableCaseInsensitiveFiltering: true,
+                enableFiltering: true,
+                maxHeight: '300',
+                onSelectAll: function () {
+                    $.uniform.update();
+                },
+
+            });
+            $("#ddlModule").multiselect('updateButtonText');
+            //$("#ddlModule option:selected").removeAttr("selected");
+            $('#ddlModule').multiselect('refresh');
+
+
+        }
+        function GetUsers() {
+            $('#tblUsers').empty();
+            $.ajax({
+                type: "POST",
+                url: "Users.aspx/GetAllUsers",
+                data: {},
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var trHTML = '<thead><tr><th>Display Name</th><th>User Name</th><th>Email Address</th><th>Edit</th><th>Delete</th></tr></thead><tbody></tbody>';
+                    $('#tblUsers').append(trHTML);
+                    for (var i = 0; i < data.d.length; i++) {
+                        var trHTML = '';
+                        trHTML += '<tr><td>' + data.d[i].DisplayName + '</td>';
+                        trHTML += '<td>' + data.d[i].UserName + '</td>';
+                        trHTML += '<td>' + data.d[i].EmailAddress + '</td>';
+                        trHTML += "<td><a class='edit'  onclick='UserEditInfo(" + data.d[i].UserId + ")';>Edit</a></td>";
+                        trHTML += "<td><a onclick='DeleteUser(" + data.d[i].UserId + ")';> Delete</a></td></tr>";
+                        $('#tblUsers').append(trHTML);
+                    }
+                    $("#tblUsers").show();
+                    $('#tblUsers').dataTable({
+                        "pagingType": "full_numbers",
+                        destroy: true,
+                        "bLengthChange": false,
+                        "bPaginate": true,
+                        "bFilter": false,
+                        "aaSorting": [],
+                        "pageLength": 4,
+                        "info": false
+                    });
+                }
+            });
+        }
+        function UserEditInfo(UserId) {
+            //$("#ModalHeader").text("Edit User");
+            $("#ddlModule option:selected").removeAttr("selected");
+            var Param = { "UserId": UserId };
+            $.ajax({
+
+                type: "POST",
+                url: "Users.aspx/GetUserOnId",
+                data: JSON.stringify(Param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var PermissionsArray = new Array();
+                    if (data.d.Permissions == null) {
+
+                    }
+                    else {
+                        for (var i = 0; i < data.d.Permissions.length; i++) {
+                            PermissionsArray[i] = data.d.Permissions[i];
+                        }
+                    }
+                    $('#txbUserId').val(UserId);
+                    $('#txbDisplayName').val(data.d.DisplayName);
+                    $('#txbUserName').val(data.d.UserName);
+                    $('#txbPassword').val(data.d.Password);
+                    $('#txbEmail').val(data.d.EmailAddress);
+                    //$('#txbUserName').attr("disabled", true)
+                    $('#cbEnableUser').bootstrapSwitch('state', data.d.Enable);
+                    $("#ddlModule").val(PermissionsArray);
+                    $("#ddlModule").multiselect("refresh");
+                    $('#divAddUser').hide();
+                    $('#divUpdateUser').show();
+
+
+                }
+            });
+        }
+        function AddUsers() {
+
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var UserId = 0;
+            var UserName = $('#txbUserName').val();
+            var Password = $('#txbPassword').val();
+            var DisplayName = $('#txbDisplayName').val();
+            var EmailAddress = $('#txbEmail').val();
+            var Enable = false;
+            if ($('#cbEnableUser').is(':checked')) {
+                Enable = true;
+            }
+            else {
+                Enable = false;
+            }
+
+            var UserPermissions = new Array();
+            //var permissions = $('#ddlModule option');
+            // give all permissions 
+            var permissions = $('#ddlModule option:selected');
+            $(permissions).each(function (index, permissions) {
+
+                UserPermissions.push($(this).val());
+            });
+
+            if (UserName == "") {
+                ErrorText('Please provide User Name', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (Password == "") {
+                ErrorText('Please provide Password', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (DisplayName == "") {
+                ErrorText('Please provide Display Name', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (EmailAddress == "") {
+                ErrorText('Please provide Email Address', ErrorDiv, ErrorLable);
+                return;
+            }
+
+            var userType = $("input[type='radio']:checked").val();
+            var Param = { "UserId": UserId, "UserName": UserName, "DisplayName": DisplayName, "EmailAddress": EmailAddress, "Password": Password, "Enable": Enable, "Permissions": UserPermissions };
+            $.ajax({
+                type: "POST",
+                url: "Users.aspx/InsertIntoUsers",
+                data: "{UsersEntityObj:" + JSON.stringify(Param) + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === "success") {
+
+                        $().toastmessage("showSuccessToast", "User added sucessfully.");
+                        CancelEditUser();
+                        GetUsers();
+                    }
+                    else {
+                        $().toastmessage("showErrorToast", data.d);
+                    }
+                }
+            });
+        }
+        function UpdateUsers() {
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var UserId = $('#txbUserId').val();
+            var UserName = $('#txbUserName').val();
+            var Password = $('#txbPassword').val();
+            var DisplayName = $('#txbDisplayName').val();
+            var EmailAddress = $('#txbEmail').val();
+            var Enable = false;
+            if ($('#cbEnableUser').is(':checked')) {
+                Enable = true;
+            }
+            else {
+                Enable = false;
+            }
+
+            var UserPermissions = new Array();
+            var permissions = $('#ddlModule option:selected');
+            $(permissions).each(function (index, permissions) {
+                UserPermissions.push($(this).val());
+            });
+
+            if (UserName == "") {
+                ErrorText('Please provide User Name', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (Password == "") {
+                ErrorText('Please provide Password', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (DisplayName == "") {
+                ErrorText('Please provide Display Name', ErrorDiv, ErrorLable);
+                return;
+            }
+            if (EmailAddress == "") {
+                ErrorText('Please provide Email Address', ErrorDiv, ErrorLable);
+                return;
+            }
+            var Param = { "UserId": UserId, "UserName": UserName, "DisplayName": DisplayName, "EmailAddress": EmailAddress, "Password": Password, "Enable": Enable, "Permissions": UserPermissions };
+            $.ajax({
+                type: "POST",
+                url: "Users.aspx/UpdateIntoUsers",
+                data: "{UsersEntityObj:" + JSON.stringify(Param) + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === "success") {
+
+                        $().toastmessage("showSuccessToast", "User updated sucessfully.");
+                        GetUsers();
+                        CancelEditUser();
+                    }
+                    else {
+                        $().toastmessage("showErrorToast", data.d);
+                    }
+                }
+            });
+        }
+        function CancelEditUser() {
+            $('#txbUserName').val("");
+            $('#txbPassword').val("");
+            $('#txbDisplayName').val("");
+            $('#txbEmail').val("");
+            $('#cbEnableUser').bootstrapSwitch('state', false);
+            $("#ddlModule option:selected").removeAttr("selected");
+            $("#ddlModule").multiselect("refresh");
+            $.uniform.update();
+            $('#ErrorDivSettings').hide();
+            $('#divAddUser').show();
+            $('#divUpdateUser').hide();
+        }
+        function DeleteUser(UserId) {
+
+            var Param = { "UserId": UserId }
+            var ConfirmDelete = confirm("Are you sure you want to delete?");
+            if (ConfirmDelete == false) {
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "Users.aspx/DeleteFromUsers",
+                data: JSON.stringify(Param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        GetUsers();
+                        ClearUserModal();
+                        $().toastmessage("showSuccessToast", "User deleted successfully.");
+                    }
+                    else {
+                        $().toastmessage("showErrorToast", "Failed to delete user.");
+                    }
+                }
+            });
+        }
+        //SMTP
+        function SaveSMTPSettings() {
+            var SMTPHost = $("#txbSMTPHost").val();
+            var SMTPPort = $("#txbSMTPort").val();
+            var SMTPUserName = $("#txbSMTUserName").val();
+            var SMTPPassword = $("#txbSMTPassword").val();
+            var EnableSSL = false;
+
+            if ($('#chkEnableSSL').is(':checked')) {
+                EnableSSL = true;
+            }
+            else {
+                EnableSSL = false;
+            }
+            if (ValidateSMTPSettings()) {
+                var Param = { "SMTPHost": SMTPHost, "SMTPPort": SMTPPort, "SMTPUserName": SMTPUserName, "SMTPPassword": SMTPPassword, "EnableSSL": EnableSSL };
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url: "settings.aspx/SaveSMTPSettings",
+                    data: JSON.stringify(Param),
+                    type: "POST",
+                    success: function (data) {
+                        if (data.d == "1")
+                            $().toastmessage("showSuccessToast", "SMTP Settings updated sucessfully.");
+                        else if (data.d == "1")
+                            $().toastmessage("showErrorToast", "Failed to update SMTP Settings.");
+                    }
+                });
+            }
+
+        }
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+        function ValidateSMTPSettings() {
+
+            ErrorDiv = $("#ErrorDivSettings");
+            ErrorLable = $("#lblErrorSettings");
+            var SMTPHost = $("#txbSMTPHost").val();
+            var SMTPPort = $("#txbSMTPort").val();
+            var SMTPUserName = $("#txbSMTUserName").val();
+            var SMTPPassword = $("#txbSMTPassword").val();
+
+            if (SMTPHost == "") {
+                ErrorText('Please provide a Host Name.', ErrorDiv, ErrorLable);
+                return false;
+            }
+            if (SMTPPort == "") {
+                ErrorText('Please provide a Port Number.', ErrorDiv, ErrorLable);
+                return false;
+            }
+            if (SMTPUserName == "") {
+                ErrorText('Please provide User Name.', ErrorDiv, ErrorLable);
+                return false;
+            }
+            if (!isEmail(SMTPUserName)) {
+                ErrorText('Please provide a valid User Name.', ErrorDiv, ErrorLable);
+                return false;
+            }
+            if (SMTPPassword == "") {
+                ErrorText('Please provide Password.', ErrorDiv, ErrorLable);
+                return false;
+            }
+            return true;
+        }
+        function GetSMTPSettings() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "Settings.aspx/GetSettings",
+                type: "POST",
+                asynch: true,
+                success: function (data) {
+                    $("#txbSMTPHost").val(data.d.SMTPHost);
+                    $("#txbSMTPort").val(data.d.SMTPPort);
+                    $("#txbSMTUserName").val(data.d.SMTPUserName);
+                    $("#txbSMTPassword").val(data.d.SMTPPassword);
+                    if (data.d.EnableSSL == 1) {
+                        $('#chkEnableSSL').bootstrapSwitch('state', true);
+                    }
+                    else {
+                        $('#chkEnableSSL').bootstrapSwitch('state', false);
+                    }
+                }
+            });
+        }
+
+        //Agents
+
+        function RedirectToAgents() {
+            //$("#SocketServerStatus").show();
+            window.location.href = "Agents.aspx";
+
+        }
+        function RedirectToDashboard() {
+            //$("#SocketServerStatus").hide();
+            window.location.href = "Dashboard.aspx";
+        }
+        function RedirectToLicensing() {
+            //$("#SocketServerStatus").hide();
+            window.location.href = "Licensing.aspx";
+        }
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+

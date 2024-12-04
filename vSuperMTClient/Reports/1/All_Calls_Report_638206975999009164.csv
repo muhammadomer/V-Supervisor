@@ -1,0 +1,56 @@
+Boards,Date & Time,Waited in Queue,Callers Number,Queue Name,Status
+Cardiology,5-21-2023 4:25:56 PM,00:02:01,1003,801042,Overflow to queue 801043 Reason MAX_WAIT_QUEUE
+Cardiology,5-19-2023 11:48:29 AM,00:02:01,1101,801042,Callback closed Reason MAX-WAIT-LIMIT 1101
+Cardiology,5-17-2023 10:20:12 AM,00:00:06,1003,801042,Answered by 801002
+Emergency Dept,5-21-2023 5:55:29 PM,00:05:22,1003,801041,Abandoned
+Emergency Dept,5-21-2023 5:24:16 PM,00:29:52,1106,801041,Abandoned
+Emergency Dept,5-21-2023 5:17:15 PM,00:29:52,1003,801041,Abandoned
+Emergency Dept,5-21-2023 4:29:13 PM,00:02:25,1106,801041,Abandoned
+Emergency Dept,5-21-2023 4:03:45 PM,00:00:36,1003,801041,Abandoned
+Emergency Dept,5-20-2023 2:37:30 PM,00:00:07,1003,801041,Answered by 801104
+Emergency Dept,5-20-2023 2:25:28 PM,00:00:15,1003,801041,Answered by 801104
+Emergency Dept,5-18-2023 6:02:02 PM,00:00:21,1003,801041,Answered by 801104
+Emergency Dept,5-18-2023 5:37:34 PM,00:00:20,1106,801041,Answered by 801104
+Emergency Dept,5-18-2023 5:25:54 PM,00:00:36,1106,801041,Answered by 801104
+Emergency Dept,5-18-2023 4:42:41 PM,00:00:02,1003,801041,Abandoned
+Emergency Dept,5-18-2023 3:15:21 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-18-2023 12:01:53 PM,00:00:05,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:40:51 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:34:48 PM,00:01:08,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:30:08 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:29:12 PM,00:00:06,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:24:37 PM,00:00:05,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:23:51 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:21:23 PM,00:00:03,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:18:33 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:16:08 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 6:02:09 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 4:01:21 PM,00:00:11,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 4:00:59 PM,00:00:00,1003,801041,Overflow on no agent logged-in 
+Emergency Dept,5-16-2023 3:48:43 PM,00:00:04,1003,801041,Answered by 801104
+Emergency Dept,5-16-2023 3:29:27 PM,00:00:04,1003,801041,Answered by 801104
+Maternity Ward,5-20-2023 2:26:36 PM,00:08:42,1003,801048,Answered by 801104
+Maternity Ward,5-19-2023 6:11:58 PM,00:04:55,1003,801048,Abandoned
+Maternity Ward,5-19-2023 2:56:39 PM,00:05:45,1003,801048,Abandoned
+Maternity Ward,5-19-2023 2:35:37 PM,00:00:25,1003,801048,Abandoned
+Maternity Ward,5-18-2023 6:03:38 PM,00:04:53,1003,801048,Abandoned
+Maternity Ward,5-18-2023 6:01:18 PM,00:00:15,1106,801048,Abandoned
+Maternity Ward,5-18-2023 5:58:47 PM,00:02:44,1003,801048,Abandoned
+Maternity Ward,5-18-2023 5:49:41 PM,00:06:19,1106,801048,Abandoned
+Maternity Ward,5-18-2023 5:40:12 PM,00:15:53,1003,801048,Abandoned
+Maternity Ward,5-18-2023 5:38:39 PM,00:00:11,1106,801048,Abandoned
+Maternity Ward,5-18-2023 5:29:12 PM,00:09:24,1003,801048,Abandoned
+Maternity Ward,5-18-2023 5:27:16 PM,00:01:03,1106,801048,Abandoned
+Maternity Ward,5-18-2023 5:11:36 PM,00:16:01,1003,801048,Abandoned
+Maternity Ward,5-18-2023 4:34:59 PM,00:07:20,1003,801048,Answered by 801104
+Maternity Ward,5-18-2023 3:47:21 PM,00:29:24,1003,801048,Abandoned
+Maternity Ward,5-18-2023 3:38:21 PM,00:08:12,1003,801048,Abandoned
+Maternity Ward,5-18-2023 3:16:11 PM,00:00:14,1003,801048,Abandoned
+Maternity Ward,5-18-2023 12:02:37 PM,00:17:36,1003,801048,
+Maternity Ward,5-16-2023 6:30:54 PM,00:03:37,1003,801048,Abandoned
+Maternity Ward,5-16-2023 6:16:54 PM,00:01:17,1003,801048,Abandoned
+Maternity Ward,5-16-2023 6:04:07 PM,00:01:46,1003,801048,
+Maternity Ward,5-16-2023 4:04:46 PM,00:00:51,1003,801048,Abandoned
+Maternity Ward,5-16-2023 3:49:30 PM,00:05:59,1003,801048,Abandoned
+Maternity Ward,5-16-2023 3:30:13 PM,00:18:15,1003,801048,Abandoned
+Priority,5-21-2023 4:27:57 PM,00:03:39,1003,801043,Abandoned

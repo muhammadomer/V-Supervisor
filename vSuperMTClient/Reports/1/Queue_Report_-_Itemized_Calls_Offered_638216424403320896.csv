@@ -1,0 +1,20 @@
+Queue,Total Calls,Total Calls Not Accepted:,Callers Number,Call Arrived,Call Ended,Call Offered Time(s),Ring Start Time,Agent Name,Outcome
+Emergency Dept,18,0,1003,6-1-2023 4:36:35 PM,6-1-2023 4:36:43 PM,6-1-2023 4:36:41 PM,00:00:03,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,6-1-2023 4:54:07 PM,6-1-2023 4:55:03 PM,6-1-2023 4:54:59 PM,00:00:04,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,6-1-2023 4:59:38 PM,6-1-2023 5:02:59 PM,6-1-2023 5:02:54 PM,00:00:05,Umar  Ijaz,Answered
+Emergency Dept,18,0,,,,6-1-2023 5:02:54 PM,00:00:05,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,6-1-2023 5:03:19 PM,6-1-2023 5:04:26 PM,6-1-2023 5:03:41 PM,00:00:07,Umar  Ijaz,Disconnected
+Emergency Dept,18,0,1003,6-1-2023 5:05:43 PM,6-1-2023 5:05:59 PM,6-1-2023 5:05:48 PM,00:00:12,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,6-2-2023 10:49:11 AM,6-2-2023 10:49:19 AM,6-2-2023 10:49:15 AM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 1:01:08 PM,5-30-2023 1:01:16 PM,5-30-2023 1:01:14 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 1:11:11 PM,5-30-2023 1:11:19 PM,5-30-2023 1:11:17 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 1:16:53 PM,5-30-2023 1:17:30 PM,5-30-2023 1:17:28 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 1:29:43 PM,5-30-2023 1:29:47 PM,5-30-2023 1:29:45 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 2:04:59 PM,5-30-2023 2:05:05 PM,5-30-2023 2:05:03 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 2:05:42 PM,5-30-2023 2:05:46 PM,5-30-2023 2:05:44 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 2:05:59 PM,5-30-2023 2:06:03 PM,5-30-2023 2:06:01 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 3:58:01 PM,5-30-2023 3:58:12 PM,5-30-2023 3:58:10 PM,00:00:02,Umar  Ijaz,Answered
+Emergency Dept,18,0,1003,5-30-2023 4:53:33 PM,5-30-2023 4:53:50 PM,5-30-2023 4:53:47 PM,00:00:03,Umar  Ijaz,Answered
+Maternity Ward,3,0,1003,5-30-2023 1:31:58 PM,5-30-2023 1:37:48 PM,5-30-2023 1:37:47 PM,00:00:01,Umar  Ijaz,Answered
+Maternity Ward,3,0,1003,5-30-2023 4:31:12 PM,5-30-2023 4:31:25 PM,5-30-2023 4:31:23 PM,00:00:02,Umar  Ijaz,Answered
+Maternity Ward,3,0,1003,5-30-2023 4:54:03 PM,5-30-2023 4:54:09 PM,5-30-2023 4:54:06 PM,00:00:03,Umar  Ijaz,Answered

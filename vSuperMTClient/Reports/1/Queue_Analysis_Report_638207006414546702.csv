@@ -1,0 +1,6 @@
+Queue Name,Total Calls Answered,Answer Call %,Avg. ACD Time,ABND. Calls,ABND. %,Avg. ABND. Time,Total Calls,Avg. Wait Time,Overflowed into Queue,Overflowed out,Avg. Time to Answer,Service Level %,Max Delay,ACD Time %
+Emergency Dept,20,76.92,00:00:28,6,23.08,00:11:21,26,00:00:11,0,1,00:00:02,85,00:29:52,00:00:11
+Maternity Ward,2,9.09,00:00:14,20,90.91,00:06:46,22,00:08:01,0,0,00:00:03,0,00:29:24,00:08:01
+Priority,0,0,00:00:00,1,100,00:03:39,1,00:00:00,1,0,00:00:00,0,00:03:39,00:00:00
+Cardiology,1,100,00:00:08,0,0,00:00:00,1,00:00:06,0,1,00:00:04,100,00:02:01,00:00:06
+Main IVR,0,0,00:00:00,0,0,00:00:00,0,00:00:00,0,0,00:00:00,0,00:00:00,00:00:00

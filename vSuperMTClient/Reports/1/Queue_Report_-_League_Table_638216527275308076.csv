@@ -1,0 +1,5 @@
+Queue,Score,Total Calls Received,Calls  Answered (Score),Answer within 10 Seconds (Score),Waited less than01:30 Seconds  (Score),Avg. Calls Abandoned  Per Day
+Cardiology,20,6,0% (0),0% (0),100% (20),3
+Emergency Dept,72,18,77% (31),57% (22),94% (18),1
+Maternity Ward,66,3,100% (40),33% (13),66% (13),0
+Priority,20,1,0% (0),0% (0),100% (20),1

@@ -1,0 +1,6 @@
+Date,Queue Name,Calls Answered,Calls Answered WithIn SLA,Calls Answered Outside SLA.
+5-30-2023,Emergency Dept,37,11,3
+5-30-2023,Maternity Ward,11,2,1
+6-1-2023,Cardiology,10,0,0
+6-1-2023,Priority,1,0,0
+6-1-2023,Main IVR,3,0,0

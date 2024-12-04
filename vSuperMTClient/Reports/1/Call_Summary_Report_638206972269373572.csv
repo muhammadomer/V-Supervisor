@@ -1,0 +1,5 @@
+Boards,Total Calls,Total Transferred In,Answered Calls,ABND. Calls,ABND. Calls(%),Avg. Wait Time,Longest Waiting,Shortest Waiting,Calls Directed to Voicmail,Avg Logged-In Agents
+Cardiology,1,0,1,0,0,00:00:06,00:00:06,00:00:06,0,3
+Emergency Dept,26,0,20,6,23.0769,00:02:46,00:29:52,00:00:02,0,2
+Maternity Ward,22,0,2,20,90.9091,00:06:53,00:29:24,00:00:11,0,2
+Priority,1,0,0,1,100,00:03:39,00:03:39,00:03:39,0,3

@@ -1,0 +1,7 @@
+Hour,Total Calls-Inbound Calls,Answered-Inbound Calls,Unanswered-Inbound Calls,Duration-Inbound Calls,Total Calls-Outbound Calls,Answered-Outbound Calls,Unanswered-Outbound Calls,Duration-Outbound Calls
+10:00 - 11:00,3,2,1,00:01:12,2,2,0,00:00:54
+13:00 - 14:00,18,18,0,00:27:16,6,1,5,00:00:18
+14:00 - 15:00,8,8,0,00:01:09,3,0,3,00:00:03
+15:00 - 16:00,3,3,0,00:00:50,2,2,0,00:00:14
+16:00 - 17:00,12,12,0,00:01:25,3,1,2,00:00:18
+17:00 - 18:00,5,4,1,00:00:56,1,0,1,00:00:02

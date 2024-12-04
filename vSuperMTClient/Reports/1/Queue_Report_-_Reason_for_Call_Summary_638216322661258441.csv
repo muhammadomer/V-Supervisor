@@ -1,0 +1,7 @@
+Agent,Reason,Code,Instances,Total Duration,AVG. Duration
+801002  801002 801002,Asset Management - repairs L Daniels,RC002,8,00:01:07,00:00:08
+801002  801002 801002,Asset Management - repairs not L Daniels,RC003,2,00:00:02,00:00:01
+801002  801002 801002,Income,RC001,2,00:00:08,00:00:04
+801002  801002 801002,No Primary Reason selected,N/A,37,00:04:48,00:00:07
+801102  Mamoon Remote,Asset Management - repairs L Daniels,RC002,4,00:03:09,00:00:47
+801102  Mamoon Remote,No Primary Reason selected,N/A,14,00:02:00,00:00:08

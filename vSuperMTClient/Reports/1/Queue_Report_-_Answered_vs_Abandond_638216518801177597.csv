@@ -1,0 +1,6 @@
+Queue Name,Total,Total Duration,Avg. Call Duration,Avg. Wait Time,Abandoned Calls,Avg. Wait Time,Total Calls
+Cardiology,0,00:00:00,00:00:00,00:00:00,6,00:00:10,6
+Emergency Dept,14,00:09:16,00:00:40,00:00:28,4,00:00:24,18
+Main IVR,0,00:00:00,00:00:00,00:00:00,0,00:00:00,0
+Maternity Ward,3,00:21:45,00:07:15,00:02:03,0,00:00:00,3
+Priority,0,00:00:00,00:00:00,00:00:00,1,00:00:03,1

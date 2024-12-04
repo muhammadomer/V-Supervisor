@@ -1,0 +1,7 @@
+Agent,Queue,Score,Days Worked,Agent Avalibility (Score)-Summary,Answered by Agent within10 Seconds (Score)-Summary,Calls Answered  by Agent  (Score)-Summary,Avg. Calls Answered Daily,Total Calls Answered,Date,Daily Score,Agent Availability (Score),Answer within10 Seconds (Score),Calls Answered  by Agent  (Score),Calls Answered
+801002 801002,Cardiology,79,6,39%(11),98%(29),101%(39),4,24,5/17/2023 ,69%(20),100%(30),100%(40),90,1
+Umar  Ijaz,Emergency Dept,79,6,39%(11),98%(29),101%(39),4,24,5/16/2023 ,14%(4),92%(27),108%(43),75,12
+Umar  Ijaz,Emergency Dept,79,6,39%(11),98%(29),101%(39),4,24,5/18/2023 ,44%(13),100%(30),100%(40),83,6
+Umar  Ijaz,Emergency Dept,79,6,39%(11),98%(29),101%(39),4,24,5/20/2023 ,30%(9),100%(30),100%(40),79,2
+Umar  Ijaz,Maternity Ward,79,6,39%(11),98%(29),101%(39),4,24,5/18/2023 ,44%(13),100%(30),100%(40),83,1
+Umar  Ijaz,Maternity Ward,79,6,39%(11),98%(29),101%(39),4,24,5/20/2023 ,30%(9),100%(30),100%(40),79,2

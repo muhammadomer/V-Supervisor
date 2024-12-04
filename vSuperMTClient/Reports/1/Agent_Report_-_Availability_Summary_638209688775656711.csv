@@ -1,0 +1,16 @@
+Boards,Agent Name,Idle Time,Time Agent Logged In,Time Agent Logged out,ACD Call Duration Time,Non-ACD Call Duration Busy Time,Total Time Absent,No. of Logins,No. of Logouts,No of Absences
+Emergency Dept,Umar  Ijaz,54:07:05,62:00:46,62:00:51,05:24:04,00:12:08,00:00:00,482,610,0
+Emergency Dept,Marshall  Sherman,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,0,147,0
+Emergency Dept,Zeeshan  Faisal,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,0,147,0
+Maternity Ward,Umar  Ijaz,54:07:05,62:00:46,62:00:51,00:21:41,00:16:05,00:00:00,482,608,0
+Maternity Ward,Asghar Hassan,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,0,147,0
+Maternity Ward,Marshall  Sherman,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,0,147,0
+Maternity Ward,Zeeshan  Faisal,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,0,145,0
+Cardiology,801002 801002,19:38:11,21:17:54,21:30:02,00:07:48,00:00:00,00:46:19,58,172,17
+Cardiology,Abdul Rehman,00:54:21,01:04:33,01:05:36,00:02:48,00:00:00,00:00:00,24,177,0
+Cardiology,Agent 1,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,0,147,0
+Cardiology,Mamoon Remote,27:53:25,35:22:21,35:22:21,00:07:55,00:00:00,06:37:45,99,224,18
+Priority,801002 801002,19:38:11,21:17:25,21:29:33,00:00:00,00:00:00,00:46:19,56,172,17
+Priority,Abdul Rehman,00:54:21,01:04:33,01:05:36,00:00:00,00:00:00,00:00:00,24,175,0
+Priority,Agent 1,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,00:00:00,0,145,0
+Priority,Mamoon Remote,27:53:25,35:22:21,35:22:21,00:00:00,00:00:00,06:37:45,99,222,18

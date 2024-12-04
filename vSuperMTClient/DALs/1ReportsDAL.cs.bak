@@ -1,0 +1,2499 @@
+﻿using LogApp;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
+using System.Web;
+using vSuperMTClient.Entities;
+namespace vSuperMTClient.DALs
+{
+    public class ReportsDAL
+    {
+        MySqlConnection con;
+        public ReportsDAL(string ClientDB)
+        {
+            string vSupervisorDB = System.Configuration.ConfigurationManager.AppSettings["vSupervisorDB"];
+            con = new MySqlConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString.Replace(vSupervisorDB, ClientDB));
+        }
+        public List<ReportCallsSummaryEntity> GetCallsSummaryReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string WeekDays)
+        {
+            try
+            {
+
+               
+                List<ReportCallsSummaryEntity> ReportEntityList = new List<ReportCallsSummaryEntity>();
+                
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_CallsSummaryReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+               
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCallsSummaryEntity ReportEntityObj = new ReportCallsSummaryEntity();
+                    ReportEntityObj.BoardTitle = row["BoardTitle"].ToString();
+                    ReportEntityObj.TotalCalls = int.Parse(row["TotalCalls"].ToString());
+                    ReportEntityObj.TotalAnsweredCalls = int.Parse(row["TotalAnsweredCalls"].ToString());
+                    ReportEntityObj.TotalAbandonedCalls = int.Parse(row["TotalAbandonedCalls"].ToString());
+                    ReportEntityObj.AbandonedCallsPercentage = float.Parse(row["AbandonedCallsPercentage"].ToString());
+                    ReportEntityObj.AVGWaitTime = double.Parse(row["AVGWaitTime"].ToString());
+                    ReportEntityObj.LongestWaitingTime = double.Parse(row["LongestWaitingTime"].ToString());
+                   
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+               
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCallsSummaryEntity> GetCallsSummaryReport2(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCallsSummaryEntity> ReportEntityList = new List<ReportCallsSummaryEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_CallsSummaryReport2", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCallsSummaryEntity ReportEntityObj = new ReportCallsSummaryEntity();
+                    ReportEntityObj.BoardTitle = row["BoardTitle"].ToString();
+                    ReportEntityObj.TotalCalls = int.Parse(row["TotalCalls"].ToString());
+                    ReportEntityObj.TotalAnsweredCalls = int.Parse(row["TotalAnsweredCalls"].ToString());
+                    ReportEntityObj.TotalAbandonedCalls = int.Parse(row["TotalAbandonedCalls"].ToString());
+                    ReportEntityObj.AbandonedCallsPercentage = float.Parse(row["AbandonedCallsPercentage"].ToString());
+                    ReportEntityObj.AVGWaitTime = double.Parse(row["AVGWaitTime"].ToString());
+                    ReportEntityObj.LongestWaitingTime = double.Parse(row["LongestWaitingTime"].ToString());
+
+                    ReportEntityObj.TotalTransferredIn = int.Parse(row["TotalTransferredIn"].ToString());
+                    ReportEntityObj.OverFlowInAnsweredCalls = int.Parse(row["OverFlowInAnsweredCalls"].ToString());
+                    ReportEntityObj.OverFlowInAbndCalls = int.Parse(row["OverFlowInAbndCalls"].ToString());
+                    ReportEntityObj.OverFlowInAbandonedCallsPercentage = float.Parse(row["OverFlowInAbandonedCallsPercentage"].ToString());
+                    ReportEntityObj.OverFlowInAVGWaitTime = double.Parse(row["OverFlowInAVGWaitTime"].ToString());
+                    ReportEntityObj.OverFlowInLongestWaitingTime = double.Parse(row["OverFlowInLongestWaitingTime"].ToString());
+                    ReportEntityObj.TotalYBVTansferredOut = int.Parse(row["TotalYBVTansferredOut"].ToString());
+                    
+
+
+
+
+        ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAbandonedCallsEntity> GetAbandonedCallsReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string WeekDays)
+        {
+            try
+            {
+         
+
+                List<ReportAbandonedCallsEntity> ReportEntityList = new List<ReportAbandonedCallsEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AbandonedCallsReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAbandonedCallsEntity ReportEntityObj = new ReportAbandonedCallsEntity();
+                    
+                    ReportEntityObj.BoardTitle = row["BoardTitle"].ToString();
+                    ReportEntityObj.CLI = row["CLI"].ToString();
+                    ReportEntityObj.DDI = row["DDI"].ToString();
+                    string s = row["DateTime"].ToString();
+                    ReportEntityObj.DateTime = DateTime.ParseExact(row["DateTime"].ToString(), "dd-MM-yyyy HH:mm:ss",null).ToString("dd-MM-yyyy HH:mm:ss");
+                    //ReportEntityObj.DateTime = row["DateTime"].ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+               
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAllCallsEntity> GetAllCallsReport( DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string WeekDays)
+        {
+            //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            //Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+            try
+            {
+                List<ReportAllCallsEntity> ReportEntityList = new List<ReportAllCallsEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AllCallsReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAllCallsEntity ReportEntityObj = new ReportAllCallsEntity();
+                    ReportEntityObj.BoardTitle = row["BoardTitle"].ToString();
+                    ReportEntityObj.CLI = row["CLI"].ToString();
+                    ReportEntityObj.DDI = row["DDI"].ToString();
+                    string s = row["DateTime"].ToString();
+                    ReportEntityObj.DateTime = DateTime.ParseExact(row["DateTime"].ToString(), "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MM-yyyy HH:mm:ss");
+
+                   // ReportEntityObj.DateTime = row["DateTime"].ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Status = row["Status"].ToString();
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+               
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCallBreakdownByIntervalEntity> GetCallBreakdownByHourReport( DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string WeekDays, int TimeInterval)
+        {
+            try
+            {
+
+               
+                List<ReportCallBreakdownByIntervalEntity> ReportEntityList = new List<ReportCallBreakdownByIntervalEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_CallBreakdownByIntervalReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.Parameters.Add(new MySqlParameter("@TimeInterval", TimeInterval));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                cmd.CommandTimeout = 0;
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCallBreakdownByIntervalEntity ReportEntityObj = new ReportCallBreakdownByIntervalEntity();
+                    ReportEntityObj.BoardTitle = row["BoardTitle"].ToString();
+                    ReportEntityObj.TotalCalls = int.Parse(row["TotalCalls"].ToString());
+                    ReportEntityObj.TotalAnsweredCalls = int.Parse(row["TotalAnsweredCalls"].ToString());
+                    ReportEntityObj.TotalAbandonedCalls = int.Parse(row["TotalAbandonedCalls"].ToString());
+                    ReportEntityObj.AbandonedCallsPercentage = Double.Parse(row["AbandonedCallsPercentage"].ToString());
+                    ReportEntityObj.TimeKey = row["TimeKey"].ToString();
+                    ReportEntityObj.LongestWaitingTime = Double.Parse(row["LongestWaitingTime"].ToString());
+                    string s = row["Date"].ToString();
+                    ReportEntityObj.Date  = DateTime.ParseExact(row["Date"].ToString(), "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString();
+                     
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+                
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAgentAvailabilityEntity> GetAgentAvailabilityReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string Agents, string WeekDays)
+        {
+            try
+            {
+                List<ReportAgentAvailabilityEntity> ReportEntityList = new List<ReportAgentAvailabilityEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AgentAvailabilityReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@Agents", Agents));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAgentAvailabilityEntity ReportEntityObj = new ReportAgentAvailabilityEntity();
+                    ReportEntityObj.AgentName = row["AgentName"].ToString();
+                    ReportEntityObj.GroupName = row["GroupTitle"].ToString();
+                    ReportEntityObj.LoggedInTime = Convert.ToDouble(row["LoggedInTime"].ToString() == "" ? "0" : row["LoggedInTime"].ToString());
+                    ReportEntityObj.LoggedOutTime = Convert.ToDouble(row["LoggedOutTime"].ToString() == "" ? "0" : row["LoggedOutTime"].ToString());
+                    
+                    ReportEntityObj.ACDBusyTime = Convert.ToDouble(row["ACDBusyTime"].ToString() == "" ? "0" : row["ACDBusyTime"].ToString());
+                    ReportEntityObj.NonACDBusyTime = Convert.ToDouble(row["NonACDBusyTime"].ToString() == "" ? "0" : row["NonACDBusyTime"].ToString());
+                    ReportEntityObj.ClerikalBusyTime = Convert.ToDouble(row["ClerikalBusyTime"].ToString() == "" ? "0" : row["ClerikalBusyTime"].ToString());
+                    ReportEntityObj.TempAbsTime = Convert.ToDouble(row["TempAbsTime"].ToString() == "" ? "0" : row["TempAbsTime"].ToString());
+                    ReportEntityObj.LoggedInCount = int.Parse(row["LoggedInCount"].ToString() == "" ? "0" : row["LoggedInCount"].ToString());
+                    ReportEntityObj.LoggedOutCount = int.Parse(row["LoggedOutCount"].ToString() == "" ? "0" : row["LoggedOutCount"].ToString());
+                    ReportEntityObj.TempAbsCount = int.Parse(row["TempAbsCount"].ToString() == "" ? "0" : row["TempAbsCount"].ToString());
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+                
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAgentCallsCountEntity> GetCallVolumeByAgentReport( DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string Agents, string WeekDays)
+        {
+            try
+            {
+                List<ReportAgentCallsCountEntity> ReportEntityList = new List<ReportAgentCallsCountEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AgentCallsCountReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@Agents", Agents));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+              
+                con.Open();
+
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAgentCallsCountEntity ReportEntityObj = new ReportAgentCallsCountEntity();
+
+                    ReportEntityObj.AgentName = row["AgentName"].ToString();
+                    ReportEntityObj.GroupName = row["GroupName"].ToString();
+                    ReportEntityObj.TotalCalls = row["TotalCalls"].ToString();
+                    ReportEntityObj.Hour = row["Hour"].ToString();
+                    ReportEntityObj.Date = DateTime.ParseExact(row["Date"].ToString(), "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString();
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+                
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAgentPresenceEntity> GetAgentPresenceReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string Agents, string WeekDays)
+        {
+            try
+            {
+                List<ReportAgentPresenceEntity> ReportEntityList = new List<ReportAgentPresenceEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AgentPresenceReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@Agents", Agents));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAgentPresenceEntity ReportEntityObj = new ReportAgentPresenceEntity();
+
+                    ReportEntityObj.GroupName = row["GroupName"].ToString();
+                    ReportEntityObj.StartTime = DateTime.ParseExact(row["StartTime"].ToString(), "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToString("dd-MM-yyyy HH:mm:ss");
+                    ReportEntityObj.AgentName = row["AgentName"].ToString();
+                    ReportEntityObj.Action = row["Action"].ToString();
+             
+                    
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAgentCallsSummaryEntity> GetTalkTimebyAgentReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string Agents, string WeekDays)
+        {
+            try
+            {
+                List<ReportAgentCallsSummaryEntity> ReportEntityList = new List<ReportAgentCallsSummaryEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AgentCallsSummaryReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@Agents", Agents));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAgentCallsSummaryEntity ReportEntityObj = new ReportAgentCallsSummaryEntity();
+                    ReportEntityObj.AgentName = row["AgentName"].ToString();
+                    ReportEntityObj.GroupName = row["GroupName"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToDouble(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.TotalTalkTime = Convert.ToDouble(row["TotalTalkTime"].ToString() == "" ? "0" : row["TotalTalkTime"].ToString());
+                    ReportEntityObj.AvgTalkTime = Convert.ToDouble(row["AvgTalkTime"].ToString() == "" ? "0" : row["AvgTalkTime"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+                
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAgentCallsTakenEntity> GetItemisedCallsByAgentReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string Agents, string WeekDays)
+        {
+            try
+            {
+                List<ReportAgentCallsTakenEntity> ReportEntityList = new List<ReportAgentCallsTakenEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AgentCallsTakenReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@Agents", Agents));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAgentCallsTakenEntity ReportEntityObj = new ReportAgentCallsTakenEntity();
+                    ReportEntityObj.AgentName = row["AgentName"].ToString();
+                    ReportEntityObj.GroupName = row["GroupName"].ToString();
+                    ReportEntityObj.CallType = row["CallType"].ToString();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.StartTime = row["StartTime"].ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+                
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportGroupAgentCallVolumeEntity> GetAgentSummaryByGroupReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string Agents, string WeekDays)
+        {
+            //not being used currently
+            try
+            {
+                List<ReportGroupAgentCallVolumeEntity> ReportEntityList = new List<ReportGroupAgentCallVolumeEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_GroupAgentCallVolume", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@Agents", Agents));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportGroupAgentCallVolumeEntity ReportEntityObj = new ReportGroupAgentCallVolumeEntity();
+                    ReportEntityObj.GroupNumber = row["GroupNumber"].ToString();
+                    ReportEntityObj.Title = row["Title"].ToString();
+                    ReportEntityObj.DateOnly = DateTime.ParseExact(row["DateOnly"].ToString(), "dd-MM-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).ToShortDateString();
+                    ReportEntityObj.HourOnly = row["HourOnly"].ToString();
+                    ReportEntityObj.AgentLoggedCount = row["AgentLoggedCount"].ToString();
+                    ReportEntityObj.CallsCount = row["CallsCount"].ToString();
+                    ReportEntityObj.AVGLogIn = row["AVGLogIn"].ToString();
+                    ReportEntityObj.AVGCallBusy = row["AVGCallBusy"].ToString();
+                    ReportEntityObj.AVGNonCallBusy = row["AVGNonCallBusy"].ToString();
+                    ReportEntityObj.AVGBusy = row["AVGBusy"].ToString();
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+                
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportAgentConsolidatedEntity> GetAgentConsolidatedReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups, string Agents, int HangUpThreshold, string WeekDays)
+        {
+            try
+            {
+                List<ReportAgentConsolidatedEntity> ReportEntityList = new List<ReportAgentConsolidatedEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_AgentConsolidatedReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@Agents", Agents));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                cmd.CommandTimeout = 0;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportAgentConsolidatedEntity ReportEntityObj = new ReportAgentConsolidatedEntity();
+                    ReportEntityObj.AgentName = row["AgentName"].ToString();
+                    ReportEntityObj.GroupName = row["GroupTitle"].ToString();
+                    ReportEntityObj.EventDate = Convert.ToDateTime(row["EventDate"].ToString()).ToShortDateString();
+                    //ReportEntityObj.LogInTime = Convert.ToDateTime(row["LogInTime"].ToString());
+                    ReportEntityObj.LogInTime = row["LogInTime"].ToString() == "" ? TimeSpan.MaxValue : Convert.ToDateTime(row["LogInTime"].ToString()).TimeOfDay;
+                    ReportEntityObj.LogOutTime = row["TotalLoggedInTime"].ToString().Contains("-") || row["LogOutTime"].ToString() == "" ? TimeSpan.MaxValue : Convert.ToDateTime(row["LogOutTime"].ToString()).TimeOfDay;
+                    //ReportEntityObj.TotalLoggedInTime = row["TotalLoggedInTime"].ToString().Contains("-") ? "" : row["TotalLoggedInTime"].ToString();
+                    ReportEntityObj.TotalLoggedInTime = row["TotalLoggedInTime"].ToString().Contains("-") || row["TotalLoggedInTime"].ToString().Equals("") ? 0 : Convert.ToDouble(row["TotalLoggedInTime"].ToString());
+                    ReportEntityObj.ACDBusyTime = Convert.ToDouble(row["ACDBusyTime"].ToString() == "" ? "0" : row["ACDBusyTime"].ToString());
+                    ReportEntityObj.NonACDBusyTime = Convert.ToDouble(row["NonACDBusyTime"].ToString() == "" ? "0" : row["NonACDBusyTime"].ToString());
+
+                    ReportEntityObj.ClerikalBusyTime = Convert.ToDouble(row["ClerikalBusyTime"].ToString() == "" ? "0" : row["ClerikalBusyTime"].ToString());
+                    ReportEntityObj.TempAbsTime = Convert.ToDouble(row["TempAbsTime"].ToString() == "" ? "0" : row["TempAbsTime"].ToString());
+                    ReportEntityObj.UnHoldTime = Convert.ToDouble(row["UnHoldTime"].ToString() == "" ? "0" : row["UnHoldTime"].ToString());
+                    ReportEntityObj.LongestUnHoldTime = Convert.ToDouble(row["LongestUnHoldTime"].ToString() == "" ? "0" : row["LongestUnHoldTime"].ToString());
+                    ReportEntityObj.TotalIdleTime = Convert.ToDouble(row["TotalIdleTime"].ToString() == "" ? "0" : row["TotalIdleTime"].ToString());
+
+                    ReportEntityObj.ACDBusyCount = Convert.ToInt32(row["ACDBusyCount"].ToString() == "" ? "0" : row["ACDBusyCount"].ToString());
+                    ReportEntityObj.LoggedInCount = Convert.ToInt32(row["LoggedInCount"].ToString() == "" ? "0" : row["LoggedInCount"].ToString());
+                    ReportEntityObj.LoggedOutCount = Convert.ToInt32(row["LoggedOutCount"].ToString() == "" ? "0" : row["LoggedOutCount"].ToString());
+                    ReportEntityObj.ClerikalBusyCount = Convert.ToInt32(row["ClerikalBusyCount"].ToString() == "" ? "0" : row["ClerikalBusyCount"].ToString());
+                    ReportEntityObj.TempAbsCount = Convert.ToInt32(row["TempAbsCount"].ToString() == "" ? "0" : row["TempAbsCount"].ToString());
+                    ReportEntityObj.OutBoundCallCount = Convert.ToInt32(row["OutBoundCallCount"].ToString() == "" ? "0" : row["OutBoundCallCount"].ToString());
+                    ReportEntityObj.TransferCount = Convert.ToInt32(row["TransferCount"].ToString() == "" ? "0" : row["TransferCount"].ToString());
+                    ReportEntityObj.UnHoldCount = Convert.ToInt32(row["UnHoldCount"].ToString() == "" ? "0" : row["UnHoldCount"].ToString());
+                    ReportEntityObj.HangUpCount = Convert.ToInt32(row["HangUpCount"].ToString() == "" ? "0" : row["HangUpCount"].ToString());
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportGroupConsolidatedEntity> GetGroupConsolidatedReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Groups,  int WorkingHours, string WeekDays)
+        {
+            try
+            {
+                List<ReportGroupConsolidatedEntity> ReportEntityList = new List<ReportGroupConsolidatedEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_GroupConsolidatedReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Groups", Groups));
+                cmd.Parameters.Add(new MySqlParameter("@WorkingHours", WorkingHours));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                cmd.CommandTimeout = 0;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportGroupConsolidatedEntity ReportEntityObj = new ReportGroupConsolidatedEntity();
+                    ReportEntityObj.StartDate = Convert.ToDateTime(row["StartDate"].ToString()).ToShortDateString();
+                    ReportEntityObj.Title = row["Title"].ToString();
+                    ReportEntityObj.TotalCalls = row["TotalCalls"].ToString();
+                    ReportEntityObj.TotalAnswered = row["TotalAnswered"].ToString();
+                    ReportEntityObj.TotalAbanodoned = row["TotalAbanodoned"].ToString();
+                    ReportEntityObj.LoggedInCount = row["LoggedInCount"].ToString();
+                    ReportEntityObj.AbandonedPer = row["AbandonedPer"].ToString();
+                    ReportEntityObj.SLAPer = row["SLAPer"].ToString();
+
+                    ReportEntityObj.AvgWaitTime = row["AvgWaitTime"].ToString();
+                    ReportEntityObj.LongestWaitAnswer = row["LongestWaitAnswer"].ToString();
+                    ReportEntityObj.AvgWaitAbandonedTime = row["AvgWaitAbandonedTime"].ToString();
+                    ReportEntityObj.LongestWaitAbandoned = row["LongestWaitAbandoned"].ToString();
+
+                    ReportEntityObj.AvgCallsHour = row["AvgCallsHour"].ToString();
+                    ReportEntityObj.AvgAvailableTime = row["AvgAvailableTime"].ToString();
+                    ReportEntityObj.AvgHold = row["AvgHold"].ToString();
+                    ReportEntityObj.TransferACD = row["TransferACD"].ToString();
+                    ReportEntityObj.TotalInternalCall = row["TotalInternalCall"].ToString();
+                    ReportEntityObj.TotalInternalTime = row["TotalInternalTime"].ToString();
+                    ReportEntityObj.AVGInternalTime = row["AVGInternalTime"].ToString();
+                    ReportEntityObj.TotalTransfersIn = row["TotalTransfersIn"].ToString();
+                  
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportYBVCallsEntity> GetYBVCallsReport(DateTime FromDate, DateTime ToDate,string timeFrom,string timeTo, string WeekDays)
+        {
+            try
+            {
+                List<ReportYBVCallsEntity> ReportEntityList = new List<ReportYBVCallsEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_YBVCallsReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportYBVCallsEntity ReportEntityObj = new ReportYBVCallsEntity();
+                    ReportEntityObj.Date = Convert.ToDateTime(row["DateObj"].ToString()).ToShortDateString(); 
+                    ReportEntityObj.TransferCount = Convert.ToInt32(row["Total"].ToString());
+                    ReportEntityObj.FirstCount = Convert.ToInt32(row["FirstCount"].ToString());
+                    ReportEntityObj.SecondCount = Convert.ToInt32(row["SecondCount"].ToString());
+                    ReportEntityObj.ThirdCount = Convert.ToInt32(row["ThirdCount"].ToString());
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportYBVCallsEntity> GetYBVCallsByIntervalReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string WeekDays,int TimeInterval)
+        {
+            try
+            {
+                List<ReportYBVCallsEntity> ReportEntityList = new List<ReportYBVCallsEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_YBVCallsReportByIntervals", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.Parameters.Add(new MySqlParameter("@TimeInterval", TimeInterval));
+
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportYBVCallsEntity ReportEntityObj = new ReportYBVCallsEntity();
+                    ReportEntityObj.Date = Convert.ToDateTime(row["DateObj"].ToString()).ToShortDateString();
+                    ReportEntityObj.TransferCount = Convert.ToInt32(row["Total"].ToString());
+                    ReportEntityObj.TimeKey= row["timekey"].ToString();
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportYBVCallsEntity> GetAHTCallsReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string WeekDays)
+        {
+            try
+            {
+                List<ReportYBVCallsEntity> ReportEntityList = new List<ReportYBVCallsEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_YBVCallsReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportYBVCallsEntity ReportEntityObj = new ReportYBVCallsEntity();
+                    ReportEntityObj.Date = Convert.ToDateTime(row["DateObj"].ToString()).ToShortDateString();
+                    ReportEntityObj.TransferCount = Convert.ToInt32(row["Total"].ToString());
+                    ReportEntityObj.FirstCount = Convert.ToInt32(row["FirstCount"].ToString());
+                    ReportEntityObj.SecondCount = Convert.ToInt32(row["SecondCount"].ToString());
+                    ReportEntityObj.ThirdCount = Convert.ToInt32(row["ThirdCount"].ToString());
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportYBVCallsEntity> GetAHTCallsByIntervalReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string WeekDays, int TimeInterval)
+        {
+            try
+            {
+                List<ReportYBVCallsEntity> ReportEntityList = new List<ReportYBVCallsEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ACD_YBVCallsReportByIntervals", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.Parameters.Add(new MySqlParameter("@TimeInterval", TimeInterval));
+
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 0;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportYBVCallsEntity ReportEntityObj = new ReportYBVCallsEntity();
+                    ReportEntityObj.Date = Convert.ToDateTime(row["DateObj"].ToString()).ToShortDateString();
+                    ReportEntityObj.TransferCount = Convert.ToInt32(row["Total"].ToString());
+                    ReportEntityObj.TimeKey = row["timekey"].ToString();
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryByTypeEntity> GetCostSummaryByRegionReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCostSummaryByTypeEntity> ReportEntityList = new List<ReportCostSummaryByTypeEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_CostSummaryByRegion", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCostSummaryByTypeEntity ReportEntityObj = new ReportCostSummaryByTypeEntity();
+                    ReportEntityObj.CostType = row["Region"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()),2);
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryByExtensionEntity> GetCostSummaryByExtensionReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCostSummaryByExtensionEntity> ReportEntityList = new List<ReportCostSummaryByExtensionEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_CostSummaryByExtension", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCostSummaryByExtensionEntity ReportEntityObj = new ReportCostSummaryByExtensionEntity();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.Name = row["Name"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryByPhoneEntity> GetCostSummaryByPhoneReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCostSummaryByPhoneEntity> ReportEntityList = new List<ReportCostSummaryByPhoneEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_CostSummaryByPhone", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCostSummaryByPhoneEntity ReportEntityObj = new ReportCostSummaryByPhoneEntity();
+                    ReportEntityObj.DialledNumber = row["DialledNumber"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryByHourEntity> GetCostSummaryByHourReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCostSummaryByHourEntity> ReportEntityList = new List<ReportCostSummaryByHourEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_CostSummaryByHour", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCostSummaryByHourEntity ReportEntityObj = new ReportCostSummaryByHourEntity();
+                    ReportEntityObj.Hour = row["Hour"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.AvgDuration = Convert.ToDouble(row["AvgDuration"].ToString() == "" ? "0" : row["AvgDuration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryByDayEntity> GetCostSummaryByDayReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCostSummaryByDayEntity> ReportEntityList = new List<ReportCostSummaryByDayEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_CostSummaryByDay", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCostSummaryByDayEntity ReportEntityObj = new ReportCostSummaryByDayEntity();
+                    ReportEntityObj.Date= DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.Day =  DateTime.Parse(row["Date"].ToString()).DayOfWeek.ToString();
+                    //ReportEntityObj.Day = row["Day"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryByExtensionItemisedEntity> GetCostSummaryByExtensionItemisedReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCostSummaryByExtensionItemisedEntity> ReportEntityList = new List<ReportCostSummaryByExtensionItemisedEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_CostSummaryByExtensionItemised", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCostSummaryByExtensionItemisedEntity ReportEntityObj = new ReportCostSummaryByExtensionItemisedEntity();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.Date = DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.PhoneNumber = row["PhoneNumber"].ToString();
+                    ReportEntityObj.Time = row["Time"].ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportResponseSummaryByHourEntity> GetResponseSummaryByHourReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportResponseSummaryByHourEntity> ReportEntityList = new List<ReportResponseSummaryByHourEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_ResponseSummaryByHour", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportResponseSummaryByHourEntity ReportEntityObj = new ReportResponseSummaryByHourEntity();
+                    ReportEntityObj.Hour = row["Hour"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.AnsweredCalls = Convert.ToInt32(row["AnsweredCalls"].ToString() == "" ? "0" : row["AnsweredCalls"].ToString());
+                    ReportEntityObj.AvgRingAnswered = Math.Round(Convert.ToDouble(row["AvgRingAnswered"].ToString() == "" ? "0" : row["AvgRingAnswered"].ToString()),0);
+                    ReportEntityObj.MaxRingAnswered = Convert.ToInt32(row["MaxRingAnswered"].ToString() == "" ? "0" : row["MaxRingAnswered"].ToString());
+                    ReportEntityObj.WithinThresholdCount = Convert.ToInt32(row["WithinThresholdCount"].ToString() == "" ? "0" : row["WithinThresholdCount"].ToString());
+                    ReportEntityObj.UnAnsweredCalls = Convert.ToInt32(row["UnAnsweredCalls"].ToString() == "" ? "0" : row["UnAnsweredCalls"].ToString());
+                    ReportEntityObj.LostCalls = Convert.ToInt32(row["LostCalls"].ToString() == "" ? "0" : row["LostCalls"].ToString());
+                    ReportEntityObj.AvgRingLost = Math.Round(Convert.ToDouble(row["AvgRingLost"].ToString() == "" ? "0" : row["AvgRingLost"].ToString()),0);
+                    ReportEntityObj.MaxRingLost = Convert.ToInt32(row["MaxRingLost"].ToString() == "" ? "0" : row["MaxRingLost"].ToString());
+                   
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportResponseSummaryByDayEntity> GetResponseSummaryByDayReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportResponseSummaryByDayEntity> ReportEntityList = new List<ReportResponseSummaryByDayEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_ResponseSummaryByDay", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportResponseSummaryByDayEntity ReportEntityObj = new ReportResponseSummaryByDayEntity();
+                    ReportEntityObj.Date = DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.Day = DateTime.Parse(row["Date"].ToString()).DayOfWeek.ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.AnsweredCalls = Convert.ToInt32(row["AnsweredCalls"].ToString() == "" ? "0" : row["AnsweredCalls"].ToString());
+                    ReportEntityObj.AvgRingAnswered = Math.Round(Convert.ToDouble(row["AvgRingAnswered"].ToString() == "" ? "0" : row["AvgRingAnswered"].ToString()), 0);
+                    ReportEntityObj.MaxRingAnswered = Convert.ToInt32(row["MaxRingAnswered"].ToString() == "" ? "0" : row["MaxRingAnswered"].ToString());
+                    ReportEntityObj.WithinThresholdCount = Convert.ToInt32(row["WithinThresholdCount"].ToString() == "" ? "0" : row["WithinThresholdCount"].ToString());
+                    ReportEntityObj.UnAnsweredCalls = Convert.ToInt32(row["UnAnsweredCalls"].ToString() == "" ? "0" : row["UnAnsweredCalls"].ToString());
+                    ReportEntityObj.LostCalls = Convert.ToInt32(row["LostCalls"].ToString() == "" ? "0" : row["LostCalls"].ToString());
+                    ReportEntityObj.AvgRingLost = Math.Round(Convert.ToDouble(row["AvgRingLost"].ToString() == "" ? "0" : row["AvgRingLost"].ToString()), 0);
+                    ReportEntityObj.MaxRingLost = Convert.ToInt32(row["MaxRingLost"].ToString() == "" ? "0" : row["MaxRingLost"].ToString());
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportResponseSummaryByExtensionEntity> GetResponseSummaryByExtensionReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportResponseSummaryByExtensionEntity> ReportEntityList = new List<ReportResponseSummaryByExtensionEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_ResponseSummaryByExtension", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportResponseSummaryByExtensionEntity ReportEntityObj = new ReportResponseSummaryByExtensionEntity();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    ReportEntityObj.AnsweredCalls = Convert.ToInt32(row["AnsweredCalls"].ToString() == "" ? "0" : row["AnsweredCalls"].ToString());
+                    ReportEntityObj.AvgRingAnswered = Math.Round(Convert.ToDouble(row["AvgRingAnswered"].ToString() == "" ? "0" : row["AvgRingAnswered"].ToString()), 0);
+                    ReportEntityObj.MaxRingAnswered = Convert.ToInt32(row["MaxRingAnswered"].ToString() == "" ? "0" : row["MaxRingAnswered"].ToString());
+                    ReportEntityObj.WithinThresholdCount = Convert.ToInt32(row["WithinThresholdCount"].ToString() == "" ? "0" : row["WithinThresholdCount"].ToString());
+                    ReportEntityObj.UnAnsweredCalls = Convert.ToInt32(row["UnAnsweredCalls"].ToString() == "" ? "0" : row["UnAnsweredCalls"].ToString());
+                    ReportEntityObj.LostCalls = Convert.ToInt32(row["LostCalls"].ToString() == "" ? "0" : row["LostCalls"].ToString());
+                    ReportEntityObj.AvgRingLost = Math.Round(Convert.ToDouble(row["AvgRingLost"].ToString() == "" ? "0" : row["AvgRingLost"].ToString()), 0);
+                    ReportEntityObj.MaxRingLost = Convert.ToInt32(row["MaxRingLost"].ToString() == "" ? "0" : row["MaxRingLost"].ToString());
+                    ReportEntityObj.CallsMade = Convert.ToInt32(row["CallsMade"].ToString() == "" ? "0" : row["CallsMade"].ToString());
+                    
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportResponseSummaryByPhoneEntity> GetResponseSummaryByPhoneReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportResponseSummaryByPhoneEntity> ReportEntityList = new List<ReportResponseSummaryByPhoneEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_ResponseSummaryByPhone", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportResponseSummaryByPhoneEntity ReportEntityObj = new ReportResponseSummaryByPhoneEntity();
+                    ReportEntityObj.DialledNumber = row["DialledNumber"].ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString() == "" ? "0" : row["TotalCalls"].ToString());
+                    
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportResponseSummaryByExtensionItemisedEntity> GetResponseSummaryByExtensionItemisedReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportResponseSummaryByExtensionItemisedEntity> ReportEntityList = new List<ReportResponseSummaryByExtensionItemisedEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_ResponseSummaryByExtensionItemised", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportResponseSummaryByExtensionItemisedEntity ReportEntityObj = new ReportResponseSummaryByExtensionItemisedEntity();
+
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.Date = DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.Time = row["Time"].ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Direction = row["Direction"].ToString();
+                    ReportEntityObj.CLI = row["CLI"].ToString();
+                    ReportEntityObj.DDI = row["DDI"].ToString();
+                    ReportEntityObj.LastState = row["LastState"].ToString();
+                    ReportEntityObj.InitialState = row["InitialState"].ToString();
+                    ReportEntityObj.RingDuration = Convert.ToDouble(row["RingDuration"].ToString() == "" ? "0" : row["RingDuration"].ToString());
+
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportTrafficSummaryByHourEntity> GetTrafficSummaryByHourReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportTrafficSummaryByHourEntity> ReportEntityList = new List<ReportTrafficSummaryByHourEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_TrafficSummaryByHour", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportTrafficSummaryByHourEntity ReportEntityObj = new ReportTrafficSummaryByHourEntity();
+                    ReportEntityObj.Hour = row["Hour"].ToString();
+                    ReportEntityObj.IncomingCalls = Convert.ToInt32(row["IncomingCalls"].ToString() == "" ? "0" : row["IncomingCalls"].ToString());
+                    ReportEntityObj.IncomingAnsweredCalls = Convert.ToInt32(row["IncomingAnsweredCalls"].ToString() == "" ? "0" : row["IncomingAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingUnAnsweredCalls = Convert.ToInt32(row["IncomingUnAnsweredCalls"].ToString() == "" ? "0" : row["IncomingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingCallDuration = Convert.ToDouble(row["IncomingCallDuration"].ToString() == "" ? "0" : row["IncomingCallDuration"].ToString());
+                    ReportEntityObj.OutgoingCalls = Convert.ToInt32(row["OutgoingCalls"].ToString() == "" ? "0" : row["OutgoingCalls"].ToString());
+                    ReportEntityObj.OutgoingAnsweredCalls = Convert.ToInt32(row["OutgoingAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingUnAnsweredCalls = Convert.ToInt32(row["OutgoingUnAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingCallDuration = Convert.ToDouble(row["OutgoingCallDuration"].ToString() == "" ? "0" : row["OutgoingCallDuration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportTrafficSummaryByDayEntity> GetTrafficSummaryByDayReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportTrafficSummaryByDayEntity> ReportEntityList = new List<ReportTrafficSummaryByDayEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_TrafficSummaryByDay", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportTrafficSummaryByDayEntity ReportEntityObj = new ReportTrafficSummaryByDayEntity();
+                    ReportEntityObj.Date = DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.Day = DateTime.Parse(row["Date"].ToString()).DayOfWeek.ToString();
+                    ReportEntityObj.IncomingCalls = Convert.ToInt32(row["IncomingCalls"].ToString() == "" ? "0" : row["IncomingCalls"].ToString());
+                    ReportEntityObj.IncomingAnsweredCalls = Convert.ToInt32(row["IncomingAnsweredCalls"].ToString() == "" ? "0" : row["IncomingAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingUnAnsweredCalls = Convert.ToInt32(row["IncomingUnAnsweredCalls"].ToString() == "" ? "0" : row["IncomingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingCallDuration = Convert.ToDouble(row["IncomingCallDuration"].ToString() == "" ? "0" : row["IncomingCallDuration"].ToString());
+                    ReportEntityObj.OutgoingCalls = Convert.ToInt32(row["OutgoingCalls"].ToString() == "" ? "0" : row["OutgoingCalls"].ToString());
+                    ReportEntityObj.OutgoingAnsweredCalls = Convert.ToInt32(row["OutgoingAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingUnAnsweredCalls = Convert.ToInt32(row["OutgoingUnAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingCallDuration = Convert.ToDouble(row["OutgoingCallDuration"].ToString() == "" ? "0" : row["OutgoingCallDuration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportTrafficSummaryByExtensionEntity> GetTrafficSummaryByExtensionReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportTrafficSummaryByExtensionEntity> ReportEntityList = new List<ReportTrafficSummaryByExtensionEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_TrafficSummaryByExtension", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportTrafficSummaryByExtensionEntity ReportEntityObj = new ReportTrafficSummaryByExtensionEntity();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.IncomingCalls = Convert.ToInt32(row["IncomingCalls"].ToString() == "" ? "0" : row["IncomingCalls"].ToString());
+                    ReportEntityObj.IncomingAnsweredCalls = Convert.ToInt32(row["IncomingAnsweredCalls"].ToString() == "" ? "0" : row["IncomingAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingUnAnsweredCalls = Convert.ToInt32(row["IncomingUnAnsweredCalls"].ToString() == "" ? "0" : row["IncomingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingCallDuration = Convert.ToDouble(row["IncomingCallDuration"].ToString() == "" ? "0" : row["IncomingCallDuration"].ToString());
+                    ReportEntityObj.OutgoingCalls = Convert.ToInt32(row["OutgoingCalls"].ToString() == "" ? "0" : row["OutgoingCalls"].ToString());
+                    ReportEntityObj.OutgoingAnsweredCalls = Convert.ToInt32(row["OutgoingAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingUnAnsweredCalls = Convert.ToInt32(row["OutgoingUnAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingCallDuration = Convert.ToDouble(row["OutgoingCallDuration"].ToString() == "" ? "0" : row["OutgoingCallDuration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportTrafficSummaryByPhoneEntity> GetTrafficSummaryByPhoneReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportTrafficSummaryByPhoneEntity> ReportEntityList = new List<ReportTrafficSummaryByPhoneEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_TrafficSummaryByPhone", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportTrafficSummaryByPhoneEntity ReportEntityObj = new ReportTrafficSummaryByPhoneEntity();
+                    ReportEntityObj.DialledNumber = row["DialledNumber"].ToString();
+                    ReportEntityObj.OutgoingCalls = Convert.ToInt32(row["OutgoingCalls"].ToString() == "" ? "0" : row["OutgoingCalls"].ToString());
+                    ReportEntityObj.OutgoingAnsweredCalls = Convert.ToInt32(row["OutgoingAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingUnAnsweredCalls = Convert.ToInt32(row["OutgoingUnAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingCallDuration = Convert.ToDouble(row["OutgoingCallDuration"].ToString() == "" ? "0" : row["OutgoingCallDuration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportTrafficSummaryByExtensionItemisedEntity> GetTrafficSummaryByExtensionItemisedReport(int InternalLength, int HangUpThreshold, DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportTrafficSummaryByExtensionItemisedEntity> ReportEntityList = new List<ReportTrafficSummaryByExtensionItemisedEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_TrafficSummaryByExtensionItemised", con);
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.Parameters.Add(new MySqlParameter("@HangUpThreshold", HangUpThreshold));
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportTrafficSummaryByExtensionItemisedEntity ReportEntityObj = new ReportTrafficSummaryByExtensionItemisedEntity();
+
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.Date = DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.Time = row["Time"].ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.Direction = row["Direction"].ToString();
+                    ReportEntityObj.CLI = row["CLI"].ToString();
+                    ReportEntityObj.DDI = row["DDI"].ToString();
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCallTrailEntity> GetCallTrailReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Extensions, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportCallTrailEntity> ReportEntityList = new List<ReportCallTrailEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Log_CallTrailReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Extensions", Extensions));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCallTrailEntity ReportEntityObj = new ReportCallTrailEntity();
+
+                    ReportEntityObj.Status = row["Status"].ToString();
+                    ReportEntityObj.MSerial = row["MSerial"].ToString();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.direction = row["Direction"].ToString();
+                    ReportEntityObj.CLI = row["CLI"].ToString();
+                    ReportEntityObj.DDI = row["DDI"].ToString();
+                    ReportEntityObj.StartTime = DateTime.Parse(row["StartTime"].ToString());
+                    ReportEntityObj.HoldDuration = Convert.ToDouble(row["HoldDuration"].ToString() == "" ? "0" : row["HoldDuration"].ToString());
+                    ReportEntityObj.TotalConversation = Convert.ToDouble(row["TotalConversation"].ToString() == "" ? "0" : row["TotalConversation"].ToString());
+                    ReportEntityObj.TotalRingDuration = Convert.ToDouble(row["TotalRingDuration"].ToString() == "" ? "0" : row["TotalRingDuration"].ToString());
+                    ReportEntityObj.TotalDuration = Convert.ToDouble(row["TotalDuration"].ToString() == "" ? "0" : row["TotalDuration"].ToString());
+                    ReportEntityObj.MExtension = row["MExtension"].ToString();
+                    ReportEntityObj.mdirection = row["MDirection"].ToString();
+                    ReportEntityObj.MCLI = row["MCLI"].ToString();
+                    ReportEntityObj.MDDI = row["MDDI"].ToString();
+                    ReportEntityObj.MStartTime = DateTime.Parse(row["MStartTime"].ToString());
+                    ReportEntityObj.MHoldDuration = Convert.ToDouble(row["MHoldDuration"].ToString() == "" ? "0" : row["MHoldDuration"].ToString());
+                    ReportEntityObj.MTotalConversation = Convert.ToDouble(row["MTotalConversation"].ToString() == "" ? "0" : row["MTotalConversation"].ToString());
+                    ReportEntityObj.MTotalRingDuration = Convert.ToDouble(row["MTotalRingDuration"].ToString() == "" ? "0" : row["MTotalRingDuration"].ToString());
+                    ReportEntityObj.MTotalDuration = Convert.ToDouble(row["MTotalDuration"].ToString() == "" ? "0" : row["MTotalDuration"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportTrafficSummaryByDayEntity> GetCallSummaryByDayGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+
+
+                List<ReportTrafficSummaryByDayEntity> ReportEntityList = new List<ReportTrafficSummaryByDayEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_CallSummaryByDay", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportTrafficSummaryByDayEntity ReportEntityObj = new ReportTrafficSummaryByDayEntity();
+                    ReportEntityObj.Date = DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.Day = DateTime.Parse(row["Date"].ToString()).DayOfWeek.ToString();
+                    ReportEntityObj.IncomingCalls = Convert.ToInt32(row["IncomingCalls"].ToString() == "" ? "0" : row["IncomingCalls"].ToString());
+                    ReportEntityObj.IncomingAnsweredCalls = Convert.ToInt32(row["IncomingAnsweredCalls"].ToString() == "" ? "0" : row["IncomingAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingUnAnsweredCalls = Convert.ToInt32(row["IncomingUnAnsweredCalls"].ToString() == "" ? "0" : row["IncomingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.IncomingCallDuration = Convert.ToDouble(row["IncomingCallDuration"].ToString() == "" ? "0" : row["IncomingCallDuration"].ToString());
+                    ReportEntityObj.OutgoingCalls = Convert.ToInt32(row["OutgoingCalls"].ToString() == "" ? "0" : row["OutgoingCalls"].ToString());
+                    ReportEntityObj.OutgoingAnsweredCalls = Convert.ToInt32(row["OutgoingAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingUnAnsweredCalls = Convert.ToInt32(row["OutgoingUnAnsweredCalls"].ToString() == "" ? "0" : row["OutgoingUnAnsweredCalls"].ToString());
+                    ReportEntityObj.OutgoingCallDuration = Convert.ToDouble(row["OutgoingCallDuration"].ToString() == "" ? "0" : row["OutgoingCallDuration"].ToString());
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString() == "" ? "0" : row["Cost"].ToString()), 2);
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportOutBoundCallsByRegion> GetOutboundCallsByRegionGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+                List<ReportOutBoundCallsByRegion> ReportEntityList = new List<ReportOutBoundCallsByRegion>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_OutboundCallsByRegion", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                int i = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportOutBoundCallsByRegion ReportEntityObj = new ReportOutBoundCallsByRegion();
+                  
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString());
+                    ReportEntityObj.Region = row["Region"].ToString();
+                    ReportEntityList.Add(ReportEntityObj);
+                    if (i == 0)
+                    {
+                        ReportEntityObj.color = "#000000";
+                    }
+                    else if (i == 1)
+                    {
+                        ReportEntityObj.color = "#57565c";
+                    }
+                    else if (i == 2)
+                    {
+                        ReportEntityObj.color = "#a89fa0";
+                    }
+                    else if (i == 3)
+                    {
+                        ReportEntityObj.color = "#f91627";
+                    }
+                    i++;
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCallsServicedByDay> GetCallsServicedByDayGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+                List<ReportCallsServicedByDay> ReportEntityList = new List<ReportCallsServicedByDay>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_CallsServicedByDay", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCallsServicedByDay ReportEntityObj = new ReportCallsServicedByDay();
+
+                    ReportEntityObj.Date = DateTime.Parse(row["Date"].ToString()).ToShortDateString();
+                    ReportEntityObj.AnsweredCalls = Convert.ToInt32(row["AnsweredCalls"].ToString());
+                    ReportEntityObj.LostCalls = Convert.ToInt32(row["LostCalls"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+                    
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryEntity> GetCostSummaryGraphReport1(DateTime FromDate, DateTime ToDate,int InternalLength)
+        {
+            try
+            {
+                List<ReportCostSummaryEntity> ReportEntityList = new List<ReportCostSummaryEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_CostSummary", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@InternalLength", InternalLength));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                ReportCostSummaryEntity ReportEntityObj = new ReportCostSummaryEntity();
+                ReportEntityObj.color = "#f91627";
+                ReportEntityObj.CostType = "Outbound Cost";
+                foreach (DataRow row in dt.Rows)
+                {
+                    Log4Net.WriteLog("----\n", LogType.GENERALLOG);
+                    Log4Net.WriteLog(row["Cost"].ToString(), LogType.GENERALLOG);
+                    ReportEntityObj.Cost = Math.Round(Convert.ToDouble(row["Cost"].ToString()==""?"0": row["Cost"].ToString()),2);
+                    ReportEntityList.Add(ReportEntityObj);
+
+                }
+                if (dt.Rows.Count==0)
+                {
+                    ReportEntityObj.Cost = 0;
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCostSummaryEntity> GetCostSummaryGraphReport2(List<ReportCostSummaryEntity> ReportEntityList,DateTime FromDate, DateTime ToDate,float DiskUsageCostPerMin,string RecordingPath,float DurationCostPerMin)
+        {
+            try
+            {
+                
+                List<ReportDiskUsageCostEntity> ReportEntityList1 = ReportsCommonMethods.GetDiskUsageCosting(DiskUsageCostPerMin, RecordingPath).Where(x => x.Time_Stamp >= FromDate && x.Time_Stamp <= ToDate).ToList();
+                ReportCostSummaryEntity ReportCostSummaryEntityObj = new ReportCostSummaryEntity();
+                ReportCostSummaryEntityObj.color = "#000000";
+                ReportCostSummaryEntityObj.CostType = "Disk Cost";
+                foreach (ReportDiskUsageCostEntity obj in ReportEntityList1)
+                {
+                    ReportCostSummaryEntityObj.Cost+= obj.Cost;  
+                }
+                if (ReportEntityList1.Count == 0)
+                {
+                    ReportCostSummaryEntityObj.Cost = 0;
+                }
+                ReportCostSummaryEntityObj.Cost=Math.Round(ReportCostSummaryEntityObj.Cost, 2);
+                ReportEntityList.Add(ReportCostSummaryEntityObj);
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_DurationCostGraphReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCostSummaryEntityObj = new ReportCostSummaryEntity();
+                    
+                    double result;
+                    string s = row["Duration"].ToString();
+                    double duration=Double.TryParse(row["Duration"].ToString(), out result) ? result : 0.00;
+                    ReportCostSummaryEntityObj.Cost = Math.Round(duration/60000 * DurationCostPerMin,2);
+                    ReportCostSummaryEntityObj.CostType = "Duration Cost";
+                    ReportCostSummaryEntityObj.color = "#57565c";
+                    ReportEntityList.Add(ReportCostSummaryEntityObj);
+
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportInboundCallsByHourEntity> GetInboundCallsByHourGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+                List<ReportInboundCallsByHourEntity> ReportEntityList = new List<ReportInboundCallsByHourEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_InboundCallsByHour", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportInboundCallsByHourEntity ReportEntityObj = new ReportInboundCallsByHourEntity();
+                    ReportEntityObj.Hour = GetHourFormatString(row["Hour"].ToString());
+                    ReportEntityObj.Calls = Convert.ToInt32(row["Calls"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportOutboundCallsByHourEntity> GetOutboundCallsByHourGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+                List<ReportOutboundCallsByHourEntity> ReportEntityList = new List<ReportOutboundCallsByHourEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_OutboundCallsByHour", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportOutboundCallsByHourEntity ReportEntityObj = new ReportOutboundCallsByHourEntity();
+                    ReportEntityObj.Hour = GetHourFormatString(row["Hour"].ToString());
+                    ReportEntityObj.Calls = Convert.ToInt32(row["Calls"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCallsLostByHourEntity> GetCallsLostByHourGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+                List<ReportCallsLostByHourEntity> ReportEntityList = new List<ReportCallsLostByHourEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_CallsLostByHour", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCallsLostByHourEntity ReportEntityObj = new ReportCallsLostByHourEntity();
+                    ReportEntityObj.Hour = GetHourFormatString(row["Hour"].ToString());
+                    ReportEntityObj.Calls = Convert.ToInt32(row["Calls"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportLongestRingTimeByHourEntity> GetLongestRingTimeByHourGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+                List<ReportLongestRingTimeByHourEntity> ReportEntityList = new List<ReportLongestRingTimeByHourEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_LongestRingTimeByHour", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportLongestRingTimeByHourEntity ReportEntityObj = new ReportLongestRingTimeByHourEntity();
+                    ReportEntityObj.Hour = GetHourFormatString(row["Hour"].ToString());
+                    ReportEntityObj.MaxRing = Convert.ToDouble(row["MaxRing"].ToString() == "" ? "0" : row["MaxRing"].ToString());
+                    ReportEntityList.Add(ReportEntityObj);
+
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportCallSummaryByExtensionEntity> GetCallSummaryByExtensionGraphReport(DateTime FromDate, DateTime ToDate)
+        {
+            try
+            {
+                List<ReportCallSummaryByExtensionEntity> ReportEntityList = new List<ReportCallSummaryByExtensionEntity>();
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_Graph_CallSummaryByExtension", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportCallSummaryByExtensionEntity ReportEntityObj = new ReportCallSummaryByExtensionEntity();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.Name = row["Name"].ToString();
+                    ReportEntityObj.IncomingCalls = Convert.ToInt32(row["IncomingCalls"].ToString());
+                    ReportEntityObj.IncomingCallDuration = ReportsCommonMethods.GetTimeFromSeconds(Convert.ToDouble(row["IncomingCallDuration"].ToString() == "" ? "0" : row["IncomingCallDuration"].ToString()));
+                    ReportEntityObj.OutgoingCalls = Convert.ToInt32(row["OutgoingCalls"].ToString());
+                    ReportEntityObj.OutgoingCallDuration = ReportsCommonMethods.GetTimeFromSeconds(Convert.ToDouble(row["OutgoingCallDuration"].ToString() == "" ? "0" : row["OutgoingCallDuration"].ToString())); 
+                    ReportEntityObj.TotalCalls = Convert.ToInt32(row["TotalCalls"].ToString());
+                    ReportEntityObj.TotalDuration = ReportsCommonMethods.GetTimeFromSeconds(Convert.ToDouble(row["TotalDuration"].ToString() == "" ? "0" : row["TotalDuration"].ToString())); 
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+
+        public List<CallActionsEntity> GetActivityLogReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo, string Users, string WeekDays)
+        {
+            try
+            {
+
+
+                List<CallActionsEntity> ReportEntityList = new List<CallActionsEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_ActivityReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@Users", Users));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    CallActionsEntity ReportEntityObj = new CallActionsEntity();
+                    ReportEntityObj.Time_Stamp = DateTime.Parse(row["Time_Stamp"].ToString());
+                    ReportEntityObj.UserName = row["UserName"].ToString();
+                    ReportEntityObj.CallDate = DateTime.Parse(row["CallDate"].ToString());
+                    ReportEntityObj.Call_CLI = row["Call_CLI"].ToString();
+                    ReportEntityObj.Call_DDI = row["Call_DDI"].ToString();
+                    ReportEntityObj.Extension = row["Extension"].ToString();
+                    ReportEntityObj.FirstName = row["FirstName"].ToString();
+                    ReportEntityObj.LastName = row["LastName"].ToString();
+                    ReportEntityObj.Action = row["Action"].ToString();
+
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportDiskUsageCostEntity> GetDiskUsageCostReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo,string RecordingPath,float DiskUsageCostPerMin, string WeekDays)
+        {
+            try
+            {
+                
+                List<ReportDiskUsageCostEntity> ReportEntityList=ReportsCommonMethods.GetDiskUsageCosting(DiskUsageCostPerMin,RecordingPath).Where(x => x.Time_Stamp >= FromDate && x.Time_Stamp <= ToDate).ToList();
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportDurationCostEntity> GetDurationCostReport(DateTime FromDate, DateTime ToDate, string timeFrom, string timeTo,float DurationCostPerMin, string WeekDays)
+        {
+            try
+            {
+
+
+                List<ReportDurationCostEntity> ReportEntityList = new List<ReportDurationCostEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("sp_DurationCostReport", con);
+                cmd.Parameters.Add(new MySqlParameter("@SDate", FromDate));
+                cmd.Parameters.Add(new MySqlParameter("@EDate", ToDate));
+                cmd.Parameters.Add(new MySqlParameter("@STime", timeFrom));
+                cmd.Parameters.Add(new MySqlParameter("@ETime", timeTo));
+                cmd.Parameters.Add(new MySqlParameter("@WeekDays", WeekDays));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationOption", DurationOption));
+                //cmd.Parameters.Add(new MySqlParameter("@DurationVal", DurationVal));
+                cmd.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportDurationCostEntity ReportEntityObj = new ReportDurationCostEntity();
+                    ReportEntityObj.Time_Stamp = DateTime.Parse(row["Time_Stamp"].ToString());
+                    ReportEntityObj.Day = DateTime.Parse(row["Time_Stamp"].ToString()).DayOfWeek.ToString();
+                    ReportEntityObj.Duration = Convert.ToDouble(row["Duration"].ToString() == "" ? "0" : row["Duration"].ToString());
+                    ReportEntityObj.DurationCost = DurationCostPerMin;
+
+
+                    ReportEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public List<ReportsEntity> GetAllReports()
+        {
+            try
+            {
+                List<ReportsEntity> ReportsEntityList = new List<ReportsEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("Select* From Reports order by VisibleIndex", con);
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportsEntity ReportEntityObj = new ReportsEntity();
+                    ReportEntityObj.RID = int.Parse(row["RID"].ToString());
+                    ReportEntityObj.ReportName = row["ReportName"].ToString();
+                    ReportsEntityList.Add(ReportEntityObj);
+                }
+                
+                return ReportsEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                Log4Net.WriteException(ex);
+                return null;
+            }
+        }
+        public List<ReportsEntity> GetReportsByType(string ReportType)
+        {
+            try
+            {
+                List<ReportsEntity> ReportsEntityList = new List<ReportsEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("Select r.RID,r.VisibleIndex,r.ReportName,Count(rs.ReportId) as ScheduleCount From Reports r left join reportschedules rs on r.RID=rs.ReportId where r.ReportType=@ReportType and r.Visible=@Visible group by r.ReportName order by r.VisibleIndex asc", con);
+                cmd.Parameters.Add(new MySqlParameter("@ReportType", ReportType));
+                cmd.Parameters.Add(new MySqlParameter("@Visible", true));
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportsEntity ReportEntityObj = new ReportsEntity();
+                    ReportEntityObj.RID = int.Parse(row["RID"].ToString());
+                    ReportEntityObj.ReportName = row["ReportName"].ToString();
+                    ReportEntityObj.ScheduleCount = row["ScheduleCount"].ToString();
+                    ReportsEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportsEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                Log4Net.WriteException(ex);
+                return null;
+            }
+        }
+        public List<ReportsEntity> GetACDReports()
+        {
+            try
+            {
+                List<ReportsEntity> ReportsEntityList = new List<ReportsEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("Select* From Reports where ReportType='ACD' order by VisibleIndex", con);
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportsEntity ReportEntityObj = new ReportsEntity();
+                    ReportEntityObj.RID = int.Parse(row["RID"].ToString());
+                    ReportEntityObj.ReportName = row["ReportName"].ToString();
+                    ReportsEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportsEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                Log4Net.WriteException(ex);
+                return null;
+            }
+        }
+        public List<ReportsEntity> GetLoggingReports(string ReportType)
+        {
+            try
+            {
+                List<ReportsEntity> ReportsEntityList = new List<ReportsEntity>();
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("Select* From Reports  where ReportType='Logging' order by VisibleIndex", con);
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportsEntity ReportEntityObj = new ReportsEntity();
+                    ReportEntityObj.RID = int.Parse(row["RID"].ToString());
+                    ReportEntityObj.ReportName = row["ReportName"].ToString();
+                    ReportsEntityList.Add(ReportEntityObj);
+                }
+
+                return ReportsEntityList;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                Log4Net.WriteException(ex);
+                return null;
+            }
+        }
+        public string GetReportNameOnReportId(int RID)
+        {
+            try
+            {
+
+
+                List<ReportCallsSummaryEntity> ReportEntityList = new List<ReportCallsSummaryEntity>();
+
+
+                MySqlCommand cmd = new MySqlCommand();
+                MySqlDataAdapter da = new MySqlDataAdapter();
+                DataTable dt = new DataTable();
+                cmd = new MySqlCommand("Select ReportName From reports where RID=@RID", con);
+                cmd.Parameters.Add(new MySqlParameter("@RID", RID));
+                da.SelectCommand = cmd;
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+                string ReportName="";
+                foreach (DataRow row in dt.Rows)
+                {
+                    ReportName = row["ReportName"].ToString();
+                }
+
+                return ReportName+" ";
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                LogApp.Log4Net.WriteException(ex);
+                return null;
+
+            }
+        }
+        public string GetHourFormatString(string Hour)
+        {
+            string HourString = "";
+            if (Convert.ToInt32(Hour) < 23)
+            {
+                HourString = Hour + ":00-" + (Convert.ToInt32(Hour) + 1).ToString() + ":00";
+            }
+            else
+            {
+                HourString = Hour + ":00-" +"00:00";
+            }
+            return HourString;
+        }
+
+
+
+
+
+
+    }
+}

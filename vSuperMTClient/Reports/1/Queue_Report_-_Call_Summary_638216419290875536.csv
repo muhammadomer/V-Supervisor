@@ -1,0 +1,5 @@
+Queue,Total Calls,Total Transferred In,Overflowed Out,Answered Calls,ABND. Calls,ABND. Calls(%),Avg. Wait Time,Longest Waiting,Shortest Waiting,Avg Logged-In Agents
+Cardiology,132,3,2,91,39,29.5455,00:00:18,00:04:37,00:00:00,2
+Emergency Dept,290,36,25,235,30,10.3448,00:01:14,00:29:53,00:00:00,1
+Maternity Ward,55,58,12,15,28,50.9091,00:04:13,00:29:24,00:00:00,2
+Priority,3,1,0,0,3,100,00:10:31,00:27:51,00:00:04,9

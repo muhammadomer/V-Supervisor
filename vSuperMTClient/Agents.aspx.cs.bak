@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Script.Services;
+using System.Web.Services;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using vSuperMTClient.Entities;
+
+namespace vSuperMTClient
+{
+    public partial class Agents : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        [WebMethod]
+        [ScriptMethod]
+        public static SocketAuthenticationEntity GetSocketAuthentications()
+        {
+            if (HttpContext.Current.Session["User"] != null && HttpContext.Current.Session["UFID"] != null)
+            {
+                try
+                {
+                    UsersEntity UsersEntityObj = (UsersEntity)HttpContext.Current.Session["User"];
+                    string UFID = HttpContext.Current.Session["UFID"].ToString();
+                    string ServerIp = HttpContext.Current.Request.ServerVariables["SERVER_NAME"];
+                    string Port = ConfigurationManager.AppSettings["WSPort"];
+                    //string WSServerUri = "ws://" + ServerIp + ":" + Port + "";
+
+                    //string WSServerUri = "ws://192.168.2.45:" + Port + "";
+                    string WSServerUri = "ws://10.2.30.180:" + Port + "";
+                    SocketAuthenticationEntity SocketAuthenticationEntityObj = new SocketAuthenticationEntity();
+                    SocketAuthenticationEntityObj.UFID = UFID;
+                    SocketAuthenticationEntityObj.UserName = UsersEntityObj.UserName;
+                    SocketAuthenticationEntityObj.Password = UsersEntityObj.Password;
+                    SocketAuthenticationEntityObj.WSURI = WSServerUri;
+                    SocketAuthenticationEntityObj.ServerIp = ServerIp;
+                    return SocketAuthenticationEntityObj;
+                }
+                catch (Exception ex)
+                {
+                    LogApp.Log4Net.WriteException(ex);
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+    }
+}

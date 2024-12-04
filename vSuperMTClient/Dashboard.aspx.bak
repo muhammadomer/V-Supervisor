@@ -1,0 +1,3389 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Supervisor.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="vSuperMTClient.Dashboard" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div class="row">
+        <div id="LeftCol" class="col-md-3" style="padding-right: 0px;">
+            <div class="row" style="padding: 0px 0px 10px 0px;">
+                <div class="col-md-12" style="text-align: left; background-color: white; height: 44px;">
+                    <span style="padding-top: 10px; display: block; font-weight: 600">Reports</span>
+                </div>
+
+            </div>
+            <div id="divLeftMenu" style="background-color: white; padding-right: 5px;">
+                <div id="ACDSection">
+                    <div class="row" style="background-color: white; padding: 5px 5px 5px 10px;">
+                        <div class="row" style="border-bottom: 1px solid #dedede">
+                            <div class="col-md-10" style="padding: 0px;">
+                                <span>ACD Reports</span>
+
+                            </div>
+                            <div class="col-md-2" style="text-align: right; padding: 0px;">
+                                <i id="btnShowHideAcdReports" class=" fa fa-angle-up" style="color: black; font-size: 20px; padding-top: 2px; cursor: pointer;"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="divACDReports">
+                    </div>
+                </div>
+                <div id="LoggingSection">
+                    <div class="row" style="background-color: white; padding: 5px 5px 5px 10px;">
+                        <div class="row" style="border-bottom: 1px solid #dedede">
+                            <div class="col-md-10" style="padding: 0px;">
+                                <span>Call Logging Reports</span>
+
+                            </div>
+                            <div class="col-md-2" style="text-align: right; padding: 0px;">
+                                <i id="btnShowHideLoggingReports" class=" fa fa-angle-up" style="color: black; font-size: 20px; padding-top: 2px; cursor: pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divLoggingReports">
+                    </div>
+                </div>
+                <div id="RecorderSection">
+                    <div class="row" style="background-color: white; padding: 5px 5px 5px 10px;">
+                        <div class="row" style="border-bottom: 1px solid #dedede">
+                            <div class="col-md-10" style="padding: 0px;">
+                                <span>Recorder Reports</span>
+
+                            </div>
+                            <div class="col-md-2" style="text-align: right; padding: 0px;">
+                                <i id="btnShowHideRecorderReports" class=" fa fa-angle-up" style="color: black; font-size: 20px; padding-top: 2px; cursor: pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divRecorderReports">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="CenterCol" class="col-md-6" style="">
+            <div class="row" style="padding: 0px 0px 10px 0px;">
+                <div class="col-md-1" style="height: 44px; background-color: white; text-align: left; padding-top: 4px;" onclick="ShowHideLeftCol();">
+                    <i id="btnShowHideLeftCol" class="on fa fa-angle-double-left" style=""></i>
+                </div>
+                <div class="col-md-11" style="height: 44px; background-color: white; text-align: right; padding-top: 4px;">
+                    <select id="ddlGraphDuration" class="bs-select form-control input-small" data-style="red">
+                        <option value="1">Today</option>
+                        <option value="2">Yesterday</option>
+                        <option value="3">Last 7 Days</option>
+                        <option value="4">Last 14 Days</option>
+                        <option value="5">Last 30 Days</option>
+                        <option value="6">This month</option>
+                    </select>
+                </div>
+                <%--<div class="col-md-1" style="height: 44px; background-color: white; text-align: right;padding-top:4px;">
+                           <i id="btnShowHideRightCol" class="on fa fa-arrow-right" style=""></i>
+                     </div>--%>
+            </div>
+            <div id="divCenterMenu">
+
+
+                <div class="row" style="padding: 0px 0px 10px 0px;">
+                    <div class="col-md-12" style="padding: 5px 10px 5px 0px; background-color: white; height: 200px;">
+                        <div class="row">
+                            <div class="col-md-8" id="LegendCallSummaryByDayChart">
+                            </div>
+                            <div class="col-md-4" style="text-align: right;">
+                                <span style="margin-top: 8px; display: block; font-weight: 600;">Call Summary By Day</span>
+                            </div>
+                        </div>
+                        <div class="row" id="divCallSummaryByDayChart" style="height: 150px;"></div>
+                    </div>
+                </div>
+                <div class="row" style="padding: 0px 0px 10px 0px;">
+                    <div class="col-md-4" style="padding: 0px 10px 0px 0px;">
+                        <div class="row" style="background-color: white; height: 200px;">
+                            <div class="row" style="text-align: center; padding-top: 5px;">
+                                <span style="display: block; font-weight: 600;">Outbound Calls By Call Type</span>
+                            </div>
+                            <div id="divOutBoundCallsByRegionChart" class="col-md-12" style="padding: 0px; height: 150px;">
+                            </div>
+                            <div id="LegendOutBoundCallsByRegionChart" class="col-md-12" style="padding: 0px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding: 0px 10px 0px 0px">
+
+                        <div class="row" style="background-color: white; height: 200px;">
+                            <div class="row" style="text-align: center; padding-top: 5px;">
+                                <span style="display: block; font-weight: 600;">Calls Serviced By Day</span>
+                            </div>
+                            <div id="divCallsServicedByDayChart" class="col-md-12" style="padding: 0px; height: 150px;">
+                            </div>
+                            <div id="LegendCallsServicedByDayChart" class="col-md-12" style="padding: 0px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding: 0px 0px 0px 0px;">
+                        <div class="row" style="background-color: white; height: 200px">
+                            <div class="row" style="text-align: center; padding-top: 5px;">
+                                <span style="display: block; font-weight: 600;">Cost Summary</span>
+                            </div>
+                            <div id="divCostSummaryChart" class="col-md-12" style="padding: 0px; height: 150px;">
+                            </div>
+                            <div id="LegendCostSummaryChart" class="col-md-12" style="padding: 0px; text-align: left; font-size: 5px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding: 0px 0px 0px 0px;">
+                    <div class="col-md-12" style="padding: 0px 0px 0px 0px; background-color: white;">
+                        <div class="row" style="text-align: right; padding-top: 5px;">
+                            <div class="col-md-12">
+                                <span style="display: block; font-weight: 600;">Call Summary By Extension</span>
+                            </div>
+                        </div>
+                        <div class="row" style="text-align: center; padding-top: 0px;">
+                            <div class="col-md-12">
+                                <table id='tblCallSummaryByExtension' class='table table-striped table-hover table-bordered'>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="RightCol" class="col-md-3" style="padding-left: 0px;">
+            <div class="row" style="padding: 0px 0px 10px 0px;">
+                <div class="col-md-12" style="text-align: right; background-color: white; height: 44px;">
+                    <span style="padding-top: 10px; display: block; font-weight: 600">Todays Call Traffic- By Hour</span>
+
+                </div>
+
+            </div>
+            <div id="divRightMenu">
+
+
+
+                <div class="row" style="padding: 0px 0px 10px 0px;">
+                    <div class="col-md-12" style="text-align: center; background-color: white; height: 200px;">
+                        <div class="row" style="padding-top: 5px; padding-bottom: 0px;">
+                            <div class="col-md-6" style=""></div>
+                            <div class="col-md-6" style="background-color: #f91627">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="display: block; float: right; font-weight: 700; color: white">Today
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center; padding: 0px;">
+                                        <span style="font-weight: 500; color: white; font-size: 11px;">Inbound Calls By Hour
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 5px;">
+                            <div class="col-md-11" style=""></div>
+                            <div class="col-md-1" style="">
+
+                                <i id="btnInboundCallsByHourChart" class=" fa fa-angle-double-down" style="color: #f91627; font-size: 25px; padding-top: 0px; cursor: pointer"></i>
+                            </div>
+                        </div>
+                        <div id="divInboundCallsByHourChart" class="row" style="height: 100px;">
+                        </div>
+                        <div class="row" style="">
+                            <div class="col-md-12" style="text-align: right; padding-right: 0px;">
+                                <span style="font-weight: 500; font-size: 11px;">Highest
+                                </span>
+                                <span id="spanInboundCallsByHourChartMaxVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                                <span style="font-weight: 500; font-size: 11px;">Compared To Lowest
+                                </span>
+                                <span id="spanInboundCallsByHourChartMinVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row" style="padding: 0px 0px 10px 0px;">
+                    <div class="col-md-12" style="text-align: center; background-color: white; height: 200px;">
+                        <div class="row" style="padding-top: 5px; padding-bottom: 0px;">
+                            <div class="col-md-6" style=""></div>
+                            <div class="col-md-6" style="background-color: #5b595a">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="display: block; float: right; font-weight: 700; color: white">Today
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center; padding: 0px;">
+                                        <span style="font-weight: 500; color: white; font-size: 10px;">Outbound Calls By Hour
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 5px;">
+                            <div class="col-md-11" style=""></div>
+                            <div class="col-md-1" style="">
+                                <i id="btnOutboundCallsByHourChart" class=" fa fa-angle-double-down" style="color: #5b595a; font-size: 25px; padding-top: 0px; cursor: pointer"></i>
+                            </div>
+                        </div>
+                        <div id="divOutboundCallsByHourChart" class="row" style="height: 100px;">
+                        </div>
+                        <div class="row" style="">
+                            <div class="col-md-12" style="text-align: right; padding-right: 0px;">
+                                <span style="font-weight: 500; font-size: 11px;">Highest
+                                </span>
+                                <span id="spanOutboundCallsByHourChartMaxVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                                <span style="font-weight: 500; font-size: 11px;">Compared To Lowest
+                                </span>
+                                <span id="spanOutboundCallsByHourChartMinVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row" style="padding: 0px 0px 10px 0px;">
+                    <div class="col-md-12" style="text-align: center; background-color: white; height: 200px;">
+                        <div class="row" style="padding-top: 5px; padding-bottom: 0px;">
+                            <div class="col-md-6" style=""></div>
+                            <div class="col-md-6" style="background-color: #f91627">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="display: block; float: right; font-weight: 700; color: white">Today
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center; padding: 0px;">
+                                        <span style="font-weight: 500; color: white; font-size: 11px;">Calls Lost By Hour
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 5px;">
+                            <div class="col-md-11" style=""></div>
+                            <div class="col-md-1" style="">
+                                <i id="btnCallsLostByHourChart" class=" fa fa-angle-double-down" style="color: #f91627; font-size: 25px; padding-top: 0px; cursor: pointer"></i>
+                            </div>
+                        </div>
+                        <div id="divCallsLostByHourChart" class="row" style="height: 100px">
+                        </div>
+                        <div class="row" style="">
+                            <div class="col-md-12" style="text-align: right; padding-right: 0px;">
+                                <span style="font-weight: 500; font-size: 11px;">Highest
+                                </span>
+                                <span id="spanCallsLostByHourChartMaxVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                                <span style="font-weight: 500; font-size: 11px;">Compared To Lowest
+                                </span>
+                                <span id="spanCallsLostByHourChartMinVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row" style="padding: 0px 0px 10px 0px;">
+                    <div class="col-md-12" style="text-align: center; background-color: white; height: 200px;">
+                        <div class="row" style="padding-top: 5px; padding-bottom: 0px;">
+                            <div class="col-md-6" style=""></div>
+                            <div class="col-md-6" style="background-color: #5b595a">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="display: block; float: right; font-weight: 700; color: white">Today
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="text-align: center; padding: 0px;">
+                                        <span style="font-weight: 500; color: white; font-size: 11px;">Longest Ring By Hour
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 5px;">
+                            <div class="col-md-11" style=""></div>
+                            <div class="col-md-1" style="">
+                                <i id="btnLongestRingTimeByHourChart" class=" fa fa-angle-double-down" style="color: #5b595a; font-size: 25px; padding-top: 0px; cursor: pointer"></i>
+                            </div>
+                        </div>
+                        <div id="divLongestRingTimeByHourChart" style="height: 100px;">
+                        </div>
+                        <div class="row" style="">
+                            <div class="col-md-12" style="text-align: right; padding-right: 0px;">
+                                <span style="font-weight: 500; font-size: 11px;">Highest
+                                </span>
+                                <span id="spanLongestRingTimeByHourChartMaxVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                                <span style="font-weight: 500; font-size: 11px;">Compared To Lowest
+                                </span>
+                                <span id="spanLongestRingTimeByHourChartMinVal" style="font-weight: 700; color: #f91627; font-size: 11px;"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ReportFilter" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="z-index: 2;">
+        <div class="modal-dialog" style="width: 540px;">
+            <div class="modal-content">
+                <div class="row" style="line-height: 35px; background-color: #ffffff; width: 100%; margin-left: 0%; vertical-align: middle; border-bottom: 1px solid #e5e5e5">
+                    <div class="col-md-3" style="margin-top: 0.5%; padding-right: 0px;">
+                        <span style="font-size: 18px; color: #404040;">Report Filters -</span>
+                        <input id="txbScheduleFilterId" type="text" class="form-control" style="display: none;" />
+                    </div>
+                    <div class="col-md-8" style="margin-top: 0.7%; padding-left: 0px;">
+                        <span id="ReportNameOnFilter" style="font-size: 14px; color: #737373;"></span>
+
+                    </div>
+                </div>
+                <div class="row" id="Sections" style="display: none;">
+
+                    <div class="row SubSection" id="SFilter" style="width: 100%; padding-top: 0px; padding-bottom: 0px; display: none;">
+                        <div class="row" style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6;">
+                            <div class="col-md-2" style="padding-right: 0px;">
+                                <span class="help-block">Date Range</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="lstDateRangeOption" class="form-control">
+                                    <option value="1" selected="selected">Today</option>
+                                    <option value="2">Yesterday</option>
+                                    <option value="3">This Week</option>
+                                    <option value="4">Last Week</option>
+                                    <option value="5">This Month</option>
+                                    <option value="6">Last Month</option>
+                                    <option value="7">Custom</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div class="row SubSection" id="SDateRange" style="width: 100%; display: none;">
+                        <div class="row" id="CustomDatePickerRow" style="padding-top: 0px; padding-bottom: 0px; display: none; border-bottom: 1px solid #d6d6d6;">
+                            <div class="row" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2" style="padding-right: 0px;">
+                                    <span class="help-block">Start Date</span>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <div class="form-group">
+                                        <div class="input-group date" id="dp1">
+                                            <input id="txbDateFrom" class="form-control" size="16" type="text" value="" placeholder="From" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2">
+                                    <span class="help-block">End Date</span>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <div class="form-group">
+                                        <div class="input-group date" id="dp2">
+                                            <input id="txbDateTo" class="form-control" size="16" type="text" value="" placeholder="To" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row SubSection" id="STimeRange" style="width: 100%; display: none;">
+                        <div class="row" id="CustomTimePickerRow" style="padding-top: 0px; padding-bottom: 0px; border-bottom: 1px solid #d6d6d6;">
+                            <div class="row" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2" style="padding-right: 0px;">
+                                    <span class="help-block">Start Time</span>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <div class="form-group">
+                                        <div class="input-group date" id="dp3">
+                                            <input id="txbTimeFrom" class="form-control" size="16" type="text" value="" placeholder="From" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 10px; padding-bottom: 0px;">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2">
+                                    <span class="help-block">End Time</span>
+                                </div>
+                                <div class="col-md-8">
+
+                                    <div class="form-group">
+                                        <div class="input-group date" id="dp4">
+                                            <input id="txbTimeTo" class="form-control" size="16" type="text" value="" placeholder="To" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="SWeekDays" style="width: 100%; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6;">
+
+
+                        <div class="=row" style="padding-top: 0px; padding-bottom: 0px;">
+                            <div class="col-md-2">
+                                <span class="help-block">Week Days</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="lstWeekDays" class="form-control" multiple="multiple">
+                                    <option value="0" title="Monday">Monday</option>
+                                    <option value="1" title="Tuesday">Tuesday</option>
+                                    <option value="2" title="Wednesday">Wednesday</option>
+                                    <option value="3" title="Thrusday">Thrusday</option>
+                                    <option value="4" title="Friday">Friday</option>
+                                    <option value="5" title="Saturday">Saturday</option>
+                                    <option value="6" title="Sunday">Sunday</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row SubSection" id="SExtensions" style="width: 100%; padding-top: 10px; padding-bottom: 10px; display: none; border-bottom: 1px solid #d6d6d6;">
+
+
+                        <div class="=row" style="padding-top: 0px; padding-bottom: 0px;">
+                            <div class="col-md-2">
+                                <span class="help-block">Extensions</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="lstExtensions" class="form-control" multiple="multiple">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row SubSection" id="SGroups" style="width: 100%; padding-top: 10px; padding-bottom: 10px; display: none; border-bottom: 1px solid #d6d6d6;">
+
+
+                        <div class="=row" style="padding-top: 0px; padding-bottom: 0px;">
+                            <div class="col-md-2">
+                                <span class="help-block">Boards</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="lstGroups" class="form-control" multiple="multiple">
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row SubSection" id="SAgents" style="width: 100%; padding-top: 10px; padding-bottom: 10px; display: none; border-bottom: 1px solid #d6d6d6;">
+
+
+                        <div class="=row" style="padding-top: 0px; padding-bottom: 0px;">
+                            <div class="col-md-2">
+                                <span class="help-block">Agents</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="lstAgents" class="form-control" multiple="multiple">
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row SubSection" id="SUsers" style="width: 100%; padding-top: 10px; padding-bottom: 10px; display: none; border-bottom: 1px solid #d6d6d6;">
+
+
+                        <div class="=row" style="padding-top: 0px; padding-bottom: 0px;">
+                            <div class="col-md-2">
+                                <span class="help-block">Users</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="lstUsers" class="form-control" multiple="multiple">
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row SubSection" id="STimeInterval" style="width: 100%; padding-top: 10px; padding-bottom: 10px; display: none; border-bottom: 1px solid #d6d6d6;">
+                        <div class="=row" style="padding-top: 0px; padding-bottom: 0px;">
+                            <div class="col-md-2">
+                                <span class="help-block">Interval</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="lstTimeInterval" class="form-control">
+                                    <option value="15" title="15 minutes">15</option>
+                                    <option value="30" title="30 minutes">30</option>
+                                    <option value="45" title="45 minutes">45</option>
+                                    <option value="60" title="60 minutes">60</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="SCreateReport" style="padding-top: 10px; padding-bottom: 10px; display: none;">
+
+                        <div class="col-md-12" style="text-align: right;">
+                            <input type="button" class="btnFlat" onclick="ShowAddEditScheduleModal('Add');" title="Schedule" value="Schedule" />
+                            <input type="button" class="btnFlat" onclick="ViewReport();" title="PDF" value="PDF" />
+                            <input type="button" class="btnFlat" onclick="CSV();" title="Excel" value="Excel" />
+                            <button type="button" class="btnFlat" onclick="ClearReportFilters()" style="width: 70px;">Close</button>
+                        </div>
+                    </div>
+                    <div class="row" id="SUpdateReport" style="padding-top: 10px; padding-bottom: 10px; display: none;">
+
+                        <div class="col-md-12" style="text-align: right;">
+                            <input type="button" class="btnFlat" onclick="UpdateReportFilters();" title="Update" value="Update" />
+                            <button type="button" class="btnFlat" onclick="ClearReportFilters()" style="width: 70px;">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="AddEditScheduleModal" tabindex="-1" role="basic" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="z-index: 3 !important;">
+        <div class="modal-dialog" style="width: 540px;">
+            <div class="modal-content">
+                <div class="row" style="line-height: 35px; background-color: #ffffff; width: 100%; margin-left: 0%; vertical-align: middle; border-bottom: 1px solid #e5e5e5;">
+                    <div class="col-md-2" style="margin-top: 0.5%; padding-right: 0px; width: 18%">
+                        <span style="font-size: 18px; color: #404040;">Schedule - </span>
+                    </div>
+                    <div class="col-md-10" style="margin-top: 0.7%; padding-left: 2px; width: 82%">
+                        <span id="ReportNameOnScheduleAddEdit" style="font-size: 14px; color: #737373;"></span>
+
+                    </div>
+                </div>
+                <div id="ErrorDivAdd" class="row" style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6; display: none;">
+                    <div class="col-md-12">
+                        <label class="" style="color: red" id="lblErrorAdd"></label>
+                        <input id="txbScheduleId" type="text" class="form-control" style="display: none;" />
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6;">
+                    <div class="col-md-2">
+                        <label class="">Name<span style="color: red;">*</span></label>
+                    </div>
+                    <div class="col-md-10">
+                        <input id="txbScheduleName" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6;">
+                    <div class="col-md-2">
+                        <label class="" style="">Schedule</label>
+                    </div>
+                    <div class="col-md-10">
+                        <select id="lstScheduleInterval" class="form-control">
+                            <option value="1">Daily</option>
+                            <option value="2">Weekly</option>
+                            <option value="3">Monthly</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div id="SchedulValueRow" class="row" style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6; display: none;">
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="">
+                        <span class="">On</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                        <select id="ddScheduleValue" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6;">
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="">
+                        <span class="">At</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="padding-left: 0px; width: 42%;">
+
+                            <select id="ddScheduleTimeHours" class="form-control"></select>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="padding-left: 0px; width: 42%;">
+                            <select id="ddScheduleTimeMinutes" class="form-control"></select>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="padding-left: 0px; padding-top: 15px; padding-right: 0px; width: 16%; text-align: right;">
+                            <span>[HH:MM]</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #d6d6d6;">
+
+                    <div class="col-md-2">
+                        <label class="">Email</label>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <input id="txbScheduleEmail" type="text" class="form-control" style="border-bottom: 0px !important;" />
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                                <button type="button" id="btnScheduleAddEmail" class="btn green" onclick="btnScheduleAddEmail_Click();" style="padding: 7px 14px;"><i class="fa fa-plus"></i></button>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <select id="lstScheduleEmails" class="form-control" multiple="multiple" style="width: 100%;">
+                            </select>
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                                <button type="button" id="btnScheduleRemoveEmail" class="btn green" onclick="btnScheduleRemoveEmail_Click();" style="padding: 7px 14px;"><i class="fa fa-trash"></i></button>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
+
+                    <div id="divAddSchedule" class="col-md-12" style="text-align: right; display: none;">
+                        <button type="button" onclick="AddSchedule();" id="btnAddSchedule" class="btnFlat">Apply</button>
+                        <button type="button" class="btnFlat" data-dismiss="modal" style="">Close</button>
+                    </div>
+                    <div id="divEditSchedule" class="col-md-12" style="text-align: right; display: none;">
+                        <button type="button" onclick="UpdateSchedule();" id="btnEditSchedule" class="btnFlat">Apply</button>
+                        <button type="button" class="btnFlat" data-dismiss="modal" style="">Close</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ViewScheduleModal" tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="right: 75px; z-index: 1 !important;">
+        <div class="modal-dialog" style="width: 900px;">
+            <div class="modal-content">
+                <div class="row" style="line-height: 35px; background-color: #ffffff; width: 100%; margin-left: 0%; vertical-align: middle; border-bottom: 1px solid #e5e5e5;">
+                    <div class="col-md-4" style="margin-top: 1%;">
+                        <span style="font-size: 18px; color: #404040;">Schedules</span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 0%; width: 100%;">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 10px 10px 0px 10px;">
+                        <table class="table table-striped table-bordered table-hover" id="tblSchedules" style="margin-bottom: 0px !important">
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
+                    <div class="col-md-12" style="text-align: right">
+                        <button type="button" class="btnFlat" data-dismiss="modal" style="width: 70px;">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var ScreenHeight = (screen.height) - 240;
+            $('#divLeftMenu').slimScroll({
+                height: ScreenHeight
+            });
+            $('#divCenterMenu').slimScroll({
+                height: ScreenHeight
+            });
+            $('#divRightMenu').slimScroll({
+                height: ScreenHeight,
+
+            });
+
+            $("#btnShowHideAcdReports").click(function () {
+                if ($("#btnShowHideAcdReports").hasClass("fa-angle-up")) {
+                    $('#divACDReports').css({ "display": "none" });
+                    $('#btnShowHideAcdReports').removeClass("fa-angle-up").addClass("fa-angle-down");
+                }
+                else {
+                    $('#divACDReports').css({ "display": "block" });
+                    $('#btnShowHideAcdReports').removeClass("fa-angle-down").addClass("fa-angle-up");
+                }
+            });
+            $("#btnShowHideLoggingReports").click(function () {
+                if ($("#btnShowHideLoggingReports").hasClass("fa-angle-up")) {
+                    $('#divLoggingReports').css({ "display": "none" });
+                    $('#btnShowHideLoggingReports').removeClass("fa-angle-up").addClass("fa-angle-down");
+                }
+                else {
+                    $('#divLoggingReports').css({ "display": "block" });
+                    $('#btnShowHideLoggingReports').removeClass("fa-angle-down").addClass("fa-angle-up");
+                }
+            });
+            $("#btnShowHideRecorderReports").click(function () {
+                if ($("#btnShowHideRecorderReports").hasClass("fa-angle-up")) {
+                    $('#divRecorderReports').css({ "display": "none" });
+                    $('#btnShowHideRecorderReports').removeClass("fa-angle-up").addClass("fa-angle-down");
+                }
+                else {
+                    $('#divRecorderReports').css({ "display": "block" });
+                    $('#btnShowHideRecorderReports').removeClass("fa-angle-down").addClass("fa-angle-up");
+                }
+            });
+
+        });
+    </script>
+    <script>
+        var LoggingReportsLicense=0;
+        var ACDReportsLicense=0;
+        var GlobalVarDBType = "vBoard";
+        var GlobalVarReportId = 0;
+        var RightMenuChart1Type = 0;
+        var RightMenuChart2Type = 0;
+        var RightMenuChart3Type = 0;
+        var RightMenuChart4Type = 0;
+        var Timer1;
+        var Timer2;
+        $(document).ready(function () {
+
+            $("#HeaderLinkDashboard").removeClass("DeactiveHeaderLink").addClass("ActiveHeaderLink");
+            CheckLicenses();
+            DrawLeftACDPanel();
+            DrawLeftLoggingPanel();
+            DrawLeftRecorderPanel();
+            GetExtension();
+            GetBoards();
+            GetAgents();
+            GetRecorderUsers();
+            GetWeekDays();
+            FillHourMinuteDropdowns();
+            DatePickersDefaultSet();
+            RegEventDateRangeChange();
+            RegEventScheduleIntervalChange();
+            RegEventddlGraphDurationChange();
+            RegEventRightMenuButton1Click();
+            RegEventRightMenuButton2Click();
+            RegEventRightMenuButton3Click();
+            RegEventRightMenuButton4Click();
+            DrawCenterMenuGraphs();
+            DrawRightMenuGraphs();
+        });
+
+        function CheckLicenses()
+        {
+            if (<%=LoggingReportsLicense%> ==1) {
+                LoggingReportsLicense=1;
+                //$("#LoggingSection").show();
+            }
+            else{
+                LoggingReportsLicense=0;
+                //$("#LoggingSection").hide();
+            }
+            if (<%=ACDReportsLicense%> ==1) {
+                //$("#ACDSection").show();
+                ACDReportsLicense=1;
+            }
+            else{
+                ACDReportsLicense=0;
+                //$("#ACDSection").hide();
+            }
+        }
+        function ShowHideLeftCol() {
+            if ($("#btnShowHideLeftCol").hasClass("on")) {
+
+                $("#LeftCol").css("display", "none");
+                $("#btnShowHideLeftCol").removeClass("on").addClass("off");
+                $("#btnShowHideLeftCol").removeClass("fa-angle-double-left").addClass("fa-angle-double-right");
+
+                $("#CenterCol").removeClass("col-md-6").addClass("col-md-9");
+
+            }
+            else if ($("#btnShowHideLeftCol").hasClass("off")) {
+
+                $("#LeftCol").css("display", "block");
+                $("#btnShowHideLeftCol").removeClass("off").addClass("on");
+                $("#btnShowHideLeftCol").removeClass("fa-angle-double-right").addClass("fa-angle-double-left");
+                $("#CenterCol").removeClass("col-md-9").addClass("col-md-6");
+            }
+        }
+        function GetSectionsOnReportId(ReportId, ReportName, DBType, AddEditMode) {
+
+            GlobalVarDBType = DBType;
+            $('#ReportFilter').modal('show');
+            $('#ReportNameOnFilter').text(ReportName);
+            $("#Sections").hide();
+            $(".SubSection").hide();
+
+            var Param = { "ReportId": ReportId, "DBType": DBType }
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetSectionsOnReportId",
+                data: JSON.stringify(Param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.d.length > 0) {
+                        $("#Sections").show();
+                        for (var i = 0; i < data.d.length; i++) {
+                            var SID = data.d[i].SID;
+                            var SectionName = data.d[i].SectionName;
+                            $("#" + SectionName + "").show();
+
+                        }
+                    }
+
+                }
+            });
+            if (AddEditMode == "Add") {
+                $("#SCreateReport").show();
+                $("#SUpdateReport").hide();
+            }
+            else if (AddEditMode == "Edit") {
+                $("#SCreateReport").hide();
+                $("#SUpdateReport").show();
+            }
+
+        }
+        function ViewReport() {
+            //$('body').addClass('wait');
+            setTimeout(function () {
+                ViewReport1();
+            }, 500);
+        }
+        function ViewReport1() {
+
+            //var ReportId = parseInt($('#lstReports').val());
+
+            var ReportId = GlobalVarReportId;
+            var DateRangeOption = $('#lstDateRangeOption').val();
+            var dateFrom = $("#txbDateFrom").val();
+            var dateTo = $("#txbDateTo").val();
+            var timeFrom = $("#txbTimeFrom").val();
+            var timeTo = $("#txbTimeTo").val();
+            var Extensions = "";
+            var Groups = "";
+            var Agents = "";
+            var Users = "";
+            var WeekDays = "";
+            var TimeInterval = parseInt($('#lstTimeInterval').val());
+            var Interval = "";
+            var ExtensionSelected = 0;
+            var lstExtensionSelected = $('#lstExtensions option:selected');
+            $(lstExtensionSelected).each(function () {
+                if (ExtensionSelected == 0) {
+                    Extensions += "" + $(this).val() + "";
+                    ExtensionSelected = 1;
+                }
+                else if (ExtensionSelected > 0) {
+                    Extensions += ',';
+                    Extensions += "" + $(this).val() + "";
+                }
+            });
+            var GroupSelected = 0;
+            var lstGroupSelected = $('#lstGroups option:selected');
+            $(lstGroupSelected).each(function () {
+                if (GroupSelected == 0) {
+                    Groups += "" + $(this).val() + "";
+                    GroupSelected = 1;
+                }
+                else if (GroupSelected > 0) {
+                    Groups += ',';
+                    Groups += "" + $(this).val() + "";
+                }
+            });
+            var AgentSelected = 0;
+            var lstAgentSelected = $('#lstAgents option:selected');
+            $(lstAgentSelected).each(function () {
+                if (AgentSelected == 0) {
+                    Agents += "" + $(this).val() + "";
+                    AgentSelected = 1;
+                }
+                else if (AgentSelected > 0) {
+                    Agents += ',';
+                    Agents += "" + $(this).val() + "";
+                }
+            });
+            var UserSelected = 0;
+            var lstUserSelected = $('#lstUsers option:selected');
+            $(lstUserSelected).each(function () {
+                if (UserSelected == 0) {
+                    Users += "" + $(this).val() + "";
+                    UserSelected = 1;
+                }
+                else if (UserSelected > 0) {
+                    Users += ',';
+                    Users += "" + $(this).val() + "";
+                }
+            });
+            var WeekDaysSelected = 0;
+            var lstWeekDaysSelected = $('#lstWeekDays option:selected');
+            $(lstWeekDaysSelected).each(function () {
+                if (WeekDaysSelected == 0) {
+                    WeekDays += "" + $(this).val() + "";
+                    WeekDaysSelected = 1;
+                }
+                else if (WeekDaysSelected > 0) {
+                    WeekDays += ',';
+                    WeekDays += "" + $(this).val() + "";
+                }
+            });
+            var DurationOption = $('#lstDuration').val();
+            var DurationVal = $('#txbDuration').val();
+            var Param = { "ReportType": "PDF", "ReportId": ReportId, "DateRangeOption": DateRangeOption, "dateFrom": dateFrom, "dateTo": dateTo, "timeFrom": timeFrom, "timeTo": timeTo, "IsSchedule": false, "Extensions": Extensions, "Groups": Groups, "Agents": Agents, "Users": Users, "WeekDays": WeekDays, "TimeInterval": TimeInterval, "DBType": GlobalVarDBType };
+
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetReport",
+                data: JSON.stringify(Param),
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                    //$('#ReportFilter').modal('hide');
+                    $.blockUI({
+                        //message: 'Helloooooooooooooooooooooooooooooooooooo',
+                        message: "<svg class='lds-spinner' width='200px'  height='200px'  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid' style='background: none;'><g transform='rotate(0 50 50)'>" +
+   "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.9166666666666666s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(30 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.8333333333333334s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(60 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.75s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(90 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.6666666666666666s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(120 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.5833333333333334s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(150 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.5s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(180 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.4166666666666667s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(210 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.3333333333333333s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(240 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.25s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(270 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.16666666666666666s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(300 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.08333333333333333s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g><g transform='rotate(330 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+    "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='0s' repeatCount='indefinite'></animate>" +
+  "</rect>" +
+"</g></svg>",
+                        css: {
+
+                            padding: 0,
+                            margin: 0,
+                            width: '15%',
+                            top: '40%',
+                            left: '45%',
+                            textAlign: 'center',
+                            cursor: 'wait',
+                            "z-index": "10001",
+                            "border": "0px",
+                            "background-color": "transparent"
+                        }
+                    });
+
+                },
+                success: function (data) {
+                    //$('#ReportFilter').modal('show');
+                    $.unblockUI();
+                    $('#tblReport').empty();
+                    if (data.d.length > 0) {
+                        //  GlobalVarReportId = 0;
+                        window.open('Reports/' + data.d, '_blank');
+
+                    }
+                    else {
+                        GlobalVarReportId = 0;
+                    }
+                }
+                ,
+                error: function (request, status, error) {
+                    //$('#ReportFilter').modal('show');
+                    $.unblockUI();
+                }
+            });
+
+        }
+        function CSV() {
+            //$('body').addClass('wait');
+            setTimeout(function () {
+                CSV1();
+            }, 500);
+        }
+        function CSV1() {
+
+            //var ReportId = parseInt($('#lstReports').val());
+
+            var ReportId = GlobalVarReportId;
+            var DateRangeOption = $('#lstDateRangeOption').val();
+            var dateFrom = $("#txbDateFrom").val();
+            var dateTo = $("#txbDateTo").val();
+            var timeFrom = $("#txbTimeFrom").val();
+            var timeTo = $("#txbTimeTo").val();
+            var Extensions = "";
+            var Groups = "";
+            var Agents = "";
+            var Users = "";
+            var WeekDays = "";
+            var TimeInterval = parseInt($('#lstTimeInterval').val());
+            var ExtensionSelected = 0;
+            var lstExtensionSelected = $('#lstExtensions option:selected');
+            $(lstExtensionSelected).each(function () {
+                if (ExtensionSelected == 0) {
+                    Extensions += "" + $(this).val() + "";
+                    ExtensionSelected = 1;
+                }
+                else if (ExtensionSelected > 0) {
+                    Extensions += ',';
+                    Extensions += "" + $(this).val() + "";
+                }
+            });
+            var GroupSelected = 0;
+            var lstGroupSelected = $('#lstGroups option:selected');
+            $(lstGroupSelected).each(function () {
+                if (GroupSelected == 0) {
+                    Groups += "" + $(this).val() + "";
+                    GroupSelected = 1;
+                }
+                else if (GroupSelected > 0) {
+                    Groups += ',';
+                    Groups += "" + $(this).val() + "";
+                }
+            });
+            var AgentSelected = 0;
+            var lstAgentSelected = $('#lstAgents option:selected');
+            $(lstAgentSelected).each(function () {
+                if (AgentSelected == 0) {
+                    Agents += "" + $(this).val() + "";
+                    AgentSelected = 1;
+                }
+                else if (AgentSelected > 0) {
+                    Agents += ',';
+                    Agents += "" + $(this).val() + "";
+                }
+            });
+            var UserSelected = 0;
+            var lstUserSelected = $('#lstUsers option:selected');
+            $(lstUserSelected).each(function () {
+                if (UserSelected == 0) {
+                    Users += "" + $(this).val() + "";
+                    UserSelected = 1;
+                }
+                else if (UserSelected > 0) {
+                    Users += ',';
+                    Users += "" + $(this).val() + "";
+                }
+            });
+            var WeekDaysSelected = 0;
+            var lstWeekDaysSelected = $('#lstWeekDays option:selected');
+            $(lstWeekDaysSelected).each(function () {
+                if (WeekDaysSelected == 0) {
+                    WeekDays += "" + $(this).val() + "";
+                    WeekDaysSelected = 1;
+                }
+                else if (WeekDaysSelected > 0) {
+                    WeekDays += ',';
+                    WeekDays += "" + $(this).val() + "";
+                }
+            });
+            var DurationOption = $('#lstDuration').val();
+            var DurationVal = $('#txbDuration').val();
+            var Param = { "ReportType": "CSV", "ReportId": ReportId, "DateRangeOption": DateRangeOption, "dateFrom": dateFrom, "dateTo": dateTo, "timeFrom": timeFrom, "timeTo": timeTo, "IsSchedule": false, "Extensions": Extensions, "Groups": Groups, "Agents": Agents, "Users": Users, "WeekDays": WeekDays, "TimeInterval": TimeInterval, "DBType": GlobalVarDBType };
+
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetReport",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function () {
+                    //$('#ReportFilter').modal('hide');
+                    $.blockUI({
+                        message: "<svg class='lds-spinner' width='200px'  height='200px'  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 100 100' preserveAspectRatio='xMidYMid' style='background: none;'><g transform='rotate(0 50 50)'>" +
+  "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.9166666666666666s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(30 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.8333333333333334s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(60 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.75s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(90 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.6666666666666666s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(120 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.5833333333333334s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(150 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.5s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(180 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.4166666666666667s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(210 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.3333333333333333s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(240 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.25s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(270 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.16666666666666666s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(300 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='-0.08333333333333333s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g><g transform='rotate(330 50 50)'>" +
+ "<rect x='47' y='15' rx='23.5' ry='7.5' width='6' height='20' fill='#f91627'>" +
+   "<animate attributeName='opacity' values='1;0' times='0;1' dur='1s' begin='0s' repeatCount='indefinite'></animate>" +
+ "</rect>" +
+"</g></svg>",
+                        css: {
+
+                            padding: 0,
+                            margin: 0,
+                            width: '15%',
+                            top: '40%',
+                            left: '45%',
+                            textAlign: 'center',
+                            cursor: 'wait',
+                            "z-index": "10001",
+                            "border": "0px",
+                            "background-color": "transparent"
+                        }
+                    });
+
+                },
+                success: function (data) {
+                    $.unblockUI();
+                    //$('#ReportFilter').modal('show');
+                    $('#tblReport').empty();
+                    if (data.d.length > 0) {
+                        //  GlobalVarReportId = 0;
+                        window.open('Reports/' + data.d, '_blank');
+
+                    }
+                    else {
+                        GlobalVarReportId = 0;
+                    }
+                }
+                ,
+                error: function (request, status, error) {
+                    $.unblockUI();
+                    //$('#ReportFilter').modal('show');
+                }
+            });
+
+        }
+        function btnScheduleAddEmail_Click() {
+            $('#ErrorDivAdd').hide();
+            var email = $('#txbScheduleEmail').val();
+            if (isEmail(email)) {
+                $('#lstScheduleEmails').append($('<option>', { value: email, text: email }));
+                $('#txbScheduleEmail').val("");
+            }
+            else {
+                $('#ErrorDivAdd').show();
+                $('#lblErrorAdd').text('Please provide valid Email Address');
+                return;
+            }
+        }
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+        function btnScheduleRemoveEmail_Click() {
+            $('#lstScheduleEmails option:selected').remove();
+        }
+        function AddSchedule() {
+
+            var ScheduleExists = 0;
+            var Name = $('#txbScheduleName').val();
+            if (Name == "") {
+                $('#ErrorDivAdd').show();
+                $('#lblErrorAdd').text('Please provide Schedule Name');
+                return;
+            }
+            var Param = { "ScheduleId": 0, "Name": Name, "DBType": GlobalVarDBType };
+
+            $.ajax({
+                type: "POST",
+                url: "Schedules.aspx/CheckIfScheduleNameAlreadyExists",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        ScheduleExists = 1;
+
+                    }
+                    else {
+                        ScheduleExists = 0;
+                    }
+                }
+            });
+            if (ScheduleExists == 1) {
+                $('#ErrorDivAdd').show();
+                $('#lblErrorAdd').text('Schedule with this name already exists.');
+                return;
+            }
+            else {
+                $('#ErrorDivAdd').hide();
+            }
+
+            var ReportId = GlobalVarReportId;
+            //var ReportId = parseInt($('#lstReports').val());
+            var DateFilterCriteria = $('#lstDateRangeOption').val();
+            var DateFrom = $("#txbDateFrom").val();
+            var DateTo = $("#txbDateTo").val();
+            var TimeFrom = $("#txbTimeFrom").val();
+            var TimeTo = $("#txbTimeTo").val();
+            var Boards = "";
+            var Agents = "";
+            var Extensions = "";
+            var Users = "";
+            var WeekDays = "";
+            var Emails = ""
+            var TimeInterval = parseInt($('#lstTimeInterval').val());
+
+            var ExtensionSelected = 0;
+            var lstExtensionSelected = $('#lstExtensions option:selected');
+            $(lstExtensionSelected).each(function () {
+                if (ExtensionSelected == 0) {
+                    Extensions += "" + $(this).val() + "";
+                    ExtensionSelected = 1;
+                }
+                else if (ExtensionSelected > 0) {
+                    Extensions += ',';
+                    Extensions += "" + $(this).val() + "";
+                }
+            });
+            var BoardsSelected = 0;
+            var lstBoardSelected = $('#lstGroups option:selected');
+            $(lstBoardSelected).each(function () {
+                if (BoardsSelected == 0) {
+                    Boards += $(this).val();
+                    BoardsSelected = 1;
+                }
+                else if (BoardsSelected > 0) {
+                    Boards += ',';
+                    Boards += $(this).val();
+                }
+            });
+            var AgentSelected = 0;
+            var lstAgentSelected = $('#lstAgents option:selected');
+            $(lstAgentSelected).each(function () {
+                if (AgentSelected == 0) {
+                    Agents += "" + $(this).val() + "";
+                    AgentSelected = 1;
+                }
+                else if (AgentSelected > 0) {
+                    Agents += ',';
+                    Agents += "" + $(this).val() + "";
+                }
+            });
+            var UserSelected = 0;
+            var lstUserSelected = $('#lstUsers option:selected');
+            $(lstUserSelected).each(function () {
+                if (UserSelected == 0) {
+                    Users += "" + $(this).val() + "";
+                    UserSelected = 1;
+                }
+                else if (UserSelected > 0) {
+                    Users += ',';
+                    Users += "" + $(this).val() + "";
+                }
+            });
+            var WeekDaysSelected = 0;
+            var lstWeekDaysSelected = $('#lstWeekDays option:selected');
+            $(lstWeekDaysSelected).each(function () {
+                if (WeekDaysSelected == 0) {
+                    WeekDays += "" + $(this).val() + "";
+                    WeekDaysSelected = 1;
+                }
+                else if (WeekDaysSelected > 0) {
+                    WeekDays += ',';
+                    WeekDays += "" + $(this).val() + "";
+                }
+            });
+
+            var ScheduleInterval = parseInt($('#lstScheduleInterval').val());
+
+            var ScheduleValue = $('#ddScheduleValue option:selected').text();
+            var ScheduleTimeHours = $('#ddScheduleTimeHours option:selected').text();
+            var ScheduleTimeMinutes = $('#ddScheduleTimeMinutes option:selected').text();
+
+
+
+            $('#lstScheduleEmails option').each(function () {
+
+                Emails += "" + $(this).val() + ";"
+            });
+
+            var Param = { "Name": Name, "ReportId": ReportId, "DateFilterCriteria": DateFilterCriteria, "WeekDays": WeekDays, "Extensions": Extensions, "Boards": Boards, "Agents": Agents, "Users": Users, "TimeInterval": TimeInterval, "ScheduleInterval": ScheduleInterval, "ScheduleValue": ScheduleValue, "ScheduleTimeHours": ScheduleTimeHours, "ScheduleTimeMinutes": ScheduleTimeMinutes, "Emails": Emails, "TimeFrom": TimeFrom, "TimeTo": TimeTo };
+
+            $.ajax({
+                type: "POST",
+                url: "Schedules.aspx/AddReportSchedule",
+                data: "{ReportScheduleEntityObj:" + JSON.stringify(Param) + ",DateFrom:" + JSON.stringify(DateFrom) + ",DateTo:" + JSON.stringify(DateTo) + ", DBType: '" + GlobalVarDBType + "' }",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d.length > 0) {
+                        $().toastmessage('showSuccessToast', 'Report Schedule saved successfully.');
+                        ShowAddEditScheduleModal("Add");
+                    }
+                    else {
+                        $().toastmessage('showErrorToast', 'Error saving Report Schedule.');
+                    }
+                }
+            });
+
+            DrawLeftACDPanel();
+            DrawLeftLoggingPanel();
+            DrawLeftRecorderPanel();
+        }
+        function GetScheduleOnReportId(ReportId, DBType) {
+
+            //alert(ReportId);
+            GlobalVarDBType = DBType;
+            $('#tblSchedules').empty();
+            //ReportId = ReportId.substr(ReportId.length - 1)
+            var Param = { "ReportId": ReportId, "DBType": DBType }
+            $.ajax({
+                type: "POST",
+                url: "Schedules.aspx/GetScheduleOnReportId",
+                data: JSON.stringify(Param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    var trHTML = '<thead><tr><th>Name</th><th>Report Name</th><th>Schedule Interval</th><th>Execution Time</th><th>Filters</th><th>Schedule</th><th>Delete</th></tr></thead><tbody></tbody>';
+                    $('#tblSchedules').append(trHTML);
+                    var boardsList = '';
+                    for (var i = 0; i < data.d.length; i++) {
+
+                        var trHTML = '';
+                        trHTML += '<tr><td>' + data.d[i].Name + '</td>';
+                        trHTML += '<td>' + data.d[i].ReportName + '</td>';
+                        if (data.d[i].ScheduleInterval == "1") {
+                            trHTML += '<td>Daily</td>';
+                        }
+                        else if (data.d[i].ScheduleInterval == "2") {
+                            trHTML += '<td>Weekly</td>';
+                        }
+                        else if (data.d[i].ScheduleInterval == "3") {
+                            trHTML += '<td>Monthly</td>';
+                        }
+                        if (data.d[i].ExecutionTime != null) {
+                            trHTML += '<td>' + moment(new Date(parseInt(data.d[i].ExecutionTime.replace(/[^0-9 +]/g, '')))).format("DD-MM-YYYY HH:mm:ss") + '</td>';
+                        }
+                        else {
+                            trHTML += '<td></td>';
+                        }
+                        
+                       
+                        trHTML += '<td><a class="edit"  onclick="EditReportFiltersOnSchedule(\'' + data.d[i].Id + '\',\'' + data.d[i].ReportId + '\',\'' + data.d[i].ReportName + '\',\'' + data.d[i].DateFilterCriteria + '\',\'' + data.d[i].DateFrom + '\',\'' + data.d[i].DateTo + '\',\'' + data.d[i].TimeFrom + '\',\'' + data.d[i].TimeTo + '\',\'' + data.d[i].Agents + '\',\'' + data.d[i].Boards + '\',\'' + data.d[i].Extensions + '\',\'' + data.d[i].Users + '\',\'' + data.d[i].WeekDays + '\',\'' + data.d[i].TimeInterval + '\',\'' + DBType + '\')";>Edit</a></td>';
+                        trHTML += '<td><a class="edit"  onclick="ScheduleEdit(\'' + data.d[i].Id + '\',\'' + data.d[i].Name + '\',\'' + data.d[i].ReportName + '\',\'' + data.d[i].ScheduleInterval + '\',\'' + data.d[i].ScheduleValue + '\',\'' + data.d[i].ScheduleTimeHours + '\',\'' + data.d[i].ScheduleTimeMinutes + '\',\'' + data.d[i].Emails + '\',\'' + DBType + '\')";>Edit</a></td>';
+                        trHTML += '<td><a class="edit" style="padding: 0px;" onclick="DeleteFromSchedules(\'' + data.d[i].Id + '\')";>Delete</a></td></tr>';
+                        $('#tblSchedules').append(trHTML);
+                    }
+                }
+            });
+
+        }
+        function ScheduleEdit(ScheduleId, ScheduleName, ReportName, ScheduleInterval, ScheduleValue, ScheduleTimeHours, ScheduleTimeMinutes, Emails, DBType) {
+
+            $('#lstScheduleEmails').empty();
+            $('#txbScheduleId').val(ScheduleId);
+            $('#txbScheduleName').val(ScheduleName);
+            $('#lstScheduleInterval').val(ScheduleInterval);
+            if (ScheduleInterval == 1) {
+                $("#SchedulValueRow").hide();
+            }
+            else if (ScheduleInterval == 2) {
+                $("#ddScheduleValue").find('option').remove().end();
+                $("#ddScheduleValue").append('<option value=Monday>Monday</option>');
+                $("#ddScheduleValue").append('<option value=Tuesday>Tuesday</option>');
+                $("#ddScheduleValue").append('<option value=Wednesday>Wednesday</option>');
+                $("#ddScheduleValue").append('<option value=Thursday>Thursday</option>');
+                $("#ddScheduleValue").append('<option value=Friday>Friday</option>');
+                $("#ddScheduleValue").append('<option value=Saturday>Saturday</option>');
+                $("#ddScheduleValue").append('<option value=Sunday>Sunday</option>');
+                $("#SchedulValueRow").show();
+                $("#ddScheduleValue").val(ScheduleValue);
+            }
+            else if (ScheduleInterval == 3) {
+                $("#ddScheduleValue").find('option').remove().end();
+
+                for (var i = 1; i <= 31; i++) {
+                    $("#ddScheduleValue").append("<option value=" + i + ">" + i + "</option>");
+                }
+                $("#SchedulValueRow").show();
+                $("#ddScheduleValue").val(ScheduleValue);
+            }
+            $("#ddScheduleTimeHours").val(ScheduleTimeHours);
+            $("#ddScheduleTimeMinutes").val(ScheduleTimeMinutes);
+
+            var ScheduleEmails = Emails.split(";");
+            for (var i = 0; i < ScheduleEmails.length; i++) {
+                if (ScheduleEmails[i] != "")
+                    $('#lstScheduleEmails').append($('<option>', { value: ScheduleEmails[i], text: ScheduleEmails[i] }));
+            }
+            ShowAddEditScheduleModal("Edit", ReportName);
+        }
+        function EditReportFiltersOnSchedule(ScheduleId, ReportId, ReportName, DateFilterCriteria, DateFrom, DateTo, TimeFrom, TimeTo, Agents, Boards, Extensions, Users, WeekDays, TimeInterval, DBType) {
+
+
+            $('#txbScheduleFilterId').val(ScheduleId);
+            GetSectionsOnReportId(ReportId, ReportName, DBType, "Edit");
+            $("#ddlModule option:selected").removeAttr("selected");
+            $("#lstDateRangeOption").val(DateFilterCriteria);
+            var AgentsArray = Agents.split(',');
+            var BoardsArray = Boards.split(',');
+            var ExtensionsArray = Extensions.split(',');
+            var UsersArray = Users.split(',');
+            var WeekDaysArray = WeekDays.split(',');
+            //alert(WeekDays);
+            //alert(WeekDaysArray);
+            $("#lstAgents").val(AgentsArray);
+            $("#lstExtensions").val(ExtensionsArray);
+            $("#lstGroups").val(BoardsArray);
+            $("#lstUsers").val(UsersArray);
+            $("#lstWeekDays").val(WeekDaysArray);
+            $('#lstTimeInterval').val(TimeInterval);
+            $("#lstAgents").multiselect("refresh");
+            $("#lstExtensions").multiselect("refresh");
+            $("#lstGroups").multiselect("refresh");
+            $("#lstUsers").multiselect("refresh");
+            $("#lstWeekDays").multiselect("refresh");
+
+            if (parseInt(DateFilterCriteria) == 7) {
+                $("#CustomTimePickerRow").hide();
+                $("#CustomDatePickerRow").show();
+                $("#txbDateFrom").val(moment(DateFrom).format("DD/MM/YYYY HH:mm:ss"));
+                $("#txbDateTo").val(moment(DateTo).format("DD/MM/YYYY HH:mm:ss"));
+            }
+            else {
+
+              
+                $("#txbTimeFrom").val(TimeFrom);
+                $("#txbTimeTo").val(TimeTo);
+                
+            }
+        }
+        function UpdateReportFilters() {
+
+            var Id = $('#txbScheduleFilterId').val();
+            var DateFilterCriteria = $('#lstDateRangeOption').val();
+            var DateFrom = $("#txbDateFrom").val();
+            var DateTo = $("#txbDateTo").val();
+            var TimeFrom = $("#txbTimeFrom").val();
+            var TimeTo = $("#txbTimeTo").val();
+            var Boards = "";
+            var Agents = "";
+            var Extensions = "";
+            var Users = "";
+            var WeekDays = "";
+            var Emails = "";
+            var TimeInterval = parseInt($('#lstTimeInterval').val());
+
+            var ExtensionSelected = 0;
+            var lstExtensionSelected = $('#lstExtensions option:selected');
+            $(lstExtensionSelected).each(function () {
+                if (ExtensionSelected == 0) {
+                    Extensions += "" + $(this).val() + "";
+                    ExtensionSelected = 1;
+                }
+                else if (ExtensionSelected > 0) {
+                    Extensions += ',';
+                    Extensions += "" + $(this).val() + "";
+                }
+            });
+            var BoardsSelected = 0;
+            var lstBoardSelected = $('#lstGroups option:selected');
+            $(lstBoardSelected).each(function () {
+                if (BoardsSelected == 0) {
+                    Boards += $(this).val();
+                    BoardsSelected = 1;
+                }
+                else if (BoardsSelected > 0) {
+                    Boards += ',';
+                    Boards += $(this).val();
+                }
+            });
+            var AgentSelected = 0;
+            var lstAgentSelected = $('#lstAgents option:selected');
+            $(lstAgentSelected).each(function () {
+                if (AgentSelected == 0) {
+                    Agents += "" + $(this).val() + "";
+                    AgentSelected = 1;
+                }
+                else if (AgentSelected > 0) {
+                    Agents += ',';
+                    Agents += "" + $(this).val() + "";
+                }
+            });
+            var UserSelected = 0;
+            var lstUserSelected = $('#lstUsers option:selected');
+            $(lstUserSelected).each(function () {
+                if (UserSelected == 0) {
+                    Users += "" + $(this).val() + "";
+                    UserSelected = 1;
+                }
+                else if (UserSelected > 0) {
+                    Users += ',';
+                    Users += "" + $(this).val() + "";
+                }
+            });
+            var WeekDaysSelected = 0;
+            var lstWeekDaysSelected = $('#lstWeekDays option:selected');
+            $(lstWeekDaysSelected).each(function () {
+                if (WeekDaysSelected == 0) {
+                    WeekDays += "" + $(this).val() + "";
+                    WeekDaysSelected = 1;
+                }
+                else if (WeekDaysSelected > 0) {
+                    WeekDays += ',';
+                    WeekDays += "" + $(this).val() + "";
+                }
+            });
+
+            var Param = { "Id": Id, "DateFilterCriteria": DateFilterCriteria, "WeekDays": WeekDays, "Extensions": Extensions, "Boards": Boards, "Agents": Agents, "Users": Users, "TimeInterval": TimeInterval, "TimeFrom": TimeFrom, "TimeTo": TimeTo };
+
+            $.ajax({
+                type: "POST",
+                url: "Schedules.aspx/UpdateScheduleFilters",
+                data: "{ReportScheduleEntityObj:" + JSON.stringify(Param) + ",DateFrom:" + JSON.stringify(DateFrom) + ",DateTo:" + JSON.stringify(DateTo) + ", DBType: '" + GlobalVarDBType + "' }",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.d == true) {
+
+                        $().toastmessage('showSuccessToast', 'Report Schedule saved successfully.');
+                        GetScheduleOnReportId(GlobalVarReportId, GlobalVarDBType);
+                        //ShowAddEditScheduleModal("Add");
+                    }
+                    else {
+                        $().toastmessage('showErrorToast', 'Error saving Report Schedule.');
+                    }
+                }
+            });
+        }
+        function UpdateSchedule() {
+            var ScheduleExists = 0;
+            var Id = $('#txbScheduleId').val();
+
+            var Name = $('#txbScheduleName').val();
+            if (Name == "") {
+                $('#ErrorDivAdd').show();
+                $('#lblErrorAdd').text('Please provide Schedule Name');
+                return;
+            }
+            var Param = { "ScheduleId": Id, "Name": Name, "DBType": GlobalVarDBType };
+
+            $.ajax({
+                type: "POST",
+                url: "Schedules.aspx/CheckIfScheduleNameAlreadyExists",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        ScheduleExists = 1;
+                    }
+                    else {
+                        ScheduleExists = 0;
+                    }
+                }
+            });
+            if (ScheduleExists == 1) {
+                $('#ErrorDivAdd').show();
+                $('#lblErrorAdd').text('Schedule with this name already exists.');
+                return;
+            }
+            else {
+                $('#ErrorDivAdd').hide();
+            }
+            var Emails = ""
+            var ScheduleInterval = parseInt($('#lstScheduleInterval').val());
+            var ScheduleValue = $('#ddScheduleValue option:selected').text();
+            var ScheduleTimeHours = $('#ddScheduleTimeHours option:selected').val();
+            var ScheduleTimeMinutes = $('#ddScheduleTimeMinutes option:selected').val();
+            $('#lstScheduleEmails option').each(function () {
+
+                Emails += "" + $(this).val() + ";"
+            });
+
+            Param = { "Id": Id, "Name": Name, "ScheduleInterval": ScheduleInterval, "ScheduleValue": ScheduleValue, "ScheduleTimeHours": ScheduleTimeHours, "ScheduleTimeMinutes": ScheduleTimeMinutes, "Emails": Emails };
+
+            $.ajax({
+                type: "POST",
+                url: "Schedules.aspx/UpdateIntoSchedules",
+                data: "{ReportScheduleEntityObj:" + JSON.stringify(Param) + ", DBType: '" + GlobalVarDBType + "' }",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        $().toastmessage('showSuccessToast', 'Schedule updated successfully.');
+                        $('#AddEditScheduleModal').modal('hide');
+                        GetScheduleOnReportId(GlobalVarReportId, GlobalVarDBType);
+                    }
+                    else {
+                        $().toastmessage('showErrorToast', 'Error updating  Schedule.');
+                    }
+                }
+            });
+            $('#txbScheduleName').val();
+        }
+        function DeleteFromSchedules(ScheduleId) {
+
+            var Param = { "ScheduleId": ScheduleId, "DBType": GlobalVarDBType }
+            var ConfirmDelete = confirm("Are you sure you want to delete?");
+            if (ConfirmDelete == false) {
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "Schedules.aspx/DeleteFromSchedules",
+                data: JSON.stringify(Param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d === true) {
+                        GetScheduleOnReportId(GlobalVarReportId, GlobalVarDBType);
+                        //$('#AddEditScheduleModal').modal('hide');
+                        $().toastmessage("showSuccessToast", "Schedule deleted successfully.");
+                    }
+                    else {
+                        $().toastmessage("showErrorToast", "Failed to delete Schedule.");
+                    }
+                }
+            });
+            DrawLeftACDPanel();
+            DrawLeftLoggingPanel();
+            DrawLeftRecorderPanel();
+        }
+        function ShowAddEditScheduleModal(type, ReportName) {
+
+            if (type == "Edit") {
+
+                $('#ReportNameOnScheduleAddEdit').text(ReportName);
+                $('#ErrorDivAdd').hide();
+                $('#AddEditScheduleModal').modal('show');
+                $('#divAddSchedule').hide();
+                $('#divEditSchedule').show();
+
+            }
+            else {
+                $('#ReportNameOnScheduleAddEdit').text($('#ReportNameOnFilter').text());
+
+                $('#ErrorDivAdd').hide();
+                $('#txbScheduleEmail').val("");
+                $('#txbScheduleName').val("");
+                $('#lstScheduleInterval').val(1);
+                $("#ddScheduleTimeHours").val(0);
+                $("#ddScheduleTimeMinutes").val(0);
+                $('#lstScheduleEmails option').remove();
+                $("#SchedulValueRow").hide();
+                $('#divAddSchedule').show();
+                $('#divEditSchedule').hide();
+                $('#AddEditScheduleModal').modal('show');
+            }
+
+        }
+        function DrawLeftACDPanel() {
+            $("#divACDReports").html('');
+            var Param = { "ReportType": "ACD", "DBType": "vBoard" }
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetReports",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    
+
+                    if(data.d)
+                    {
+                        if(ACDReportsLicense==0)
+                        {
+                            var $divACDReports = $("#divACDReports");
+                            var $Row = $("<div/>", { id: "ACDRow" + i, "class": "row" });
+                            $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                            $Row.appendTo($divACDReports);
+                            var $Col1 = $("<div/>", { id: "ACDCol1" + i, "class": "col-md-12" });
+                            $Col1.css({ "padding": "0px" });
+                            $Col1.appendTo($Row);
+                            
+
+                            var $span = $("<span/>", { id: "ACDspan" + i });
+                            $span.text("ACD Reports License Expired.");
+                            $span.css({ "font-size": "12px","color":"#f91627" });
+                            $span.appendTo($Col1);
+                        }
+                        else if (data.d.length > 0) {
+                            for (var i = 0; i < data.d.length; i++) {
+                                var $divACDReports = $("#divACDReports");
+                                var $Row = $("<div/>", { id: "ACDRow" + i, "class": "row" });
+                                $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                                $Row.appendTo($divACDReports);
+                                var $Col1 = $("<div/>", { id: "ACDCol1" + i, "class": "col-md-8" });
+                                $Col1.css({ "padding": "0px" });
+                                $Col1.appendTo($Row);
+                                var $Col2 = $("<div/>", { id: "ACDCol2" + i, "class": "col-md-2" });
+                                $Col2.css({ "text-align": "right", "padding": "0px", "width": "19.667%" });
+                                $Col2.appendTo($Row);
+                                var $Col3 = $("<div/>", { id: "ACDCol3" + i, "class": "col-md-2" });
+                                $Col3.css({ "text-align": "right", "padding": "0px", "width": "13.667%" });
+                                $Col3.appendTo($Row);
+                                var $ul = $("<ul/>", { id: "ACDul" + i });
+                                $ul.css({ "list-style": "none", "padding": "0px" });
+                                $ul.appendTo($Col1);
+                                var $li = $("<li/>", { id: "ACDli" + i });
+                                $li.appendTo($ul);
+                                var $i = $("<i/>", { id: "ACDi" + i, "class": "fa fa-file-pdf-o" });
+                                $i.css({ "color": "#f91627" });
+                                $i.appendTo($li);
+                                var $span = $("<span/>", { id: "ACDspan" + i });
+                                var ReportName = data.d[i].ReportName;
+                                //if (ReportName.length>30)
+                                //{
+                                ReportName = ReportName.replace("Extension", "Ext.");
+                                //}
+                                $span.text(ReportName);
+
+
+                                $span.css({ "font-size": "11px" });
+                                $span.appendTo($li);
+                                var $btnSchedule = $("<input id=btnScheduleACDReport_" + data.d[i].RID + " type=button value=Schedule class=btnLeftPanelGrey />");
+
+                                $btnSchedule.appendTo($Col2);
+                                if (data.d[i].ScheduleCount == 0) {
+                                    $btnSchedule.prop('disabled', true);
+                                }
+                                $btnSchedule.click(function () {
+                                    $('#ViewScheduleModal').modal('show');
+
+
+                                    GlobalVarReportId = this.id.split('_')[1];
+                                    GetScheduleOnReportId(GlobalVarReportId, "vBoard");
+
+                                });
+                                var $btnRunReport = $("<input id=btnRunACDReport_" + data.d[i].RID + " data-reportname='" + data.d[i].ReportName + "' type=button value=Run class=btnLeftPanel />");
+                                $btnRunReport.appendTo($Col3);
+                                $btnRunReport.click(function () {
+
+                                    GlobalVarReportId = this.id.split('_')[1];
+                                    if (parseInt(GlobalVarReportId) > 0) {
+
+                                        GetSectionsOnReportId(GlobalVarReportId, $(this).attr("data-reportname"), "vBoard", "Add");
+                                    }
+                                    else {
+                                        $("#Sections").hide();
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                       
+                            var $divACDReports = $("#divACDReports");
+                            var $Row = $("<div/>", { id: "ACDRow" + i, "class": "row" });
+                            $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                            $Row.appendTo($divACDReports);
+                            var $Col1 = $("<div/>", { id: "ACDCol1" + i, "class": "col-md-12" });
+                            $Col1.css({ "padding": "0px" });
+                            $Col1.appendTo($Row);
+                            
+
+                            var $span = $("<span/>", { id: "ACDspan" + i });
+                            $span.text("vBoard App Not Installed.");
+                            $span.css({ "font-size": "12px","color":"#f91627" });
+                            $span.appendTo($Col1);
+                          
+                    }
+                }
+            });
+        }
+        function DrawLeftLoggingPanel() {
+
+            $("#divLoggingReports").html('');
+
+            var Param = { "ReportType": "Logging", "DBType": "vBoard" }
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetReports",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d)
+                    {
+                        if(LoggingReportsLicense==0)
+                        {
+                            var $divLoggingReports = $("#divLoggingReports");
+                            var $Row = $("<div/>", { id: "LoggingRow" + i, "class": "row" });
+                            $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                            $Row.appendTo($divLoggingReports);
+                            var $Col1 = $("<div/>", { id: "LoggingCol1" + i, "class": "col-md-12" });
+                            $Col1.css({ "padding": "0px" });
+                            $Col1.appendTo($Row);
+                            
+                            var $span = $("<span/>", { id: "Loggingspan" + i });
+                            $span.text("Logging Reports License Expired.");
+                            $span.css({ "font-size": "12px","color":"#f91627" });
+                            $span.appendTo($Col1);
+                        }
+                        else if (data.d.length > 0) {
+                            for (var i = 0; i < data.d.length; i++) {
+                                var $divLoggingReports = $("#divLoggingReports");
+                                var $Row = $("<div/>", { id: "LoggingRow" + i, "class": "row" });
+                                $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                                $Row.appendTo($divLoggingReports);
+                                var $Col1 = $("<div/>", { id: "LoggingCol1" + i, "class": "col-md-8" });
+                                $Col1.css({ "padding": "0px" });
+                                $Col1.appendTo($Row);
+                                var $Col2 = $("<div/>", { id: "LoggingCol2" + i, "class": "col-md-2" });
+                                $Col2.css({ "text-align": "right", "padding": "0px", "width": "19.667%" });
+                                $Col2.appendTo($Row);
+                                var $Col3 = $("<div/>", { id: "LoggingCol3" + i, "class": "col-md-2" });
+                                $Col3.css({ "text-align": "right", "padding": "0px", "width": "13.667%" });
+                                $Col3.appendTo($Row);
+                                var $ul = $("<ul/>", { id: "Loggingul" + i });
+                                $ul.css({ "list-style": "none", "padding": "0px" });
+                                $ul.appendTo($Col1);
+                                var $li = $("<li/>", { id: "Loggingli" + i });
+                                $li.appendTo($ul);
+                                var $i = $("<i/>", { id: "Loggingi" + i, "class": "fa fa-file-pdf-o" });
+                                $i.css({ "color": "#f91627" });
+                                $i.appendTo($li);
+                                var $span = $("<Loggingspan>", { id: "Loggingspan" + i });
+
+                                var ReportName = data.d[i].ReportName;
+                                ReportName = ReportName.replace("Extension", "Ext.");
+                                $span.text(ReportName);
+                                $span.css({ "font-size": "11px" });
+                                $span.appendTo($li);
+                                var $btnSchedule = $("<input id=btnScheduleLogReport_" + data.d[i].RID + " type=button value=Schedule class=btnLeftPanelGrey />");
+                                $btnSchedule.appendTo($Col2);
+                                if (data.d[i].ScheduleCount == 0) {
+                                    $btnSchedule.prop('disabled', true);
+                                }
+                                $btnSchedule.click(function () {
+                                    $('#ViewScheduleModal').modal('show');
+                                    GlobalVarReportId = this.id.split('_')[1];
+                                    GetScheduleOnReportId(GlobalVarReportId, "vBoard");
+                                });
+                                var $btnRunReport = $("<input id=btnRunLogReport_" + data.d[i].RID + " data-reportname='" + data.d[i].ReportName + "' type=button value=Run class=btnLeftPanel />");
+                                $btnRunReport.appendTo($Col3);
+                                $btnRunReport.click(function () {
+                                    GlobalVarReportId = this.id.split('_')[1];
+                                    if (parseInt(GlobalVarReportId) > 0) {
+                                        GetSectionsOnReportId(GlobalVarReportId, $(this).attr("data-reportname"), "vBoard", "Add");
+                                    }
+                                    else {
+                                        $("#Sections").hide();
+                                    }
+
+                                });
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var $divLoggingReports = $("#divLoggingReports");
+                        var $Row = $("<div/>", { id: "LoggingRow" + i, "class": "row" });
+                        $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                        $Row.appendTo($divLoggingReports);
+                        var $Col1 = $("<div/>", { id: "LoggingCol1" + i, "class": "col-md-12" });
+                        $Col1.css({ "padding": "0px" });
+                        $Col1.appendTo($Row);
+                            
+                        var $span = $("<span/>", { id: "Loggingspan" + i });
+                        $span.css({ "font-size": "12px","color":"#f91627" });
+                        $span.text("vBoard App Not Installed.");
+                        $span.appendTo($Col1);
+                    }
+                }
+            });
+        }
+        function DrawLeftRecorderPanel() {
+            $("#divRecorderReports").html('');
+            var Param = { "ReportType": "Activity", "DBType": "vRecord" }
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetReports",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d)
+                    {
+                        if (data.d.length > 0) 
+                        {
+                            for (var i = 0; i < data.d.length; i++) {
+                                var $divRecorderReports = $("#divRecorderReports");
+                                var $Row = $("<div/>", { id: "RecorderRow" + i, "class": "row" });
+                                $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                                $Row.appendTo($divRecorderReports);
+                                var $Col1 = $("<div/>", { id: "RecorderCol1" + i, "class": "col-md-8" });
+                                $Col1.css({ "padding": "0px" });
+                                $Col1.appendTo($Row);
+                                var $Col2 = $("<div/>", { id: "RecorderCol2" + i, "class": "col-md-2" });
+                                $Col2.css({ "text-align": "right", "padding": "0px", "width": "19.667%" });
+                                $Col2.appendTo($Row);
+                                var $Col3 = $("<div/>", { id: "RecorderCol3" + i, "class": "col-md-2" });
+                                $Col3.css({ "text-align": "right", "padding": "0px", "width": "13.667%" });
+                                $Col3.appendTo($Row);
+                                var $ul = $("<ul/>", { id: "Recorderul" + i });
+                                $ul.css({ "list-style": "none", "padding": "0px" });
+                                $ul.appendTo($Col1);
+                                var $li = $("<li/>", { id: "Recorderli" + i });
+                                $li.appendTo($ul);
+                                var $i = $("<i/>", { id: "Recorderi" + i, "class": "fa fa-file-pdf-o" });
+                                $i.css({ "color": "#f91627" });
+                                $i.appendTo($li);
+                                var $span = $("<span/>", { id: "Recorderspan" + i });
+
+                                var ReportName = data.d[i].ReportName;
+                                ReportName = ReportName.replace("Extension", "Ext.");
+                                $span.text(ReportName);
+
+
+                                $span.css({ "font-size": "11px" });
+                                $span.appendTo($li);
+                                var $btnSchedule = $("<input id=btnScheduleRecorderReport_" + data.d[i].RID + " type=button value=Schedule class=btnLeftPanelGrey />");
+
+                                $btnSchedule.appendTo($Col2);
+                                if (data.d[i].ScheduleCount == 0) {
+                                    $btnSchedule.prop('disabled', true);
+                                }
+                                $btnSchedule.click(function () {
+                                    $('#ViewScheduleModal').modal('show');
+                                    GlobalVarReportId = this.id.split('_')[1];
+                                    GetScheduleOnReportId(GlobalVarReportId, "vRecord");
+
+                                });
+                                var $btnRunReport = $("<input id=btnRunRecorderReport_" + data.d[i].RID + " data-reportname='" + data.d[i].ReportName + "' type=button value=Run class=btnLeftPanel />");
+                                $btnRunReport.appendTo($Col3);
+                                $btnRunReport.click(function () {
+                                    GlobalVarReportId = this.id.split('_')[1];
+                                    if (parseInt(GlobalVarReportId) > 0) {
+                                        GetSectionsOnReportId(GlobalVarReportId, $(this).attr("data-reportname"), "vRecord", "Add");
+                                    }
+                                    else {
+                                        $("#Sections").hide();
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var $divRecorderReports = $("#divRecorderReports");
+                        var $Row = $("<div/>", { id: "RecorderRow" + i, "class": "row" });
+                        $Row.css({ "background-color": "white", "padding": "0px 5px 0px 10px" });
+                        $Row.appendTo($divRecorderReports);
+                        var $Col1 = $("<div/>", { id: "RecorderCol1" + i, "class": "col-md-12" });
+                        $Col1.css({ "padding": "0px" });
+                        $Col1.appendTo($Row);
+                            
+                        var $span = $("<span/>", { id: "Loggingspan" + i });
+                        $span.text("vRecord App Not Installed");
+                        $span.css({ "font-size": "12px","color":"#f91627" });
+                        $span.appendTo($Col1);
+                    }
+                }
+            });
+        }
+        function GetExtension() {
+
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetExtensions",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d.length > 0) {
+
+                        $("#lstExtensions").find('option').remove().end();
+                        for (var i = 0; i < data.d.length; i++) {
+                            var Id = data.d[i].Id;
+                            var Extension = data.d[i].Extension;
+                            $("#lstExtensions").append("<option value='" + Extension + "'>" + Extension + "</option>");
+                        }
+                    }
+                }
+            });
+
+            // Extensions, Groups, Agents Dropdown make multiselect
+            $('#lstExtensions').multiselect({
+                includeSelectAllOption: true,
+                selectAllValue: 'multiselect-all',
+                enableCaseInsensitiveFiltering: true,
+                enableFiltering: true,
+                maxHeight: '300',
+                onSelectAll: function () {
+
+                },
+                onSelectAll: function () {
+                    $.uniform.update();
+                },
+                onChange: function (element, checked) {
+
+
+                },
+                onDropdownHide: function (element, checked) {
+
+                }
+            });
+            $("#lstExtensions").multiselect('selectAll', false);
+            $("#lstExtensions").multiselect('updateButtonText');
+        }
+        function GetBoards() {
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetBoards",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d.length > 0) {
+                        $("#lstGroups").find('option').remove().end();
+                        for (var i = 0; i < data.d.length; i++) {
+                            var huntGroupId = data.d[i].huntGroupId;
+                            var Title = data.d[i].Title;
+                            $("#lstGroups").append("<option value=" + huntGroupId + ">" + Title + "</option>");
+                        }
+                    }
+                }
+            });
+            $('#lstGroups').multiselect({
+                includeSelectAllOption: true,
+                selectAllValue: 'multiselect-all',
+                enableCaseInsensitiveFiltering: true,
+                enableFiltering: true,
+                maxHeight: '300',
+                onSelectAll: function () {
+
+                },
+                onSelectAll: function () {
+                    $.uniform.update();
+                },
+                onChange: function (element, checked) {
+
+
+                },
+                onDropdownHide: function (element, checked) {
+
+                }
+            });
+            $("#lstGroups").multiselect('selectAll', false);
+            $("#lstGroups").multiselect('updateButtonText');
+        }
+        function GetAgents() {
+
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetAgents",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d.length > 0) {
+                        $("#lstAgents").find('option').remove().end();
+                        for (var i = 0; i < data.d.length; i++) {
+                            var AgentName = data.d[i].AgentName;
+                            $("#lstAgents").append("<option value='" + AgentName + "'>" + AgentName + "</option>");
+                        }
+                    }
+                }
+            });
+            $('#lstAgents').multiselect({
+                includeSelectAllOption: true,
+                selectAllValue: 'multiselect-all',
+                enableCaseInsensitiveFiltering: true,
+                enableFiltering: true,
+                maxHeight: '300',
+
+                onSelectAll: function () {
+
+                },
+                onSelectAll: function () {
+                    $.uniform.update();
+                },
+                onChange: function (element, checked) {
+
+
+                },
+                onDropdownHide: function (element, checked) {
+
+                }
+            });
+            $("#lstAgents").multiselect('selectAll', false);
+            $("#lstAgents").multiselect('updateButtonText');
+        }
+        function GetRecorderUsers() {
+
+            $.ajax({
+                type: "POST",
+                url: "ReportsCommonMethods.aspx/GetUsers",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d){
+                        if (data.d.length > 0) {
+                            $("#lstUsers").find('option').remove().end();
+                            for (var i = 0; i < data.d.length; i++) {
+                                $("#lstUsers").append("<option value='" + data.d[i].UserId + "'>" + data.d[i].UserName + "</option>");
+                            }
+                        }}
+                }
+            });
+            $('#lstUsers').multiselect({
+                includeSelectAllOption: true,
+                selectAllValue: 'multiselect-all',
+                enableCaseInsensitiveFiltering: true,
+                enableFiltering: true,
+                maxHeight: '300',
+
+                onSelectAll: function () {
+
+                },
+                onSelectAll: function () {
+                    $.uniform.update();
+                },
+                onChange: function (element, checked) {
+
+
+                },
+                onDropdownHide: function (element, checked) {
+
+                }
+            });
+            $("#lstUsers").multiselect('selectAll', false);
+            $("#lstUsers").multiselect('updateButtonText');
+        }
+        function GetWeekDays() {
+
+            $('#lstWeekDays').multiselect({
+                includeSelectAllOption: true,
+                selectAllValue: 'multiselect-all',
+                enableCaseInsensitiveFiltering: true,
+                enableFiltering: true,
+                maxHeight: '300',
+
+                onSelectAll: function () {
+
+                },
+                onSelectAll: function () {
+                    $.uniform.update();
+                },
+                onChange: function (element, checked) {
+
+
+                },
+                onDropdownHide: function (element, checked) {
+
+                }
+            });
+            $("#lstWeekDays").multiselect('selectAll', false);
+            $("#lstWeekDays").multiselect('updateButtonText');
+        }
+        function FillHourMinuteDropdowns() {
+            // Fill Hours Dropdown from 0-23
+            for (var i = 0; i <= 23; i++) {
+                var j = i;
+                if (i < 10) {
+                    j = "0" + i;
+                }
+                $("#ddScheduleTimeHours").append("<option value=" + i + ">" + j.toString() + "</option>");
+            }
+            // Fill Minutes Dropdown from 0-59
+            for (var i = 0; i <= 59; i++) {
+                var j = i;
+                if (i < 10) {
+                    j = "0" + i;
+                }
+                $("#ddScheduleTimeMinutes").append("<option value=" + i + ">" + j.toString() + "</option>");
+            }
+
+        }
+        function DatePickersDefaultSet() {
+            // Date pickers default values set
+            $("#dp1").datetimepicker({
+                format: 'DD/MM/YYYY HH:mm:ss'
+            }).datetimepicker("setTime", '00:00:00');
+            $("#dp2").datetimepicker({
+                format: 'DD/MM/YYYY HH:mm:ss'
+            }).datetimepicker("setTime", '23:59:59');
+            $("#dp3").datetimepicker({
+                format: 'HH:mm:ss'
+            }).datetimepicker("setTime", '00:00:00');
+            $("#dp4").datetimepicker({
+                format: 'HH:mm:ss'
+            }).datetimepicker("setTime", '23:59:59');
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            var today = dd + '/' + mm + '/' + yyyy;
+            $("#txbDateFrom").val(today + ' 00:00:00');
+            $("#txbDateTo").val(today + ' 23:59:59');
+            $("#txbTimeFrom").val('00:00:00');
+            $("#txbTimeTo").val('23:59:59');
+            $('#dp1').datetimepicker().on('dp.change', function (ev) {
+            });
+            $('#dp2').datetimepicker().on('dp.change', function (ev) {
+            });
+            $('#dp3').datetimepicker().on('dp.change', function (ev) {
+            });
+            $('#dp4').datetimepicker().on('dp.change', function (ev) {
+            });
+        }
+        function RegEventDateRangeChange() {
+            $('#lstDateRangeOption').val(1);
+            $('#lstDateRangeOption').on('change', function () {
+                var DateRangeOption = this.value;
+                if (parseInt(DateRangeOption) == 7) {
+                    $("#CustomTimePickerRow").hide();
+                    $("#CustomDatePickerRow").show();
+                }
+                else {
+                    $("#CustomTimePickerRow").show();
+                    $("#CustomDatePickerRow").hide();
+                }
+            });
+        }
+        function RegEventScheduleIntervalChange() {
+            $("#lstScheduleInterval").change(function () {
+
+                if (this.value == 1) {
+                    $("#SchedulValueRow").hide();
+                }
+                else if (this.value == 2) {
+                    $("#ddScheduleValue").find('option').remove().end();
+                    $("#ddScheduleValue").append('<option value=Monday>Monday</option>');
+                    $("#ddScheduleValue").append('<option value=Tuesday>Tuesday</option>');
+                    $("#ddScheduleValue").append('<option value=Wednesday>Wednesday</option>');
+                    $("#ddScheduleValue").append('<option value=Thursday>Thursday</option>');
+                    $("#ddScheduleValue").append('<option value=Friday>Friday</option>');
+                    $("#ddScheduleValue").append('<option value=Saturday>Saturday</option>');
+                    $("#ddScheduleValue").append('<option value=Sunday>Sunday</option>');
+                    $("#SchedulValueRow").show();
+                }
+                else if (this.value == 3) {
+                    $("#ddScheduleValue").find('option').remove().end();
+
+                    for (var i = 1; i <= 31; i++) {
+                        $("#ddScheduleValue").append("<option value=" + i + ">" + i + "</option>");
+                    }
+
+                    $("#SchedulValueRow").show();
+                }
+            }
+          );
+        }
+        function RegEventddlGraphDurationChange() {
+            $("#ddlGraphDuration").change(function () {
+                DrawCenterMenuGraphs();
+            });
+        }
+        function RegEventRightMenuButton1Click() {
+
+            $("#btnInboundCallsByHourChart").click(function () {
+
+                if (RightMenuChart1Type == 0) {
+                    RightMenuChart1Type = 1;
+                    CreateInboundCallsByHourBarChart();
+
+                }
+                else {
+                    RightMenuChart1Type = 0;
+                    CreateInboundCallsByHourLineChart();
+
+                }
+
+            });
+        }
+        function RegEventRightMenuButton2Click() {
+
+            $("#btnOutboundCallsByHourChart").click(function () {
+
+                if (RightMenuChart2Type == 0) {
+                    RightMenuChart2Type = 1;
+                    CreateOutboundCallsByHourBarChart();
+
+                }
+                else {
+                    RightMenuChart2Type = 0;
+                    CreateOutboundCallsByHourLineChart();
+
+                }
+
+            });
+        }
+        function RegEventRightMenuButton3Click() {
+
+            $("#btnCallsLostByHourChart").click(function () {
+
+                if (RightMenuChart3Type == 0) {
+                    RightMenuChart3Type = 1;
+                    CreateCallsLostByHourBarChart();
+
+                }
+                else {
+                    RightMenuChart3Type = 0;
+                    CreateCallsLostByHourLineChart();
+
+                }
+
+            });
+        }
+        function RegEventRightMenuButton4Click() {
+
+            $("#btnLongestRingTimeByHourChart").click(function () {
+                if (RightMenuChart4Type == 0) {
+                    RightMenuChart4Type = 1;
+                    CreateLongestRingTimeByHourBarChart();
+
+                }
+                else {
+                    RightMenuChart4Type = 0;
+                    CreateLongestRingTimeByHourLineChart();
+
+                }
+
+            });
+        }
+        function DrawCenterMenuGraphs() {
+
+            var Duration = $("#ddlGraphDuration").val();
+            CreateCallSummaryByDayChart(Duration);
+            CreateOutBoundCallsByRegionChart(Duration);
+            CreateCallsServicedByDayChart(Duration);
+            CreateCostSummaryChart(Duration);
+            GetCallSummaryByExtensionGraphReport(Duration);
+            clearTimeout(Timer1);
+            Timer1=setTimeout(DrawCenterMenuGraphs, 30000);
+
+        }
+        function DrawRightMenuGraphs() {
+            CreateInboundCallsByHourLineChart();
+            CreateOutboundCallsByHourLineChart();
+            CreateCallsLostByHourLineChart();
+            CreateLongestRingTimeByHourLineChart();
+            clearTimeout(Timer2);
+            Timer2 = setTimeout(DrawRightMenuGraphs, 30000);
+        }
+        function CreateCallSummaryByDayChart(Duration) {
+            $("#divCallSummaryByDayChart").empty();
+            var Param = { "DateRangeOption": Duration }
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetCallSummaryGraphReport",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d){
+                        var BarChart_CallSummaryByDay = AmCharts.makeChart("divCallSummaryByDayChart", {
+                            "type": "serial",
+                            "theme": "light",
+                            "autoMargins": false,
+                            "marginTop": 0,
+                            "marginBottom": 5,
+                            "marginLeft": 5,
+                            "marginRight": 0,
+                            "pullOutRadius": 0,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            "dataProvider": data.d,
+                            "categoryField": "Date",
+                            "legend": {
+                                "divId": "LegendCallSummaryByDayChart",
+                                "useGraphSettings": true,
+                                "markerSize": 5,
+                            },
+                            "categoryAxis": {
+                                "labelsEnabled": false,
+                            },
+                            "valueAxes": [{
+                                "stackType": "regular",
+                                "axisAlpha": 0,
+                                "gridAlpha": 0.3,
+
+                            }],
+                            "graphs": [{
+                                "id": "g1",
+                                "type": "column",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                                "bullet": "none",
+                                "bulletBorderAlpha": 1,
+                                "fillColors": '#f91627',
+                                "lineColor": '#f91627',
+                                "bulletColor": "#FFFFFF",
+                                "hideBulletsCount": 50,
+                                "title": "IncomingCalls",
+                                "valueField": "IncomingCalls",
+                                "useLineColorForBulletBorder": true,
+                                "fillAlphas": 1,
+                            }, {
+                                "id": "g2",
+                                "type": "column",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+
+                                "bullet": "none",
+                                "bulletBorderAlpha": 1,
+                                "fillColors": '#6a6a6a',
+                                "lineColor": '#6a6a6a',
+                                "bulletColor": "#FFFFFF",
+                                "hideBulletsCount": 50,
+                                "title": "OutgoingCalls",
+                                "valueField": "OutgoingCalls",
+                                "useLineColorForBulletBorder": true,
+                                "fillAlphas": 1,
+                            }],
+                            //"chartScrollbar": {
+                            //    "autoGridCount": false,
+                            //    "graph": "g1",
+                            //    "scrollbarHeight": 1,
+                            //    "oppositeAxis": false,
+                            //},
+                            //"chartCursor": {
+                            //    "limitToGraph": "g1",
+                            //    "valueLineAlpha": 1,
+                            //},
+                        });
+                        checkEmptyDataBarChart(BarChart_CallSummaryByDay);
+                    } else{
+
+                    }
+                }
+            });
+        }
+        function CreateOutBoundCallsByRegionChart(Duration) {
+            $("#divOutBoundCallsByRegionChart").empty();
+            var Param = { "DateRangeOption": Duration }
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetOutboundCallsByRegionGraphReport",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d) {
+                        var PieChart_OutBoundCallsByRegion = AmCharts.makeChart("divOutBoundCallsByRegionChart", {
+                            "type": "pie",
+                            "theme": "light",
+                            "labelsEnabled": false,
+                            "autoMargins": false,
+                            "marginTop": 5,
+                            "marginBottom": 0,
+                            "marginLeft": 0,
+                            "marginRight": 0,
+                            "pullOutRadius": 0,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            //"legend": {
+                            //    "divId": "LegendOutBoundCallsByRegionChart",
+                            //    "markerSize": 2,
+                            //    "valueText": '',
+                            //    "verticalGap": 0,
+
+                            //},
+                            "dataProvider": data.d,
+                            "titleField": "Region",
+                            "valueField": "TotalCalls",
+                            "colorField": "color",
+
+
+                        });
+
+                        checkEmptyDataPieChart(PieChart_OutBoundCallsByRegion);
+                    }
+
+                }
+
+            });
+        }
+        function CreateCallsServicedByDayChart(Duration) {
+            $("#divCallsServicedByDayChart").empty();
+            var Param = { "DateRangeOption": Duration }
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetCallsServicedByDayGraphReport",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d){
+                        var BarChart_CallsServicedByDay = AmCharts.makeChart("divCallsServicedByDayChart", {
+                            "type": "serial",
+                            "theme": "light",
+                            "labelsEnabled": false,
+                            "autoMargins": false,
+                            "marginTop": 5,
+                            "marginBottom": 0,
+                            "marginLeft": 5,
+                            "marginRight": 5,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            "dataProvider": data.d,
+                            "legend": {
+                                "divId": "LegendCallsServicedByDayChart",
+                                "useGraphSettings": true,
+                                "markerSize": 2,
+                                "valueText": '',
+                                "verticalGap": 0,
+
+                            },
+                            "categoryField": "Date",
+                            "categoryAxis": {
+                                "labelsEnabled": false,
+                            },
+                            "valueAxes": [{
+                                "stackType": "regular",
+                                "axisAlpha": 0,
+                                "gridAlpha": 0.3
+                            }],
+                            "graphs": [{
+                                "id": "CallsServicedByDayChart1",
+                                "type": "column",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+
+                                "bullet": "none",
+                                "bulletBorderAlpha": 1,
+                                "fillColors": '#f91627',
+                                "lineColor": '#f91627',
+                                "bulletColor": "#FFFFFF",
+                                "hideBulletsCount": 50,
+                                "title": "Lost",
+                                "valueField": "LostCalls",
+                                "useLineColorForBulletBorder": true,
+                                "fillAlphas": 1,
+
+                            }, {
+                                "id": "CallsServicedByDayChart2",
+                                "type": "column",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+
+                                "bullet": "none",
+                                "bulletBorderAlpha": 1,
+                                "fillColors": '#6a6a6a',
+                                "lineColor": '#6a6a6a',
+                                "bulletColor": "#FFFFFF",
+                                "hideBulletsCount": 50,
+                                "title": "Answered",
+                                "valueField": "AnsweredCalls",
+                                "useLineColorForBulletBorder": true,
+                                "fillAlphas": 1,
+
+                            }],
+                            //"chartScrollbar": {
+                            //    "autoGridCount": false,
+                            //    "graph": "g5",
+                            //    "scrollbarHeight": 1,
+                            //    "oppositeAxis": false,
+                            //},
+                            //"chartCursor": {
+                            //    "limitToGraph": "g1",
+                            //    "valueLineAlpha": 1,
+                            //},
+                        });
+
+                        //  if (data.d.length == 0) {
+                        checkEmptyDataBarChart(BarChart_CallsServicedByDay);
+                    } else{
+
+                    }
+                }
+                //}
+            });
+
+
+        }
+        function CreateCostSummaryChart(Duration) {
+            $("#divCostSummaryChart").html('');
+            var Param = { "DateRangeOption": Duration }
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetCostSummaryGraphReport",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d){
+                        var PieChart_CostSummary = AmCharts.makeChart("divCostSummaryChart", {
+                            "type": "pie",
+                            "theme": "light",
+                            "labelsEnabled": false,
+                            "autoMargins": false,
+                            "marginTop": 5,
+                            "marginBottom": 0,
+                            "marginLeft": 0,
+                            "marginRight": 0,
+                            "pullOutRadius": 0,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            //"legend": {
+                            //    "divId": "LegendCostSummaryChart",
+                            //    "markerSize": 1,
+                            //    "valueText": '',
+                            //    "verticalGap": 0,
+                            //    "autoMargins": false,
+
+                            //},
+                            "dataProvider": data.d,
+                            "titleField": "CostType",
+                            "valueField": "Cost",
+
+                            "colorField": "color",
+                            valueAxesSettings: {
+                                unit: "$",
+                                unitPosition: "right"
+                            }
+                        });
+                        checkEmptyDataPieChart(PieChart_CostSummary);
+                    } else{
+
+                    }
+                }
+            });
+        }
+        //right menu
+        function CreateInboundCallsByHourLineChart() {
+            $("#divInboundCallsByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetInboundCallsByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d)
+                    {
+                        if (data.d.length == 0) {
+                            $('#btnInboundCallsByHourChart').unbind("click");
+                            $("#spanInboundCallsByHourChartMaxVal").text(" 0 ");
+                            $("#spanInboundCallsByHourChartMinVal").text(" 0 ");
+                        }
+                        else {
+                            var maxval = Math.max.apply(Math, data.d.map(function (o) { return o.Calls; }));
+                            var minval = Math.min.apply(Math, data.d.map(function (o) { return o.Calls; }));
+
+                            $("#spanInboundCallsByHourChartMaxVal").text(maxval);
+                            $("#spanInboundCallsByHourChartMinVal").text(minval);
+                        }
+                        var LineChart_InboundCallsByHour = AmCharts.makeChart("divInboundCallsByHourChart", {
+                            "type": "serial",
+                            "theme": "light",
+                            "marginTop": 5,
+                            "marginBottom": 5,
+                            "marginLeft": 5,
+                            "marginRight": 5,
+                            "dataProvider": data.d,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            "valueAxes": [{
+                                "axisAlpha": 0,
+                                "position": "left"
+                            }],
+
+                            "graphs": [{
+
+                                "id": "LineChart_InboundCallsByHour",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                                "bullet": "round",
+                                "bulletSize": 8,
+                                "lineColor": "#f91627",
+                                "lineThickness": 2,
+                                "negativeLineColor": "#637bb6",
+                                "type": "smoothedLine",
+                                "title": "Calls",
+                                "valueField": "Calls"
+                            }],
+                            "categoryField": "Hour",
+                            "categoryAxis": {
+                                "labelsEnabled": false,
+                                "minorGridAlpha": 0.1,
+                                "minorGridEnabled": true,
+                            },
+
+
+                        });
+                        checkEmptyDataBarChart(LineChart_InboundCallsByHour);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            });
+        }
+        function CreateOutboundCallsByHourLineChart() {
+            $("#divOutboundCallsByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetOutboundCallsByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d){
+                        if (data.d.length == 0) {
+                            $('#btnOutboundCallsByHourChart').unbind("click");
+                            $("#spanOutboundCallsByHourChartMaxVal").text(" 0 ");
+                            $("#spanOutboundCallsByHourChartMinVal").text(" 0 ");
+                        }
+                        else {
+                            var maxval = Math.max.apply(Math, data.d.map(function (o) { return o.Calls; }));
+                            var minval = Math.min.apply(Math, data.d.map(function (o) { return o.Calls; }));
+
+
+                            $("#spanOutboundCallsByHourChartMaxVal").text(maxval);
+                            $("#spanOutboundCallsByHourChartMinVal").text(minval);
+                        }
+                        var LineChart_OutboundCallsByHour = AmCharts.makeChart("divOutboundCallsByHourChart", {
+                            "type": "serial",
+                            "theme": "light",
+                            "marginTop": 5,
+                            "marginBottom": 5,
+                            "marginLeft": 5,
+                            "marginRight": 5,
+                            "dataProvider": data.d,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            "valueAxes": [{
+                                "axisAlpha": 0,
+                                "position": "left"
+                            }],
+
+                            "graphs": [{
+
+                                "id": "LineChart_OutboundCallsByHour",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                                "bullet": "round",
+                                "bulletSize": 8,
+                                "lineColor": "#5b595a",
+                                "lineThickness": 2,
+                                "negativeLineColor": "#5b595a",
+                                "type": "smoothedLine",
+                                "title": "Calls",
+                                "valueField": "Calls"
+                            }],
+                            "categoryField": "Hour",
+                            "categoryAxis": {
+                                "labelsEnabled": false,
+                                "minorGridAlpha": 0.1,
+                                "minorGridEnabled": true,
+                            },
+
+
+                        });
+                        checkEmptyDataBarChart(LineChart_OutboundCallsByHour);}
+                    else
+                    {
+
+                    }
+                }
+            });
+        }
+        function CreateCallsLostByHourLineChart() {
+            $("#divCallsLostByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetCallsLostByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d)
+                    {
+                        if (data.d.length == 0) {
+                            $('#btnCallsLostByHourChart').unbind("click");
+                            $("#spanCallsLostByHourChartMaxVal").text(" 0 ");
+                            $("#spanCallsLostByHourChartMinVal").text(" 0 ");
+                        }
+                        else {
+                            var maxval = Math.max.apply(Math, data.d.map(function (o) { return o.Calls; }));
+                            var minval = Math.min.apply(Math, data.d.map(function (o) { return o.Calls; }));
+
+                            $("#spanCallsLostByHourChartMaxVal").text(maxval);
+                            $("#spanCallsLostByHourChartMinVal").text(minval);
+                        }
+                        var LineChart_CallsLostByHour = AmCharts.makeChart("divCallsLostByHourChart", {
+                            "type": "serial",
+                            "theme": "light",
+                            "marginTop": 5,
+                            "marginBottom": 5,
+                            "marginLeft": 5,
+                            "marginRight": 5,
+                            "dataProvider": data.d,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            "valueAxes": [{
+                                "axisAlpha": 0,
+                                "position": "left"
+                            }],
+
+                            "graphs": [{
+
+                                "id": "LineChart_CallsLostByHour",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                                "bullet": "round",
+                                "bulletSize": 8,
+                                "lineColor": "#f91627",
+                                "lineThickness": 2,
+                                "negativeLineColor": "#637bb6",
+                                "type": "smoothedLine",
+                                "title": "Calls",
+                                "valueField": "Calls"
+                            }],
+                            "categoryField": "Hour",
+                            "categoryAxis": {
+                                "labelsEnabled": false,
+                                "minorGridAlpha": 0.1,
+                                "minorGridEnabled": true,
+                            },
+
+
+                        });
+                        checkEmptyDataBarChart(LineChart_CallsLostByHour);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            });
+        }
+        function CreateLongestRingTimeByHourLineChart() {
+            $("#divLongestRingTimeByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetLongestRingTimeByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d){
+                        if (data.d.length == 0) {
+                            $('#btnLongestRingTimeByHourChart').unbind("click");
+                            $("#spanLongestRingTimeByHourChartMaxVal").text(" 0 ");
+                            $("#spanLongestRingTimeByHourChartMinVal").text(" 0 ");
+                        }
+                        else {
+                            var maxval = Math.max.apply(Math, data.d.map(function (o) { return o.MaxRing; }));
+                            var minval = Math.min.apply(Math, data.d.map(function (o) { return o.MaxRing; }));
+
+                            $("#spanLongestRingTimeByHourChartMaxVal").text(maxval);
+                            $("#spanLongestRingTimeByHourChartMinVal").text(minval);
+                        }
+
+                        var LineChart_LongestRingTimeByHour = AmCharts.makeChart("divLongestRingTimeByHourChart", {
+                            "type": "serial",
+                            "theme": "light",
+                            "marginTop": 5,
+                            "marginBottom": 5,
+                            "marginLeft": 5,
+                            "marginRight": 5,
+                            "dataProvider": data.d,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            "valueAxes": [{
+                                "axisAlpha": 0,
+                                "position": "left"
+                            }],
+
+                            "graphs": [{
+
+                                "id": "LineChart_LongestRingTimeByHour",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                                "bullet": "round",
+                                "bulletSize": 8,
+                                "lineColor": "#5b595a",
+                                "lineThickness": 2,
+                                "negativeLineColor": "#5b595a",
+                                "type": "smoothedLine",
+                                "title": "Max Ring",
+                                "valueField": "MaxRing"
+                            }],
+                            "categoryField": "Hour",
+                            "categoryAxis": {
+                                "labelsEnabled": false,
+                                "minorGridAlpha": 0.1,
+                                "minorGridEnabled": true,
+                            },
+
+
+                        });
+                        checkEmptyDataBarChart(LineChart_LongestRingTimeByHour);}
+                    else
+                    {
+
+                    }
+                }
+            });
+        }
+        function CreateInboundCallsByHourBarChart() {
+            $("#divInboundCallsByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetInboundCallsByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if(data.d){
+                        var BarChart_InboundCallsByHour = AmCharts.makeChart("divInboundCallsByHourChart", {
+                            "type": "serial",
+                            "theme": "light",
+                            "marginTop": 5,
+                            "marginBottom": 5,
+                            "marginLeft": 5,
+                            "marginRight": 5,
+                            "dataProvider": data.d,
+                            "mouseWheelZoomEnabled": false,
+                            "mouseWheelScrollEnabled": true,
+                            "valueAxes": [{
+                                "stackType": "regular",
+                                "axisAlpha": 0,
+                                "gridAlpha": 0.3,
+                                "position": "left"
+                            }],
+
+                            "graphs": [{
+
+                                "id": "BarChart_InboundCallsByHour",
+                                "type": "column",
+                                "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                                "bullet": "none",
+                                "fillColors": '#f91627',
+                                "lineColor": '#f91627',
+                                "title": "Calls",
+                                "valueField": "Calls",
+                                "useLineColorForBulletBorder": true,
+                                "fillAlphas": 1,
+                            }],
+                            "categoryField": "Hour",
+                            "categoryAxis": {
+                                "labelsEnabled": false,
+
+                            },
+
+
+                        });
+                    }
+                    else{
+
+                    }
+                    // checkEmptyDataBarChart(BarChart_InboundCallsByHour);
+
+                }
+            });
+        }
+        function CreateOutboundCallsByHourBarChart() {
+            $("#divOutboundCallsByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetOutboundCallsByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d) {
+                    var BarChart_OutboundCallsByHour = AmCharts.makeChart("divOutboundCallsByHourChart", {
+                        "type": "serial",
+                        "theme": "light",
+                        "marginTop": 5,
+                        "marginBottom": 5,
+                        "marginLeft": 5,
+                        "marginRight": 5,
+                        "dataProvider": data.d,
+                        "mouseWheelZoomEnabled": false,
+                        "mouseWheelScrollEnabled": true,
+                        "valueAxes": [{
+                            "axisAlpha": 0,
+                            "position": "left"
+                        }],
+                        "graphs": [{
+
+                            "id": "BarChart_OutboundCallsByHour",
+                            "type": "column",
+                            "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                            "bullet": "none",
+                            "fillColors": '#5b595a',
+                            "lineColor": '#5b595a',
+                            "title": "Calls",
+                            "valueField": "Calls",
+                            "useLineColorForBulletBorder": true,
+                            "fillAlphas": 1,
+                        }],
+                        "categoryField": "Hour",
+                        "categoryAxis": {
+                            "labelsEnabled": false,
+                            "minorGridAlpha": 0.1,
+                            "minorGridEnabled": true,
+                        },
+
+
+                    });
+                    //checkEmptyDataBarChart(BarChart_OutboundCallsByHour);
+                    }
+                    else{
+
+                    }
+                }
+            });
+        }
+        function CreateCallsLostByHourBarChart() {
+            $("#divCallsLostByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetCallsLostByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data.d) {
+                    var BarChart_CallsLostByHour = AmCharts.makeChart("divCallsLostByHourChart", {
+                        "type": "serial",
+                        "theme": "light",
+                        "marginTop": 5,
+                        "marginBottom": 5,
+                        "marginLeft": 5,
+                        "marginRight": 5,
+                        "dataProvider": data.d,
+                        "mouseWheelZoomEnabled": false,
+                        "mouseWheelScrollEnabled": true,
+                        "valueAxes": [{
+                            "axisAlpha": 0,
+                            "position": "left"
+                        }],
+                        "graphs": [{
+
+                            "id": "BarChart_CallsLostByHour",
+                            "type": "column",
+                            "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                            "bullet": "none",
+                            "fillColors": '#f91627',
+                            "lineColor": '#f91627',
+                            "title": "Calls",
+                            "valueField": "Calls",
+                            "useLineColorForBulletBorder": true,
+                            "fillAlphas": 1,
+                        }],
+                        "categoryField": "Hour",
+                        "categoryAxis": {
+                            "labelsEnabled": false,
+                            "minorGridAlpha": 0.1,
+                            "minorGridEnabled": true,
+                        },
+
+
+                    });
+                    //checkEmptyDataBarChart(BarChart_CallsLostByHour);
+                    }
+                    else{
+
+                    }
+                }
+            });
+        }
+        function CreateLongestRingTimeByHourBarChart() {
+            $("#divLongestRingTimeByHourChart").empty();
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetLongestRingTimeByHourGraphReport",
+                data: {},
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                     if (data.d) {
+                    var BarChart_LongestRingTimeByHour = AmCharts.makeChart("divLongestRingTimeByHourChart", {
+                        "type": "serial",
+                        "theme": "light",
+                        "marginTop": 5,
+                        "marginBottom": 5,
+                        "marginLeft": 5,
+                        "marginRight": 5,
+                        "dataProvider": data.d,
+                        "mouseWheelZoomEnabled": false,
+                        "mouseWheelScrollEnabled": true,
+                        "valueAxes": [{
+                            "axisAlpha": 0,
+                            "position": "left"
+                        }],
+                        "graphs": [{
+
+                            "id": "BarChart_LongestRingTimeByHour",
+                            "type": "column",
+                            "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
+                            "bullet": "none",
+                            "fillColors": '#5b595a',
+                            "lineColor": '#5b595a',
+                            "title": "Max Ring",
+                            "valueField": "MaxRing",
+                            "useLineColorForBulletBorder": true,
+                            "fillAlphas": 1,
+                        }],
+                        "categoryField": "Hour",
+                        "categoryAxis": {
+                            "labelsEnabled": false,
+                            "minorGridAlpha": 0.1,
+                            "minorGridEnabled": true,
+                        },
+
+
+                    });
+                    //checkEmptyDataBarChart(BarChart_LongestRingTimeByHour);
+                     }
+                     else{
+
+                     }
+                }
+            });
+        }
+        function GetCallSummaryByExtensionGraphReport(Duration) {
+
+            $("#tblCallSummaryByExtension").empty();
+            var Param = {"DateRangeOption": Duration }
+            $.ajax({
+                type: "POST",
+                url: "Dashboard.aspx/GetCallSummaryByExtensionGraphReport",
+                data: JSON.stringify(Param),
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#tblCallSummaryByExtension').empty();
+                    var thHTML = '<thead><tr><th>Extension</th><th>Name</th><th>Inbound Calls</th><th>Duration</th><th>Outbound Calls</th><th>Duration</th><th>Total Calls</th><th> </th><th>Total Duration</th></tr></thead><tbody></tbody>';
+                    $('#tblCallSummaryByExtension').append(thHTML);
+                    if(data.d){
+                        if (data.d.length > 0) {
+
+                            for (j = 0; j < data.d.length; j++) {
+                                var trHTML = '';
+                                trHTML += '<tr><td>' + data.d[j].Extension + '</td>';
+                                trHTML += '<td>' + data.d[j].Name + '</td>';
+                                trHTML += '<td>' + data.d[j].IncomingCalls + '</td>';
+                                trHTML += '<td>' + data.d[j].IncomingCallDuration + '</td>';
+                                trHTML += '<td>' + data.d[j].OutgoingCalls + '</td>';
+                                trHTML += '<td>' + data.d[j].OutgoingCallDuration + '</td>';
+                                trHTML += '<td>' + data.d[j].TotalCalls + '</td>';
+                                trHTML += '<td></td>';
+                                trHTML += '<td>' + data.d[j].TotalDuration + '</td></tr>';
+                                $('#tblCallSummaryByExtension').append(trHTML);
+                            }
+
+                        }
+                        $("#tblCallSummaryByExtension").show();
+                        $('#tblCallSummaryByExtension').dataTable({
+                            "pagingType": "full_numbers",
+                            destroy: true,
+                            "bLengthChange": false,
+                            "bPaginate": true,
+                            "bFilter": false,
+                            "aaSorting": [],
+                            "pageLength": 5,
+                            "info": false
+                        });
+                    }
+                    else
+                    {
+
+                    }
+                }
+            });
+        }
+        function checkEmptyDataBarChart(chart) {
+            if (chart.dataProvider === undefined || chart.dataProvider.length == 0) {
+
+
+                // chart.clear();
+                //disable angle down buttons
+
+
+                // set min/max on the value axis
+                chart.valueAxes[0].minimum = 0;
+                chart.valueAxes[0].maximum = 100;
+
+                // add dummy data point
+                var chartData =
+                // Data set #1
+                [
+                    { IncomingCalls: 0, OutgoingCalls: 0 },
+                ];
+                chart.dataProvider = chartData//[dataPoint];
+
+                //alert(dataPoint);
+
+                // add label
+                chart.addLabel(0, '50%', 'The chart contains no data ', 'center', 12, "black");
+
+                // set opacity of the chart div
+                chart.chartDiv.style.opacity = 0.9;
+                chart.alpha = 0.2;
+
+                // redraw it
+                chart.validateData();
+                //chart.validateNow();
+
+
+
+            }
+        }
+        function checkEmptyDataPieChart(chart) {
+
+            if (chart.dataProvider === undefined || chart.dataProvider.length === 0) {
+
+
+                //  chart.clear();
+                chart.balloon.enabled = false;
+                // add some bogus data
+                var dp = {};
+                dp[chart.titleField] = "";
+                dp[chart.valueField] = 1;
+                dp[chart.colorField] = '#000000';
+
+
+
+                chart.dataProvider.push(dp)
+
+                var dp = {};
+                dp[chart.titleField] = "";
+                dp[chart.valueField] = 1;
+                dp[chart.colorField] = "#57565c";
+
+                chart.dataProvider.push(dp)
+
+                var dp = {};
+                dp[chart.titleField] = "";
+                dp[chart.valueField] = 1;
+                dp[chart.colorField] = "#f91627";
+                chart.dataProvider.push(dp)
+
+                // disable slice labels
+                chart.labelsEnabled = false;
+
+                // add label to let users know the chart is empty
+                chart.addLabel("50%", "50%", "The chart contains no data", "middle", 12, "#000000");
+
+                // dim the whole chart
+                chart.chartDiv.style.opacity = 0.9;
+                chart.alpha = 0.2;
+                chart.validateData();
+
+            }
+        }
+        function ClearReportFilters() {
+            $("#lstDateRangeOption").val(1);
+            DatePickersDefaultSet();
+            $("#CustomTimePickerRow").show();
+            $("#CustomDatePickerRow").hide();
+
+            $("#lstAgents").multiselect('selectAll', false);
+            $("#lstExtensions").multiselect('selectAll', false);
+            $("#lstGroups").multiselect('selectAll', false);
+            $("#lstUsers").multiselect('selectAll', false);
+            $("#lstWeekDays").multiselect('selectAll', false);
+
+            $("#lstAgents").multiselect("refresh");
+            $("#lstExtensions").multiselect("refresh");
+            $("#lstGroups").multiselect("refresh");
+            $("#lstUsers").multiselect("refresh");
+            $("#lstWeekDays").multiselect("refresh");
+            $("#ReportFilter").modal("hide");
+        }
+    </script>
+
+</asp:Content>

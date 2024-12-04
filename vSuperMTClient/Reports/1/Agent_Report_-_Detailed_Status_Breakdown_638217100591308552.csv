@@ -1,0 +1,826 @@
+Queue,Agent,Status,Date & Time
+Cardiology,801002 801002,Logout,5-30-2023 12:18:12 PM
+Cardiology,801002 801002,Logout,5-30-2023 1:54:18 PM
+Cardiology,801002 801002,Logout,5-30-2023 4:29:24 PM
+Cardiology,801002 801002,Logout,5-30-2023 4:51:32 PM
+Cardiology,801002 801002,Logout,6-1-2023 6:17:23 PM
+Cardiology,801002 801002,Logout,6-1-2023 6:20:57 PM
+Cardiology,801002 801002,Login,6-2-2023 1:00:32 PM
+Cardiology,801002 801002,Wrap-up,6-2-2023 1:00:33 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:00:35 PM
+Cardiology,801002 801002,Unavailable - Meeting,6-2-2023 1:00:38 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:02:03 PM
+Cardiology,801002 801002,Ringing Out Abandoned,6-2-2023 1:05:02 PM
+Cardiology,801002 801002,Ringing,6-2-2023 1:05:03 PM
+Cardiology,801002 801002,Login,6-2-2023 1:06:46 PM
+Cardiology,801002 801002,Logout,6-2-2023 1:06:47 PM
+Cardiology,801002 801002,Wrap-up,6-2-2023 1:06:47 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:06:49 PM
+Cardiology,801002 801002,Ringing Out Abandoned,6-2-2023 1:08:37 PM
+Cardiology,801002 801002,Ringing,6-2-2023 1:08:41 PM
+Cardiology,801002 801002,Unavailable - Meeting,6-2-2023 1:08:53 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:12:40 PM
+Cardiology,801002 801002,Ringing Out Abandoned,6-2-2023 1:12:41 PM
+Cardiology,801002 801002,Ringing,6-2-2023 1:12:42 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:14:05 PM
+Cardiology,801002 801002,Ringing Out Abandoned,6-2-2023 1:14:06 PM
+Cardiology,801002 801002,Ringing,6-2-2023 1:14:06 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:15:06 PM
+Cardiology,801002 801002,Ringing Out Abandoned,6-2-2023 1:15:07 PM
+Cardiology,801002 801002,Ringing,6-2-2023 1:15:07 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:16:37 PM
+Cardiology,801002 801002,Ringing Out Abandoned,6-2-2023 1:16:38 PM
+Cardiology,801002 801002,ACD Busy Outbound,6-2-2023 1:16:55 PM
+Cardiology,801002 801002,Wrap-up,6-2-2023 1:17:00 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:17:31 PM
+Cardiology,801002 801002,Ringing Out Abandoned,6-2-2023 1:17:32 PM
+Cardiology,801002 801002,Ringing,6-2-2023 1:17:34 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 1:18:40 PM
+Cardiology,801002 801002,Logout,6-2-2023 3:23:07 PM
+Cardiology,801002 801002,Login,6-2-2023 3:23:27 PM
+Cardiology,801002 801002,Wrap-up,6-2-2023 3:23:27 PM
+Cardiology,801002 801002,Available (Ready for Call),6-2-2023 3:23:38 PM
+Cardiology,801002 801002,Logout,6-2-2023 3:25:59 PM
+Cardiology,Abdul Rehman,Logout,5-30-2023 12:18:12 PM
+Cardiology,Abdul Rehman,Logout,5-30-2023 1:54:17 PM
+Cardiology,Abdul Rehman,Logout,5-30-2023 4:29:24 PM
+Cardiology,Abdul Rehman,Logout,5-30-2023 4:51:31 PM
+Cardiology,Abdul Rehman,Logout,6-1-2023 6:17:22 PM
+Cardiology,Abdul Rehman,Logout,6-1-2023 6:20:57 PM
+Cardiology,Abdul Rehman,Logout,6-2-2023 1:06:47 PM
+Cardiology,Abdul Rehman,Logout,6-2-2023 3:23:07 PM
+Cardiology,Abdul Rehman,Logout,6-2-2023 3:25:57 PM
+Cardiology,Agent 1,Logout,5-30-2023 12:18:12 PM
+Cardiology,Agent 1,Logout,5-30-2023 1:54:18 PM
+Cardiology,Agent 1,Logout,5-30-2023 4:29:25 PM
+Cardiology,Agent 1,Logout,5-30-2023 4:51:32 PM
+Cardiology,Agent 1,Logout,6-1-2023 6:17:22 PM
+Cardiology,Agent 1,Logout,6-1-2023 6:20:57 PM
+Cardiology,Agent 1,Logout,6-2-2023 1:06:47 PM
+Cardiology,Agent 1,Logout,6-2-2023 3:23:07 PM
+Cardiology,Agent 1,Logout,6-2-2023 3:25:58 PM
+Cardiology,Mamoon Remote,Login,5-29-2023 4:23:59 PM
+Cardiology,Mamoon Remote,Wrap-up,5-29-2023 4:24:00 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-29-2023 4:24:25 PM
+Cardiology,Mamoon Remote,Logout,5-29-2023 4:27:57 PM
+Cardiology,Mamoon Remote,Login,5-29-2023 4:47:21 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-29-2023 4:47:21 PM
+Cardiology,Mamoon Remote,Logout,5-29-2023 4:48:51 PM
+Cardiology,Mamoon Remote,Wrap-up,5-29-2023 5:08:20 PM
+Cardiology,Mamoon Remote,Login,5-29-2023 5:08:20 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-29-2023 5:08:43 PM
+Cardiology,Mamoon Remote,Logout,5-29-2023 5:19:24 PM
+Cardiology,Mamoon Remote,Login,5-29-2023 5:31:16 PM
+Cardiology,Mamoon Remote,Wrap-up,5-29-2023 5:31:17 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-29-2023 5:31:45 PM
+Cardiology,Mamoon Remote,Logout,5-29-2023 5:35:36 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 12:18:12 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 12:19:23 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 12:19:24 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 12:19:51 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 12:20:46 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 12:21:15 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 12:21:16 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 12:21:43 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 12:28:26 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 12:28:36 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 12:28:36 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 12:28:48 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 12:46:37 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 1:01:38 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 1:01:39 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 1:02:06 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 1:03:49 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 1:05:38 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 1:05:38 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 1:06:04 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 1:12:53 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 1:21:50 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 1:21:50 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 1:22:16 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 1:22:43 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 1:23:04 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 1:23:04 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 1:23:29 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 1:54:18 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 2:41:54 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 2:41:55 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 2:42:22 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 2:49:04 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 2:56:29 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 2:56:30 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 2:56:52 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 3:02:15 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 4:20:29 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 4:20:29 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 4:20:38 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 4:29:24 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 4:30:13 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 4:30:14 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 4:30:24 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 4:38:19 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 4:45:20 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 4:45:20 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 4:49:16 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 4:51:32 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 5:05:33 PM
+Cardiology,Mamoon Remote,Wrap-up,5-30-2023 5:05:33 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 5:06:02 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 5:11:44 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 5:13:07 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 5:13:08 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 6:14:46 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 11:14:27 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 11:14:27 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 11:16:17 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 11:22:27 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 11:22:27 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 11:24:48 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 11:26:08 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 11:26:09 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 11:39:56 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-30-2023 11:48:54 PM
+Cardiology,Mamoon Remote,Login,5-30-2023 11:48:54 PM
+Cardiology,Mamoon Remote,Logout,5-30-2023 11:50:23 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 12:00:55 AM
+Cardiology,Mamoon Remote,Login,5-31-2023 12:00:55 AM
+Cardiology,Mamoon Remote,Logout,5-31-2023 12:02:20 AM
+Cardiology,Mamoon Remote,Login,5-31-2023 12:07:36 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 12:07:37 AM
+Cardiology,Mamoon Remote,Logout,5-31-2023 4:58:29 AM
+Cardiology,Mamoon Remote,Login,5-31-2023 10:10:05 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 10:10:06 AM
+Cardiology,Mamoon Remote,Logout,5-31-2023 10:43:54 AM
+Cardiology,Mamoon Remote,Login,5-31-2023 11:42:23 AM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 11:42:24 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 11:42:49 AM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 11:43:59 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 11:44:26 AM
+Cardiology,Mamoon Remote,Logout,5-31-2023 11:45:55 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 11:48:05 AM
+Cardiology,Mamoon Remote,Login,5-31-2023 11:48:05 AM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 11:49:55 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 11:50:21 AM
+Cardiology,Mamoon Remote,Logout,5-31-2023 11:52:56 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 11:55:42 AM
+Cardiology,Mamoon Remote,Login,5-31-2023 11:55:42 AM
+Cardiology,Mamoon Remote,Logout,5-31-2023 11:58:52 AM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 12:03:35 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 12:03:35 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 12:06:34 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 12:07:19 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 12:07:20 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 12:08:44 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 12:09:44 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 12:09:44 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 12:12:35 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 4:51:32 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 4:51:32 PM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 4:53:09 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 4:53:38 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 4:54:00 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:07:57 PM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 5:07:57 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:08:03 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:09:44 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:10:40 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:10:41 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:15:30 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:24:13 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:24:14 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:26:12 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:32:55 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:32:55 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:33:11 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:34:45 PM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 5:34:46 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:35:12 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:36:04 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:37:48 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:37:49 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:39:34 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:40:21 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:40:21 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:40:37 PM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 5:42:22 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:42:22 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:42:37 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:43:50 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:44:26 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:44:26 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:46:01 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:48:13 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:48:14 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:48:42 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:49:50 PM
+Cardiology,Mamoon Remote,Wrap-up,5-31-2023 5:49:50 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:49:57 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:52:27 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:56:41 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:56:42 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 5:58:08 PM
+Cardiology,Mamoon Remote,Login,5-31-2023 5:58:54 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),5-31-2023 5:58:55 PM
+Cardiology,Mamoon Remote,Logout,5-31-2023 11:06:39 PM
+Cardiology,Mamoon Remote,Logout,6-1-2023 6:17:23 PM
+Cardiology,Mamoon Remote,Logout,6-1-2023 6:20:57 PM
+Cardiology,Mamoon Remote,Logout,6-2-2023 1:06:47 PM
+Cardiology,Mamoon Remote,Logout,6-2-2023 3:23:08 PM
+Cardiology,Mamoon Remote,Login,6-2-2023 3:24:47 PM
+Cardiology,Mamoon Remote,Wrap-up,6-2-2023 3:24:48 PM
+Cardiology,Mamoon Remote,Available (Ready for Call),6-2-2023 3:24:56 PM
+Cardiology,Mamoon Remote,Logout,6-2-2023 3:25:59 PM
+Emergency Dept,Marshall  Sherman,Logout,5-30-2023 12:18:12 PM
+Emergency Dept,Marshall  Sherman,Logout,5-30-2023 1:54:17 PM
+Emergency Dept,Marshall  Sherman,Logout,5-30-2023 4:29:25 PM
+Emergency Dept,Marshall  Sherman,Logout,5-30-2023 4:51:31 PM
+Emergency Dept,Marshall  Sherman,Logout,6-1-2023 6:17:22 PM
+Emergency Dept,Marshall  Sherman,Logout,6-1-2023 6:20:57 PM
+Emergency Dept,Marshall  Sherman,Logout,6-2-2023 1:06:47 PM
+Emergency Dept,Marshall  Sherman,Logout,6-2-2023 3:23:07 PM
+Emergency Dept,Marshall  Sherman,Logout,6-2-2023 3:25:58 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 12:18:11 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 1:00:32 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:00:32 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:01:14 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:01:17 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 1:01:30 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 1:01:31 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:01:32 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:02:06 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:02:08 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 1:02:58 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 1:02:58 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:03:00 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:03:14 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:03:17 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:09:43 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 1:09:46 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 1:10:53 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:10:53 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:11:17 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:11:19 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:16:12 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 1:16:16 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:16:38 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 1:16:38 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:17:28 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:17:30 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 1:17:39 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 1:17:39 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:17:39 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:18:06 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:18:09 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:29:20 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:29:45 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:29:47 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 1:29:55 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 1:29:55 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:29:56 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:30:06 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:30:08 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 1:31:21 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 1:31:22 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:31:23 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 1:37:47 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 1:37:48 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:39:34 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 1:39:38 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 1:54:17 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 2:04:35 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:04:36 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 2:05:03 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 2:05:05 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 2:05:12 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 2:05:12 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:05:13 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 2:05:23 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 2:05:23 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 2:05:25 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 2:05:33 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 2:05:34 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:05:34 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 2:05:44 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 2:05:46 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 2:05:50 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 2:05:51 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:05:52 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 2:06:01 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 2:06:03 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:06:39 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 2:09:46 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 2:21:10 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:21:10 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 2:26:05 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 3:57:54 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:57:54 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 3:58:10 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 3:58:12 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:58:53 PM
+Emergency Dept,Umar  Ijaz,Off Hook,5-30-2023 3:59:01 PM
+Emergency Dept,Umar  Ijaz,Outbound Call,5-30-2023 3:59:08 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:59:15 PM
+Emergency Dept,Umar  Ijaz,Off Hook,5-30-2023 3:59:21 PM
+Emergency Dept,Umar  Ijaz,Outbound Call,5-30-2023 3:59:25 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:59:30 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 4:29:23 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 4:30:31 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:30:31 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 4:30:50 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 4:30:53 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 4:31:04 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 4:31:05 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:31:06 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 4:31:23 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 4:31:23 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 4:31:25 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:31:33 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 4:41:24 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 4:51:32 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:53:11 PM
+Emergency Dept,Umar  Ijaz,Login,5-30-2023 4:53:11 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 4:53:47 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 4:53:50 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,5-30-2023 4:53:54 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,5-30-2023 4:53:55 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:53:55 PM
+Emergency Dept,Umar  Ijaz,Ringing,5-30-2023 4:54:06 PM
+Emergency Dept,Umar  Ijaz,ACD Call,5-30-2023 4:54:09 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:54:13 PM
+Emergency Dept,Umar  Ijaz,Logout,5-30-2023 5:20:09 PM
+Emergency Dept,Umar  Ijaz,Login,6-1-2023 4:20:03 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:20:03 PM
+Emergency Dept,Umar  Ijaz,Logout,6-1-2023 4:33:29 PM
+Emergency Dept,Umar  Ijaz,Login,6-1-2023 4:34:22 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:34:22 PM
+Emergency Dept,Umar  Ijaz,Ringing,6-1-2023 4:36:41 PM
+Emergency Dept,Umar  Ijaz,ACD Call,6-1-2023 4:36:44 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:36:48 PM
+Emergency Dept,Umar  Ijaz,Logout,6-1-2023 4:53:06 PM
+Emergency Dept,Umar  Ijaz,Login,6-1-2023 4:53:40 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:53:41 PM
+Emergency Dept,Umar  Ijaz,Logout,6-1-2023 4:54:39 PM
+Emergency Dept,Umar  Ijaz,Login,6-1-2023 4:54:52 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:54:52 PM
+Emergency Dept,Umar  Ijaz,Ringing,6-1-2023 4:54:59 PM
+Emergency Dept,Umar  Ijaz,ACD Call,6-1-2023 4:55:03 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:55:39 PM
+Emergency Dept,Umar  Ijaz,Logout,6-1-2023 4:57:37 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:58:28 PM
+Emergency Dept,Umar  Ijaz,Login,6-1-2023 4:58:28 PM
+Emergency Dept,Umar  Ijaz,Ringing,6-1-2023 5:02:54 PM
+Emergency Dept,Umar  Ijaz,ACD Call,6-1-2023 5:02:59 PM
+Emergency Dept,Umar  Ijaz,Call put on hold,6-1-2023 5:03:11 PM
+Emergency Dept,Umar  Ijaz,Transfer Queue,6-1-2023 5:03:13 PM
+Emergency Dept,Umar  Ijaz,ACD Call,6-1-2023 5:03:14 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 5:03:14 PM
+Emergency Dept,Umar  Ijaz,Ringing,6-1-2023 5:03:41 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 5:03:48 PM
+Emergency Dept,Umar  Ijaz,Ringing,6-1-2023 5:05:48 PM
+Emergency Dept,Umar  Ijaz,ACD Call,6-1-2023 5:06:00 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-1-2023 5:06:20 PM
+Emergency Dept,Umar  Ijaz,Logout,6-1-2023 5:21:34 PM
+Emergency Dept,Umar  Ijaz,Logout,6-1-2023 6:17:23 PM
+Emergency Dept,Umar  Ijaz,Logout,6-1-2023 6:20:56 PM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:48:38 AM
+Emergency Dept,Umar  Ijaz,Login,6-2-2023 10:48:38 AM
+Emergency Dept,Umar  Ijaz,Ringing,6-2-2023 10:49:15 AM
+Emergency Dept,Umar  Ijaz,ACD Call,6-2-2023 10:49:17 AM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:50:18 AM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:50:56 AM
+Emergency Dept,Umar  Ijaz,Off Hook,6-2-2023 10:51:09 AM
+Emergency Dept,Umar  Ijaz,Outbound Call,6-2-2023 10:51:34 AM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:51:52 AM
+Emergency Dept,Umar  Ijaz,Off Hook,6-2-2023 10:52:20 AM
+Emergency Dept,Umar  Ijaz,Outbound Call,6-2-2023 10:52:26 AM
+Emergency Dept,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:52:37 AM
+Emergency Dept,Umar  Ijaz,Logout,6-2-2023 11:02:43 AM
+Emergency Dept,Umar  Ijaz,Logout,6-2-2023 1:06:46 PM
+Emergency Dept,Umar  Ijaz,Logout,6-2-2023 3:23:07 PM
+Emergency Dept,Umar  Ijaz,Logout,6-2-2023 3:25:58 PM
+Emergency Dept,Zeeshan  Faisal,Logout,5-30-2023 12:18:12 PM
+Emergency Dept,Zeeshan  Faisal,Logout,5-30-2023 1:54:17 PM
+Emergency Dept,Zeeshan  Faisal,Logout,5-30-2023 4:29:25 PM
+Emergency Dept,Zeeshan  Faisal,Logout,5-30-2023 4:51:32 PM
+Emergency Dept,Zeeshan  Faisal,Logout,6-1-2023 6:17:22 PM
+Emergency Dept,Zeeshan  Faisal,Logout,6-1-2023 6:20:57 PM
+Emergency Dept,Zeeshan  Faisal,Logout,6-2-2023 1:06:47 PM
+Emergency Dept,Zeeshan  Faisal,Logout,6-2-2023 3:23:07 PM
+Emergency Dept,Zeeshan  Faisal,Logout,6-2-2023 3:25:57 PM
+Maternity Ward,Asghar Hassan,Logout,5-30-2023 12:18:11 PM
+Maternity Ward,Asghar Hassan,Logout,5-30-2023 1:54:17 PM
+Maternity Ward,Asghar Hassan,Logout,5-30-2023 4:29:23 PM
+Maternity Ward,Asghar Hassan,Logout,5-30-2023 4:51:31 PM
+Maternity Ward,Asghar Hassan,Logout,6-1-2023 6:17:22 PM
+Maternity Ward,Asghar Hassan,Logout,6-1-2023 6:20:56 PM
+Maternity Ward,Asghar Hassan,Logout,6-2-2023 1:06:46 PM
+Maternity Ward,Asghar Hassan,Logout,6-2-2023 3:23:07 PM
+Maternity Ward,Asghar Hassan,Logout,6-2-2023 3:25:57 PM
+Maternity Ward,Marshall  Sherman,Logout,5-30-2023 12:18:12 PM
+Maternity Ward,Marshall  Sherman,Logout,5-30-2023 1:54:17 PM
+Maternity Ward,Marshall  Sherman,Logout,5-30-2023 4:29:25 PM
+Maternity Ward,Marshall  Sherman,Logout,5-30-2023 4:51:31 PM
+Maternity Ward,Marshall  Sherman,Logout,6-1-2023 6:17:22 PM
+Maternity Ward,Marshall  Sherman,Logout,6-1-2023 6:20:57 PM
+Maternity Ward,Marshall  Sherman,Logout,6-2-2023 1:06:47 PM
+Maternity Ward,Marshall  Sherman,Logout,6-2-2023 3:23:07 PM
+Maternity Ward,Marshall  Sherman,Logout,6-2-2023 3:25:58 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 12:18:11 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 1:00:32 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:00:32 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:01:14 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:01:17 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 1:01:30 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 1:01:31 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:01:32 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:02:06 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:02:08 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 1:02:58 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 1:02:58 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:03:00 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:03:14 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:03:17 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:09:43 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 1:09:46 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:10:53 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 1:10:53 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:11:17 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:11:19 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:16:12 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 1:16:16 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 1:16:38 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:16:38 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:17:28 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:17:30 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 1:17:39 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:17:39 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 1:17:39 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:18:06 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:18:09 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:29:20 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:29:45 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:29:47 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 1:29:55 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 1:29:55 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:29:56 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:30:06 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:30:08 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 1:31:21 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 1:31:22 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:31:23 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 1:37:47 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 1:37:48 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 1:39:34 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 1:39:38 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 1:54:17 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 2:04:35 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:04:36 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 2:05:03 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 2:05:05 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 2:05:12 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 2:05:12 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:05:13 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 2:05:23 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 2:05:23 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 2:05:25 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 2:05:33 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 2:05:34 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:05:34 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 2:05:44 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 2:05:46 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 2:05:50 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 2:05:51 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:05:52 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 2:06:01 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 2:06:03 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:06:39 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 2:09:46 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 2:21:10 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 2:21:10 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 2:26:05 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 3:57:54 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:57:54 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 3:58:10 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 3:58:12 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:58:53 PM
+Maternity Ward,Umar  Ijaz,Off Hook,5-30-2023 3:59:01 PM
+Maternity Ward,Umar  Ijaz,Outbound Call,5-30-2023 3:59:08 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:59:15 PM
+Maternity Ward,Umar  Ijaz,Off Hook,5-30-2023 3:59:21 PM
+Maternity Ward,Umar  Ijaz,Outbound Call,5-30-2023 3:59:25 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 3:59:30 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 4:29:23 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 4:30:31 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:30:31 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 4:30:50 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 4:30:53 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 4:31:04 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 4:31:05 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:31:06 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 4:31:23 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 4:31:23 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 4:31:25 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:31:33 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 4:41:24 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 4:51:32 PM
+Maternity Ward,Umar  Ijaz,Login,5-30-2023 4:53:11 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:53:11 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 4:53:47 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 4:53:50 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,5-30-2023 4:53:54 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,5-30-2023 4:53:55 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:53:55 PM
+Maternity Ward,Umar  Ijaz,Ringing,5-30-2023 4:54:06 PM
+Maternity Ward,Umar  Ijaz,ACD Call,5-30-2023 4:54:09 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),5-30-2023 4:54:13 PM
+Maternity Ward,Umar  Ijaz,Logout,5-30-2023 5:20:09 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:20:03 PM
+Maternity Ward,Umar  Ijaz,Login,6-1-2023 4:20:03 PM
+Maternity Ward,Umar  Ijaz,Logout,6-1-2023 4:33:29 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:34:22 PM
+Maternity Ward,Umar  Ijaz,Login,6-1-2023 4:34:22 PM
+Maternity Ward,Umar  Ijaz,Ringing,6-1-2023 4:36:41 PM
+Maternity Ward,Umar  Ijaz,ACD Call,6-1-2023 4:36:44 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:36:48 PM
+Maternity Ward,Umar  Ijaz,Logout,6-1-2023 4:53:06 PM
+Maternity Ward,Umar  Ijaz,Login,6-1-2023 4:53:40 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:53:41 PM
+Maternity Ward,Umar  Ijaz,Logout,6-1-2023 4:54:39 PM
+Maternity Ward,Umar  Ijaz,Login,6-1-2023 4:54:52 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:54:52 PM
+Maternity Ward,Umar  Ijaz,Ringing,6-1-2023 4:54:59 PM
+Maternity Ward,Umar  Ijaz,ACD Call,6-1-2023 4:55:03 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:55:39 PM
+Maternity Ward,Umar  Ijaz,Logout,6-1-2023 4:57:37 PM
+Maternity Ward,Umar  Ijaz,Login,6-1-2023 4:58:28 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 4:58:28 PM
+Maternity Ward,Umar  Ijaz,Ringing,6-1-2023 5:02:54 PM
+Maternity Ward,Umar  Ijaz,ACD Call,6-1-2023 5:02:59 PM
+Maternity Ward,Umar  Ijaz,Call put on hold,6-1-2023 5:03:11 PM
+Maternity Ward,Umar  Ijaz,Transfer Queue,6-1-2023 5:03:13 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 5:03:14 PM
+Maternity Ward,Umar  Ijaz,ACD Call,6-1-2023 5:03:14 PM
+Maternity Ward,Umar  Ijaz,Ringing,6-1-2023 5:03:41 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 5:03:48 PM
+Maternity Ward,Umar  Ijaz,Ringing,6-1-2023 5:05:48 PM
+Maternity Ward,Umar  Ijaz,ACD Call,6-1-2023 5:06:00 PM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-1-2023 5:06:20 PM
+Maternity Ward,Umar  Ijaz,Logout,6-1-2023 5:21:34 PM
+Maternity Ward,Umar  Ijaz,Logout,6-1-2023 6:17:23 PM
+Maternity Ward,Umar  Ijaz,Logout,6-1-2023 6:20:56 PM
+Maternity Ward,Umar  Ijaz,Login,6-2-2023 10:48:38 AM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:48:38 AM
+Maternity Ward,Umar  Ijaz,Ringing,6-2-2023 10:49:15 AM
+Maternity Ward,Umar  Ijaz,ACD Call,6-2-2023 10:49:17 AM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:50:18 AM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:50:56 AM
+Maternity Ward,Umar  Ijaz,Off Hook,6-2-2023 10:51:09 AM
+Maternity Ward,Umar  Ijaz,Outbound Call,6-2-2023 10:51:34 AM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:51:52 AM
+Maternity Ward,Umar  Ijaz,Off Hook,6-2-2023 10:52:20 AM
+Maternity Ward,Umar  Ijaz,Outbound Call,6-2-2023 10:52:26 AM
+Maternity Ward,Umar  Ijaz,Available (Ready for Call),6-2-2023 10:52:37 AM
+Maternity Ward,Umar  Ijaz,Logout,6-2-2023 11:02:43 AM
+Maternity Ward,Umar  Ijaz,Logout,6-2-2023 1:06:46 PM
+Maternity Ward,Umar  Ijaz,Logout,6-2-2023 3:23:07 PM
+Maternity Ward,Umar  Ijaz,Logout,6-2-2023 3:25:58 PM
+Maternity Ward,Zeeshan  Faisal,Logout,5-30-2023 12:18:12 PM
+Maternity Ward,Zeeshan  Faisal,Logout,5-30-2023 1:54:17 PM
+Maternity Ward,Zeeshan  Faisal,Logout,5-30-2023 4:29:25 PM
+Maternity Ward,Zeeshan  Faisal,Logout,5-30-2023 4:51:32 PM
+Maternity Ward,Zeeshan  Faisal,Logout,6-1-2023 6:17:22 PM
+Maternity Ward,Zeeshan  Faisal,Logout,6-1-2023 6:20:57 PM
+Maternity Ward,Zeeshan  Faisal,Logout,6-2-2023 1:06:47 PM
+Maternity Ward,Zeeshan  Faisal,Logout,6-2-2023 3:23:07 PM
+Maternity Ward,Zeeshan  Faisal,Logout,6-2-2023 3:25:57 PM
+Priority,801002 801002,Logout,5-30-2023 12:18:12 PM
+Priority,801002 801002,Logout,5-30-2023 1:54:18 PM
+Priority,801002 801002,Logout,5-30-2023 4:29:24 PM
+Priority,801002 801002,Logout,5-30-2023 4:51:32 PM
+Priority,801002 801002,Logout,6-1-2023 6:17:23 PM
+Priority,801002 801002,Logout,6-1-2023 6:20:57 PM
+Priority,801002 801002,Login,6-2-2023 1:00:32 PM
+Priority,801002 801002,Wrap-up,6-2-2023 1:00:33 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:00:35 PM
+Priority,801002 801002,Unavailable - Meeting,6-2-2023 1:00:38 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:02:03 PM
+Priority,801002 801002,Ringing Out Abandoned,6-2-2023 1:05:02 PM
+Priority,801002 801002,Ringing,6-2-2023 1:05:03 PM
+Priority,801002 801002,Login,6-2-2023 1:06:46 PM
+Priority,801002 801002,Wrap-up,6-2-2023 1:06:47 PM
+Priority,801002 801002,Logout,6-2-2023 1:06:47 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:06:49 PM
+Priority,801002 801002,Ringing Out Abandoned,6-2-2023 1:08:37 PM
+Priority,801002 801002,Ringing,6-2-2023 1:08:41 PM
+Priority,801002 801002,Unavailable - Meeting,6-2-2023 1:08:53 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:12:40 PM
+Priority,801002 801002,Ringing Out Abandoned,6-2-2023 1:12:41 PM
+Priority,801002 801002,Ringing,6-2-2023 1:12:42 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:14:05 PM
+Priority,801002 801002,Ringing,6-2-2023 1:14:06 PM
+Priority,801002 801002,Ringing Out Abandoned,6-2-2023 1:14:06 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:15:06 PM
+Priority,801002 801002,Ringing Out Abandoned,6-2-2023 1:15:07 PM
+Priority,801002 801002,Ringing,6-2-2023 1:15:07 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:16:37 PM
+Priority,801002 801002,Ringing Out Abandoned,6-2-2023 1:16:38 PM
+Priority,801002 801002,ACD Busy Outbound,6-2-2023 1:16:55 PM
+Priority,801002 801002,Wrap-up,6-2-2023 1:17:00 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:17:31 PM
+Priority,801002 801002,Ringing Out Abandoned,6-2-2023 1:17:32 PM
+Priority,801002 801002,Ringing,6-2-2023 1:17:34 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 1:18:40 PM
+Priority,801002 801002,Logout,6-2-2023 3:23:07 PM
+Priority,801002 801002,Login,6-2-2023 3:23:27 PM
+Priority,801002 801002,Wrap-up,6-2-2023 3:23:27 PM
+Priority,801002 801002,Available (Ready for Call),6-2-2023 3:23:38 PM
+Priority,801002 801002,Logout,6-2-2023 3:25:59 PM
+Priority,Abdul Rehman,Logout,5-30-2023 12:18:12 PM
+Priority,Abdul Rehman,Logout,5-30-2023 1:54:17 PM
+Priority,Abdul Rehman,Logout,5-30-2023 4:29:24 PM
+Priority,Abdul Rehman,Logout,5-30-2023 4:51:31 PM
+Priority,Abdul Rehman,Logout,6-1-2023 6:17:22 PM
+Priority,Abdul Rehman,Logout,6-1-2023 6:20:57 PM
+Priority,Abdul Rehman,Logout,6-2-2023 1:06:47 PM
+Priority,Abdul Rehman,Logout,6-2-2023 3:23:07 PM
+Priority,Abdul Rehman,Logout,6-2-2023 3:25:57 PM
+Priority,Agent 1,Logout,5-30-2023 12:18:12 PM
+Priority,Agent 1,Logout,5-30-2023 1:54:18 PM
+Priority,Agent 1,Logout,5-30-2023 4:29:25 PM
+Priority,Agent 1,Logout,5-30-2023 4:51:32 PM
+Priority,Agent 1,Logout,6-1-2023 6:17:22 PM
+Priority,Agent 1,Logout,6-1-2023 6:20:57 PM
+Priority,Agent 1,Logout,6-2-2023 1:06:47 PM
+Priority,Agent 1,Logout,6-2-2023 3:23:07 PM
+Priority,Agent 1,Logout,6-2-2023 3:25:58 PM
+Priority,Mamoon Remote,Login,5-29-2023 4:23:59 PM
+Priority,Mamoon Remote,Wrap-up,5-29-2023 4:24:00 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-29-2023 4:24:25 PM
+Priority,Mamoon Remote,Logout,5-29-2023 4:27:57 PM
+Priority,Mamoon Remote,Login,5-29-2023 4:47:21 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-29-2023 4:47:21 PM
+Priority,Mamoon Remote,Logout,5-29-2023 4:48:51 PM
+Priority,Mamoon Remote,Login,5-29-2023 5:08:20 PM
+Priority,Mamoon Remote,Wrap-up,5-29-2023 5:08:20 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-29-2023 5:08:43 PM
+Priority,Mamoon Remote,Logout,5-29-2023 5:19:24 PM
+Priority,Mamoon Remote,Login,5-29-2023 5:31:16 PM
+Priority,Mamoon Remote,Wrap-up,5-29-2023 5:31:17 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-29-2023 5:31:45 PM
+Priority,Mamoon Remote,Logout,5-29-2023 5:35:36 PM
+Priority,Mamoon Remote,Logout,5-30-2023 12:18:12 PM
+Priority,Mamoon Remote,Login,5-30-2023 12:19:23 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 12:19:24 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 12:19:51 PM
+Priority,Mamoon Remote,Logout,5-30-2023 12:20:46 PM
+Priority,Mamoon Remote,Login,5-30-2023 12:21:15 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 12:21:16 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 12:21:43 PM
+Priority,Mamoon Remote,Logout,5-30-2023 12:28:26 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 12:28:36 PM
+Priority,Mamoon Remote,Login,5-30-2023 12:28:36 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 12:28:48 PM
+Priority,Mamoon Remote,Logout,5-30-2023 12:46:37 PM
+Priority,Mamoon Remote,Login,5-30-2023 1:01:38 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 1:01:39 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 1:02:06 PM
+Priority,Mamoon Remote,Logout,5-30-2023 1:03:49 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 1:05:38 PM
+Priority,Mamoon Remote,Login,5-30-2023 1:05:38 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 1:06:04 PM
+Priority,Mamoon Remote,Logout,5-30-2023 1:12:53 PM
+Priority,Mamoon Remote,Login,5-30-2023 1:21:50 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 1:21:50 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 1:22:16 PM
+Priority,Mamoon Remote,Logout,5-30-2023 1:22:43 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 1:23:04 PM
+Priority,Mamoon Remote,Login,5-30-2023 1:23:04 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 1:23:29 PM
+Priority,Mamoon Remote,Logout,5-30-2023 1:54:18 PM
+Priority,Mamoon Remote,Login,5-30-2023 2:41:54 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 2:41:55 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 2:42:22 PM
+Priority,Mamoon Remote,Logout,5-30-2023 2:49:04 PM
+Priority,Mamoon Remote,Login,5-30-2023 2:56:29 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 2:56:30 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 2:56:52 PM
+Priority,Mamoon Remote,Logout,5-30-2023 3:02:15 PM
+Priority,Mamoon Remote,Login,5-30-2023 4:20:29 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 4:20:29 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 4:20:38 PM
+Priority,Mamoon Remote,Logout,5-30-2023 4:29:24 PM
+Priority,Mamoon Remote,Login,5-30-2023 4:30:13 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 4:30:14 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 4:30:24 PM
+Priority,Mamoon Remote,Logout,5-30-2023 4:38:19 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 4:45:20 PM
+Priority,Mamoon Remote,Login,5-30-2023 4:45:20 PM
+Priority,Mamoon Remote,Logout,5-30-2023 4:49:16 PM
+Priority,Mamoon Remote,Logout,5-30-2023 4:51:32 PM
+Priority,Mamoon Remote,Login,5-30-2023 5:05:33 PM
+Priority,Mamoon Remote,Wrap-up,5-30-2023 5:05:33 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 5:06:02 PM
+Priority,Mamoon Remote,Logout,5-30-2023 5:11:44 PM
+Priority,Mamoon Remote,Login,5-30-2023 5:13:07 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 5:13:08 PM
+Priority,Mamoon Remote,Logout,5-30-2023 6:14:46 PM
+Priority,Mamoon Remote,Login,5-30-2023 11:14:27 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 11:14:27 PM
+Priority,Mamoon Remote,Logout,5-30-2023 11:16:17 PM
+Priority,Mamoon Remote,Login,5-30-2023 11:22:27 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 11:22:27 PM
+Priority,Mamoon Remote,Logout,5-30-2023 11:24:48 PM
+Priority,Mamoon Remote,Login,5-30-2023 11:26:08 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 11:26:09 PM
+Priority,Mamoon Remote,Logout,5-30-2023 11:39:56 PM
+Priority,Mamoon Remote,Login,5-30-2023 11:48:54 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-30-2023 11:48:54 PM
+Priority,Mamoon Remote,Logout,5-30-2023 11:50:23 PM
+Priority,Mamoon Remote,Login,5-31-2023 12:00:55 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 12:00:55 AM
+Priority,Mamoon Remote,Logout,5-31-2023 12:02:20 AM
+Priority,Mamoon Remote,Login,5-31-2023 12:07:36 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 12:07:37 AM
+Priority,Mamoon Remote,Logout,5-31-2023 4:58:29 AM
+Priority,Mamoon Remote,Login,5-31-2023 10:10:05 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 10:10:06 AM
+Priority,Mamoon Remote,Logout,5-31-2023 10:43:54 AM
+Priority,Mamoon Remote,Login,5-31-2023 11:42:23 AM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 11:42:24 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 11:42:49 AM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 11:43:59 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 11:44:26 AM
+Priority,Mamoon Remote,Logout,5-31-2023 11:45:55 AM
+Priority,Mamoon Remote,Login,5-31-2023 11:48:05 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 11:48:05 AM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 11:49:55 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 11:50:21 AM
+Priority,Mamoon Remote,Logout,5-31-2023 11:52:56 AM
+Priority,Mamoon Remote,Login,5-31-2023 11:55:42 AM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 11:55:42 AM
+Priority,Mamoon Remote,Logout,5-31-2023 11:58:52 AM
+Priority,Mamoon Remote,Login,5-31-2023 12:03:35 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 12:03:35 PM
+Priority,Mamoon Remote,Logout,5-31-2023 12:06:34 PM
+Priority,Mamoon Remote,Login,5-31-2023 12:07:19 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 12:07:20 PM
+Priority,Mamoon Remote,Logout,5-31-2023 12:08:44 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 12:09:44 PM
+Priority,Mamoon Remote,Login,5-31-2023 12:09:44 PM
+Priority,Mamoon Remote,Logout,5-31-2023 12:12:35 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 4:51:32 PM
+Priority,Mamoon Remote,Login,5-31-2023 4:51:32 PM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 4:53:09 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 4:53:38 PM
+Priority,Mamoon Remote,Logout,5-31-2023 4:54:00 PM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 5:07:57 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:07:57 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:08:03 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:09:44 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:10:40 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:10:41 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:15:30 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:24:13 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:24:14 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:26:12 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:32:55 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:32:55 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:33:11 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:34:45 PM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 5:34:46 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:35:12 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:36:04 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:37:48 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:37:49 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:39:34 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:40:21 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:40:21 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:40:37 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:42:22 PM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 5:42:22 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:42:37 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:43:50 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:44:26 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:44:26 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:46:01 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:48:13 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:48:14 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:48:42 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:49:50 PM
+Priority,Mamoon Remote,Wrap-up,5-31-2023 5:49:50 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:49:57 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:52:27 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:56:41 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:56:42 PM
+Priority,Mamoon Remote,Logout,5-31-2023 5:58:08 PM
+Priority,Mamoon Remote,Login,5-31-2023 5:58:54 PM
+Priority,Mamoon Remote,Available (Ready for Call),5-31-2023 5:58:55 PM
+Priority,Mamoon Remote,Logout,5-31-2023 11:06:39 PM
+Priority,Mamoon Remote,Logout,6-1-2023 6:17:23 PM
+Priority,Mamoon Remote,Logout,6-1-2023 6:20:57 PM
+Priority,Mamoon Remote,Logout,6-2-2023 1:06:47 PM
+Priority,Mamoon Remote,Logout,6-2-2023 3:23:08 PM
+Priority,Mamoon Remote,Login,6-2-2023 3:24:47 PM
+Priority,Mamoon Remote,Wrap-up,6-2-2023 3:24:48 PM
+Priority,Mamoon Remote,Available (Ready for Call),6-2-2023 3:24:56 PM
+Priority,Mamoon Remote,Logout,6-2-2023 3:25:59 PM

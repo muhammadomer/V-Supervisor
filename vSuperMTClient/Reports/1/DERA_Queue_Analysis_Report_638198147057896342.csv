@@ -1,0 +1,7 @@
+Queue Number,Queue Name,Total Calls,Total Answered,ABND. Calls,ABND. Over 10 Secs,Calls Not Accepted
+801041,Emergency Dept,147,139,8,6,0
+801042,Cardiology,114,83,31,23,1
+801048,Maternity Ward,14,7,7,7,0
+801043,Priority,1,0,1,0,0
+801044,Main IVR,0,0,0,0,0
+,Total,276,229,47,36,1
